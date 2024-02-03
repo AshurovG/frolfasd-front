@@ -1,8 +1,15 @@
 import React from 'react'
+import styles from './AdminPage.module.scss'
 
 const AdminPage = () => {
+  React.useEffect(() => {
+    console.log('render')
+  }, [])
+
   return (
-    <div>AdminPage</div>
+    <div className={styles.admin}>
+      AdminPage
+    </div>
   )
 }
 
