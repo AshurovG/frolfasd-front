@@ -29,6 +29,7 @@ const OrderForm = () => {
         )
         .then(
           (result) => {
+            alert(result.text)
             console.log(result.text)
           },
           (error) => {
