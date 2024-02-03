@@ -1,0 +1,55 @@
+@import "../../styles/variables.scss";
+
+.faq {
+  margin-left: 100px;
+
+  padding: 10px;
+
+  color: #000;
+  font-size: 32px;
+  &__question {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+
+    &.open {
+      color: $brand;
+      font-weight: 700;
+      letter-spacing: -0.74px;
+
+      svg {
+        transform: rotate(180deg);
+
+        path {
+          fill: #610a0ad1;
+        }
+      }
+    }
+  }
+
+  &__answer {
+    padding-left: 37px;
+    max-height: 0;
+
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+
+    position: relative;
+
+    &.open {
+      max-height: 350px;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+
+      left: 0;
+      height: 100%; /* Задаем высоту линии */
+      width: 2px; /* Ширина линии */
+
+      background: $brand; /* Цвет линии */
+      margin-left: 14px; /* Отступ слева */
+    }
+  }
+}

@@ -1,0 +1,42 @@
+@import "../../styles/variables.scss";
+.header {
+  background-color: $brand;
+  color: #fff;
+  font-size: 25px;
+
+  //   height: 120px;
+  padding: 50px 90px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__logo {
+    cursor: pointer;
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  &__navmenu {
+    display: flex;
+    justify-content: space-between;
+
+    width: 50%;
+
+    &_item {
+      cursor: pointer;
+    }
+  }
+
+  &__action {
+    cursor: pointer;
+    background-color: #fff;
+    color: $brand;
+    font-size: 30px;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #a2a2a2;
+    }
+  }
+}

@@ -1,0 +1,16 @@
+@import "../../styles/variables.scss";
+
+.button {
+  border: 1px solid $brand;
+  background-color: $brand;
+  color: #fff;
+  font-size: 20px;
+  padding: 10px 30px;
+  border-radius: 35px;
+  transition: all 0.1s linear;
+
+  &:hover {
+    border-color: $brand;
+    background-color: $brand-secondary;
+  }
+}

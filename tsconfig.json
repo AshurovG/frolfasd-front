@@ -23,11 +23,10 @@
     /* Path aliasing */
     "baseUrl": "src",
     "paths": {
-      "components": ["components/*"],
-      "pages": ["pages/*"],
-      "assets": ["assets/*"],
-      "config": ["config/*"],
-      "styles": ["styles/*"]
+      "components/*": ["components/*"],
+      "pages/*": ["pages/*"],
+      "assets/*": ["assets/*"],
+      "@styles/*": ["styles/*"]
     }
   },
   "include": ["src"],
