@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './AdminPage.module.scss'
+import Navigation from 'components/Navigation'
 
 const AdminPage = () => {
   React.useEffect(() => {
@@ -8,7 +9,9 @@ const AdminPage = () => {
 
   return (
     <div className={styles.admin}>
-      AdminPage
+      <h1 className={styles.admin__title}>Управление сайтом</h1>
+      <h4 className={styles.admin__subtitle}>Здесь вы можете редактировать данные сайта</h4>
+      <Navigation/>
     </div>
   )
 }

@@ -9,10 +9,8 @@ const App = () => {
       <Header />
       <HashRouter>
         <Routes>
-          <Route path="/administration" element={<AdminPage />}></Route>
-        </Routes>
-        <Routes>
           <Route path="/" element={<MainPage />}></Route>
+          <Route path="/administration" element={<AdminPage />}></Route>
         </Routes>
       </HashRouter>
     </div>
