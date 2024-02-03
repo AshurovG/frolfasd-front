@@ -1,8 +1,6 @@
-import { HashRouter, Routes, Route } from "react-router-dom"
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
 import Header from "components/Header"
 import AdminPage from "pages/AdminPage"
-
-import { Navigate } from "react-router-dom"
 import MainPage from "pages/MainPage"
 
 const App = () => {
@@ -12,6 +10,9 @@ const App = () => {
       <HashRouter>
         <Routes>
           <Route path="/administration" element={<AdminPage />}></Route>
+        </Routes>
+        <Routes>
+          <Route path="/" element={<MainPage />}></Route>
         </Routes>
       </HashRouter>
     </div>
