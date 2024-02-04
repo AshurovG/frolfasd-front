@@ -3,7 +3,16 @@ import styles from "./Question.module.scss"
 import clsx from "clsx"
 import ArrowDownIcon from "components/Icons/ArrowDownIcon"
 
-const Questiom = () => {
+export type QuestionProps = {
+  questions_id: number
+  questions_title: string
+  questions_text: string
+}
+
+const Question: React.FC<QuestionProps> = ({
+  questions_title,
+  questions_text,
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
@@ -17,17 +26,13 @@ const Questiom = () => {
           width={30}
           height={30}
         />
-        <div>Какие материалы используются?</div>
+        <div>{questions_title}</div>
       </div>
       <div className={clsx(styles.faq__answer, isOpen ? styles.open : "")}>
-        Could not connect to development server. Ensure the following Could not
-        connect to development server. Ensure the followingCould not connect to
-        development server. Ensure the followingCould not connect to development
-        server. Ensure the followingCould not connect to development server.
-        Ensure the following
+        {questions_text}
       </div>
     </div>
   )
 }
 
-export default Questiom
+export default Question

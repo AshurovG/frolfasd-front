@@ -2,18 +2,21 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
 import Header from "components/Header"
 import AdminPage from "pages/AdminPage"
 import MainPage from "pages/MainPage"
+import Footer from "components/Footer"
+import PortfolioPage from "pages/PortfolioPage"
 
 const App = () => {
   return (
     <div className="app">
-      <Header />
       <HashRouter>
+        <Header />
         <Routes>
           <Route path="/administration" element={<AdminPage />}></Route>
+          <Route path="/frolfasd" element={<MainPage />}></Route>
+          <Route path="/portfolio" element={<PortfolioPage />}></Route>
+          <Route path="*" element={<Navigate to="/frolfasd" replace />} />
         </Routes>
-        <Routes>
-          <Route path="/" element={<MainPage />}></Route>
-        </Routes>
+        <Footer />
       </HashRouter>
     </div>
   )

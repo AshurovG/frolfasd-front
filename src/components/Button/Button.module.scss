@@ -8,6 +8,7 @@
   padding: 10px 30px;
   border-radius: 35px;
   transition: all 0.1s linear;
+  cursor: pointer;
 
   &:hover {
     border-color: $brand;
