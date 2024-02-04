@@ -4,7 +4,7 @@ import Button from "components/Button"
 import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
-import { Link as ScrollLink } from "react-scroll"
+import { Link as ScrollLink, scroller } from "react-scroll"
 
 const Header = () => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
@@ -22,16 +22,16 @@ const Header = () => {
           </Link>
 
           <li className={styles.header__inner_navmenu_item}>
-            <ScrollLink
-              activeClass="active"
-              to="faq"
-              // spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
+            <Link
+              onClick={() => {
+                setTimeout(() => {
+                  scroller.scrollTo("faq", { smooth: true, duration: 500 })
+                }, 100)
+              }}
+              to="/frolfasd"
             >
               Помощь
-            </ScrollLink>
+            </Link>
           </li>
           {/* <li className={styles.header__inner_navmenu_item}>Сделать заказ</li> */}
         </ul>

@@ -6,6 +6,7 @@ import Button from "components/Button"
 import ModalWindow from "components/ModalWindow"
 import DetailedItem from "components/DetailedItem"
 import CardList from "components/CardList"
+import { Link } from "react-router-dom"
 
 export type FacadesBlockProps = {
   items: ReceivedFacadeData[]
@@ -25,7 +26,9 @@ const FacadesBlock: React.FC<FacadesBlockProps> = ({ items }) => {
       <CardList items={items} onCardClick={() => setIsModalFormOpened(true)} />
 
       <div className={styles.block__action}>
-        <Button>Посмотреть все работы</Button>
+        <Link to="/portfolio">
+          <Button>Посмотреть все работы</Button>
+        </Link>
       </div>
       <p className={styles.block__description}>
         Здесь кратко описано, что это за услуга / где и как используется. Также
