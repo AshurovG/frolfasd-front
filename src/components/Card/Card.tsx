@@ -1,5 +1,6 @@
 import React from "react"
 import styles from "./Card.module.scss"
+import FavoritesIcon from "components/Icons/FavoritesIcon"
 
 export type CardProps = {
   exterior_design_id: number
@@ -8,6 +9,8 @@ export type CardProps = {
   exterior_design_description: string
   is_important: boolean
   onCardClick: () => void
+  onButtonClick?: (event: React.MouseEvent<HTMLElement>) => void
+  isAdminPage?: boolean
 }
 
 const Card: React.FC<CardProps> = ({
@@ -16,6 +19,9 @@ const Card: React.FC<CardProps> = ({
   exterior_design_url,
   exterior_design_description,
   onCardClick,
+  onButtonClick,
+  isAdminPage,
+  is_important
 }) => {
   return (
     <div
@@ -25,6 +31,9 @@ const Card: React.FC<CardProps> = ({
       className={styles.card}
     >
       <img className={styles.card__image} src={exterior_design_url}></img>
+      {isAdminPage && <div onClick={onButtonClick ? (event) => onButtonClick(event) : () => {}} className={styles.card__btn}>
+        {is_important && <FavoritesIcon className={styles['card__btn-icon']}/>}
+      </div>}
       <div className={styles.card__description}>
         {exterior_design_description}
       </div>

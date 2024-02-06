@@ -3,16 +3,15 @@ import styles from './Navigation.module.scss'
 
 export type MultiDropdownProps = {
     onFacadesClick: () => void;
-    onImportantFacades?: () => void;
-    onQuestionsClick?: () => void;
+    active: 'facades' | 'questions';
+    onQuestionsClick: () => void;
 };
 
-const Navigation: React.FC<MultiDropdownProps> = ({onFacadesClick}) => {
+const Navigation: React.FC<MultiDropdownProps> = ({onFacadesClick, onQuestionsClick, active}) => {
   return (
     <div  className={styles.nav}>
-        <div onClick={() => onFacadesClick()} className={styles['nav__item']}>Вентилируемые фасады</div>
-        <div className={styles['nav__item']}>Вентилируемые фасады на главной странице</div>
-        <div className={styles['nav__item']}>Часто задаваемые вопросы</div>
+        <div onClick={() => onFacadesClick()} className={active === 'facades' ? styles['nav__item-active'] : styles['nav__item']}>Вентилируемые фасады</div>
+        <div onClick={() => onQuestionsClick()} className={active === 'questions' ? styles['nav__item-active'] : styles['nav__item']}>Часто задаваемые вопросы</div>
     </div>
   )
 }

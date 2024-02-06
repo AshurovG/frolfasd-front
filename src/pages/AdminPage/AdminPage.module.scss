@@ -1,7 +1,11 @@
 @import "../../styles/variables.scss";
 
 .admin {
-    padding: 50px 90px;
+    // padding: 50px 90px;
+    min-height: 100vh;
+    max-width: $content-width;
+    width: 85vw;
+    margin: 0 auto;
 
     &__title {
         font-size: 30px;

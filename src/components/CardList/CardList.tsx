@@ -12,9 +12,11 @@ import Loader from "components/Loader"
 export type CardListProps = {
   items: ReceivedFacadeData[]
   onCardClick?: (a: number) => void
+  onButtonClick?: (item: ReceivedFacadeData) => void
+  isAdminPage?: boolean
 }
 
-const CardList: React.FC<CardListProps> = ({ items }) => {
+const CardList: React.FC<CardListProps> = ({ items, isAdminPage, onButtonClick }) => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
 
   const [isItemLoading, setIsItemLoading] = useState<boolean>(true)
@@ -43,20 +45,41 @@ const CardList: React.FC<CardListProps> = ({ items }) => {
       setIsItemLoading(false)
     }
   }
+
+  // const changeImportantItem = async (item: ReceivedFacadeData) => {
+  //   try {
+  //     await axios(
+  //       `https://frolfasd.ru/api/exterior_design_important/${item.exterior_design_id}`,
+  //       {
+  //         method: "PUT",
+  //         data: {
+  //           isImportant: !item.is_important
+  //         }
+  //       }
+  //     )
+  //   } catch {
+
+  //   }
+  // }
+
   const onCardClick = (id: number) => {
-    setIsModalFormOpened(true)
-    getItemData(id)
+    if (isAdminPage) {
+      console.log('admin!!!')
+    } else {
+      setIsModalFormOpened(true)
+      getItemData(id)
+    }
   }
 
   return (
     <div className={styles.list}>
       {items.map((item: ReceivedFacadeData) => (
         <Card
-          onCardClick={() => {
-            onCardClick(item.exterior_design_id)
-          }}
+          isAdminPage={isAdminPage}
+          onCardClick={() => onCardClick(item.exterior_design_id)}
           {...item}
           key={item.exterior_design_id}
+          onButtonClick={isAdminPage ? (event) => {event.stopPropagation(); onButtonClick && onButtonClick(item)} : () => {}}
         ></Card>
       ))}
       <ModalWindow
