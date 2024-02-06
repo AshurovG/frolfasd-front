@@ -1,2 +1,17 @@
+@import "../../styles/variables.scss";
+
 .admin {
+    padding: 50px 90px;
+
+    &__title {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    &__subtitle {
+        font-size: 20px;
+        color: rgb(125, 125, 125);
+        text-align: center;
+        padding-bottom: 30px;
+    }
 }

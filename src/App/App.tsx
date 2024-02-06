@@ -11,6 +11,7 @@ const App = () => {
       <HashRouter>
         <Header />
         <Routes>
+          <Route path="/" element={<MainPage />}></Route>
           <Route path="/administration" element={<AdminPage />}></Route>
           <Route path="/frolfasd" element={<MainPage />}></Route>
           <Route path="/portfolio" element={<PortfolioPage />}></Route>
