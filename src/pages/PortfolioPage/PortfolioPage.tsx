@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useLayoutEffect, useState } from "react"
 import styles from "./PortfolioPage.module.scss"
 import { ReceivedFacadeData } from "../../../types"
 import { Response } from "../../../types"
@@ -14,6 +14,7 @@ import { Link } from "react-router-dom"
 const PortfolioPage = () => {
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
+  const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
 
   const getFacadesItems = async () => {
     try {
@@ -24,6 +25,7 @@ const PortfolioPage = () => {
         }
       )
       setFacadesItems(response.data)
+      setIsCardsLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -32,12 +34,17 @@ const PortfolioPage = () => {
     getFacadesItems()
   }, [])
 
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  })
+
   return (
     <div className={styles.page}>
       <h1 className={styles.page__title}>Портфолио</h1>
       <h2 className={styles.page__subtitle}>Вентилируемые фасады</h2>
       <div className={styles.page__content}>
         <CardList
+          isCardsLoading={isCardsLoading}
           onCardClick={() => setIsModalFormOpened(true)}
           items={facadesItems}
         />

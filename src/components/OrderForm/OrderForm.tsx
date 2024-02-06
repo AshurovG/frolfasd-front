@@ -1,14 +1,14 @@
-import React, { useRef, useState } from "react"
+import { useRef } from "react"
 import styles from "./OrderFrom.module.scss"
-import Input from "components/Input"
+
 import Button from "components/Button"
 import emailjs from "@emailjs/browser"
 
-import { Controller, FieldValues, useForm } from "react-hook-form"
+import { FieldValues, useForm } from "react-hook-form"
 
 const OrderForm = () => {
   const form = useRef<HTMLFormElement>(null)
-  const [name, setName] = useState<string>("")
+  // const [name, setName] = useState<string>("")
   // const [email, setEmail] = useState<string>("")
   // const [description, setDescription] = useState<string>("")
 

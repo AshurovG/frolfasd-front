@@ -1,13 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import styles from "./FacadesBlock.module.scss"
-import { FacadeData, ReceivedFacadeData } from "../../../types"
-import Card from "components/Card"
+import { ReceivedFacadeData } from "../../../types"
+
 import Button from "components/Button"
-import ModalWindow from "components/ModalWindow"
-import DetailedItem from "components/DetailedItem"
+
 import CardList from "components/CardList"
 import { Link } from "react-router-dom"
-import axios from "axios"
 
 export type FacadesBlockProps = {
   items: ReceivedFacadeData[]

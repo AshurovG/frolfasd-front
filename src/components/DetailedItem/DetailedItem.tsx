@@ -84,9 +84,13 @@ const DetailedItem: React.FC<ReceivedFacadeData> = ({
           </p>
         </div>
 
-        <div>
-          Фото объекта {slideIndex} из {items.length}
-        </div>
+        {items.length != 0 ? (
+          <div>
+            Фото объекта {slideIndex} из {items.length}
+          </div>
+        ) : (
+          <div>Изображения отсутствуют</div>
+        )}
       </div>
     </div>
   )
