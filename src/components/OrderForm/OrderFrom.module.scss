@@ -2,8 +2,11 @@
 .form {
   margin: 0;
   width: 600px;
+  background-color: #fff;
+  border-radius: 30px;
 
   display: flex;
+  padding: 40px 80px; //!!!!!!!!!!!!!!!!!
   flex-direction: column;
   align-items: center;
   gap: 20px;
@@ -21,6 +24,15 @@
     text-align: left;
     padding-left: 10px;
     width: 100%;
+
+    &_message {
+      font-size: 13px;
+      color: red;
+      // background-color: red;
+      position: absolute;
+      // top: 0; /* Располагаем сообщение об ошибке прямо под инпутом */
+      left: 0;
+    }
 
     font-size: 20px;
 

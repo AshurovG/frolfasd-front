@@ -1,0 +1,10 @@
+.block {
+  border-bottom: 2px #130d0d73 solid;
+  &__title {
+    font-size: 40px;
+    font-weight: 700;
+  }
+  &__content {
+    font-size: 26px;
+  }
+}

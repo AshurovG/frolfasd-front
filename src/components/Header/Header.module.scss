@@ -1,42 +1,47 @@
 @import "../../styles/variables.scss";
 .header {
   background-color: $brand;
-  color: #fff;
-  font-size: 25px;
+  // color: #fff;
+  padding: 30px 50px;
 
-  //   height: 120px;
-  padding: 50px 90px;
+  &__inner {
+    font-size: 26px;
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  &__logo {
-    cursor: pointer;
-    font-size: 30px;
-    font-weight: 700;
-  }
-
-  &__navmenu {
+    color: #fff;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    max-width: 1620px;
+    margin: 0 auto;
 
-    width: 50%;
-
-    &_item {
+    &_logo {
       cursor: pointer;
+      font-size: 30px;
+      font-weight: 700;
     }
-  }
 
-  &__action {
-    cursor: pointer;
-    background-color: #fff;
-    color: $brand;
-    font-size: 30px;
-    font-weight: 600;
+    &_navmenu {
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
 
-    &:hover {
-      background-color: #a2a2a2;
+      width: 50%;
+
+      &_item {
+        cursor: pointer;
+      }
+    }
+
+    &_action {
+      cursor: pointer;
+      background-color: #fff;
+      color: $brand;
+      font-size: 30px;
+      font-weight: 600;
+
+      &:hover {
+        background-color: #a2a2a2;
+      }
     }
   }
 }

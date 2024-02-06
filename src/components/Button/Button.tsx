@@ -7,11 +7,21 @@ export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode
   state?: boolean
   className?: string
+  disbled?: boolean
 }
 
-const Button: React.FC<ButtonProps> = ({ children, className, ...props }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  className,
+  disabled,
+  ...props
+}) => {
   return (
-    <button {...props} className={clsx(styles["button"], className)}>
+    <button
+      disabled={disabled}
+      {...props}
+      className={clsx(styles["button"], className)}
+    >
       {children}
     </button>
   )
