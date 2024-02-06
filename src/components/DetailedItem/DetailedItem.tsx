@@ -9,6 +9,9 @@ import ArrowLeftIcon from "components/Icons/ArrowLeftIcon"
 import AddButton from 'components/Icons/AddButton'
 import BasketIcon from 'components/Icons/BasketIcon'
 import SliderButton from "./SliderButton"
+import ModalWindow from "components/ModalWindow"
+import ImageForm from "components/ImageForm"
+import Button from "components/Button"
 import { ReceivedFacadeData } from "../../../types"
 
 // export type MockItemDataType = {
@@ -27,10 +30,14 @@ import { ReceivedFacadeData } from "../../../types"
 export type DetailedProps = {
   facade: ReceivedFacadeData
   isAdminPage?: boolean
+  onImageFormSubmit?: (file: File) => void
+  onDeleteButtonClick?: (imageId: number) => void
 };
 
-const DetailedItem: React.FC<DetailedProps> = ({facade, isAdminPage}) => {
+const DetailedItem: React.FC<DetailedProps> = ({facade, isAdminPage, onImageFormSubmit, onDeleteButtonClick}) => {
   const [slideIndex, setSlideIndex] = useState<number>(1)
+  const [isAddFacadeItemWindowOpened, setIsAddFacadeItemWindowOpened] = useState(false)
+  const [isDeleteImageWindowOpened, setIsDeleteImageWindowOpened] = useState(false)
 
   const nextSlide = () => {
     if (slideIndex !== facade.items.length) {
@@ -86,8 +93,8 @@ const DetailedItem: React.FC<DetailedProps> = ({facade, isAdminPage}) => {
         : <div>
              <h2 className={styles.slider__info_title}>У вас есть возможность удалить текущее изображение или добавить новое</h2>
              <div className={styles.slider__info_actions}>
-                <AddButton onClick={() => {}}/>
-                <BasketIcon/>
+                <AddButton onClick={() => setIsAddFacadeItemWindowOpened(true)}/>
+                <BasketIcon onClick={facade.items.length ? () => setIsDeleteImageWindowOpened(true) : () => {}}/>
              </div>
         </div>
         }
@@ -96,6 +103,20 @@ const DetailedItem: React.FC<DetailedProps> = ({facade, isAdminPage}) => {
           Фото объекта {slideIndex} из {facade.items.length}
         </div>
       </div>
+
+      <ModalWindow active={isAddFacadeItemWindowOpened} handleBackdropClick={() => setIsAddFacadeItemWindowOpened(false)}>
+        <ImageForm onSubmit={(file: File) => {onImageFormSubmit && onImageFormSubmit(file); setIsAddFacadeItemWindowOpened(false)}} fileTitle=""/>
+      </ModalWindow>
+
+      <ModalWindow active={isDeleteImageWindowOpened} handleBackdropClick={() => setIsDeleteImageWindowOpened(false)}>
+        <div className={styles.modal__delete}>
+            <h4 className={styles.modal__title}>Вы уверены что хотите удалить это фото?</h4>
+            <div className={styles.modal__btns}>
+                <Button className={styles.modal__btn} onClick={() => {onDeleteButtonClick && onDeleteButtonClick(facade.items[slideIndex - 1].exterior_design_items_id)}}>Да</Button>
+                <Button className={styles.modal__btn} onClick={() => setIsDeleteImageWindowOpened(false)}>Нет</Button>
+            </div>
+        </div>
+      </ModalWindow>
     </div>
   )
 }

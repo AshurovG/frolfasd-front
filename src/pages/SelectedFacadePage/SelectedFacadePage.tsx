@@ -72,6 +72,37 @@ const SelectedFacadePage = () => {
         }
     }
 
+    const postImage = async (file: File) => {
+        const formData = new FormData();
+        formData.append('file', file);
+        if (facade) {
+            formData.append('exteriorDesignId', String(facade.exterior_design_id))
+        }
+        try {
+            await axios ('https://frolfasd.ru/api/exterior_design_items/', {
+                method: 'POST',
+                data: formData
+            })
+            getFacade()
+        } catch(error) {
+            throw error
+        }
+    }
+
+    const deleteImage = async (imageId: number) => {
+        try {
+            await axios(`https://frolfasd.ru/api/exterior_design_items/${imageId}?id=${id}`, {
+                method: 'DELETE',
+                data: {
+                    idMany: imageId
+                }
+            })
+            getFacade()
+        } catch(error) {
+            throw error
+        }
+    }
+
     React.useEffect(() => {
         getFacade()
     }, [])
@@ -98,7 +129,7 @@ const SelectedFacadePage = () => {
                     </div>
                 </div>
                 <h1 className={styles.selected__title}>Галлерея</h1>
-                {facade && <DetailedItem isAdminPage facade={facade}/>}
+                {facade && <DetailedItem onDeleteButtonClick={deleteImage} onImageFormSubmit={postImage} isAdminPage facade={facade}/>}
             </div>}
             <ModalWindow active={isEditFacadeWindowOpened} handleBackdropClick={() => setIsEditFacadeWindowOpened(false)}>
                 <div>
@@ -108,14 +139,13 @@ const SelectedFacadePage = () => {
 
             <ModalWindow active={isDeleteFacadeWindowOpened} handleBackdropClick={() => setIsDeleteFacadeWindowOpened(false)}>
                 <div className={styles.modal__delete}>
-                    <h4 className={styles.selected__subtitle}>Вы уверены что хотите удалить этот объект?</h4>
+                    <h4 className={styles.modal__title}>Вы уверены что хотите удалить этот объект?</h4>
                     <div className={styles.modal__btns}>
                         <Button className={styles.modal__btn} onClick={() => deleteFacade()}>Да</Button>
                         <Button className={styles.modal__btn} onClick={() => setIsDeleteFacadeWindowOpened(false)}>Нет</Button>
                     </div>
                 </div>
             </ModalWindow>
-            
         </div>
     )
 }

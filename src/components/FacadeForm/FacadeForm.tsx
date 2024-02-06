@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './FacadeForm.module.scss'
-import { Controller, FieldValues, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import Button from 'components/Button';
 
 export type FacadeFormProps = {
@@ -21,8 +21,6 @@ const FacadeForm: React.FC<FacadeFormProps> = ({onSubmit, title, description, fi
         if (event.target.files) {
             file = event.target.files[0];
         }
-        console.log(file)
-        
         if (file) {
           setSelectedFile(file);
           setFileName(file.name);
@@ -32,14 +30,10 @@ const FacadeForm: React.FC<FacadeFormProps> = ({onSubmit, title, description, fi
         }
     };
 
-    React.useEffect(() => {
-        console.log(description, '- title')
-    }, [])
-
     const forma = useForm({
-        mode: "onChange", // I want to change it to onBlur
+        mode: "onChange"
     })
-    const { register, handleSubmit, formState, reset } = forma
+    const { register } = forma
     return (
         <form
             className={styles.form}
