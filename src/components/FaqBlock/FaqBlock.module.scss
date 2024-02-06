@@ -4,4 +4,17 @@
     font-weight: 700;
     margin: 15px 0;
   }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 }
