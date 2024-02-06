@@ -1,0 +1,38 @@
+@import "../../styles/variables.scss";
+
+.selected {
+    min-height: 100vh;
+    max-width: $content-width;
+    width: 85vw;
+    margin: 0 auto;
+    margin-top: 50px;
+
+    &__info {
+        margin-bottom: 30px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    &__image {
+        width: 100%;
+    }
+
+    &__title {
+        font-size: 30px;
+        margin-bottom: 20px;
+
+        &-block {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        max-height: 50px;
+        margin-bottom: 15px;
+    }
+}

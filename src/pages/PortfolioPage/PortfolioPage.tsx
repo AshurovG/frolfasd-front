@@ -49,12 +49,12 @@ const PortfolioPage = () => {
         </Link>
       </div>
 
-      <ModalWindow
+      {/* <ModalWindow
         handleBackdropClick={() => setIsModalFormOpened(false)}
         active={isModalFormOpened}
       >
-        <DetailedItem />
-      </ModalWindow>
+        <DetailedItem facade={}/>
+      </ModalWindow> */}
     </div>
   )
 }

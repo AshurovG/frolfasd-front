@@ -8,6 +8,7 @@ import ModalWindow from "components/ModalWindow"
 import DetailedItem from "components/DetailedItem"
 import ArrowDownIcon from "components/Icons/ArrowDownIcon"
 import Loader from "components/Loader"
+import { useNavigate } from 'react-router-dom'
 
 export type CardListProps = {
   items: ReceivedFacadeData[]
@@ -17,8 +18,8 @@ export type CardListProps = {
 }
 
 const CardList: React.FC<CardListProps> = ({ items, isAdminPage, onButtonClick }) => {
+  const navigate = useNavigate()
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
-
   const [isItemLoading, setIsItemLoading] = useState<boolean>(true)
   const [selectedItemData, setSelectedItemData] = useState<ReceivedFacadeData>({
     exterior_design_id: 0,
@@ -46,25 +47,9 @@ const CardList: React.FC<CardListProps> = ({ items, isAdminPage, onButtonClick }
     }
   }
 
-  // const changeImportantItem = async (item: ReceivedFacadeData) => {
-  //   try {
-  //     await axios(
-  //       `https://frolfasd.ru/api/exterior_design_important/${item.exterior_design_id}`,
-  //       {
-  //         method: "PUT",
-  //         data: {
-  //           isImportant: !item.is_important
-  //         }
-  //       }
-  //     )
-  //   } catch {
-
-  //   }
-  // }
-
   const onCardClick = (id: number) => {
     if (isAdminPage) {
-      console.log('admin!!!')
+      navigate(`/facades/${id}`)
     } else {
       setIsModalFormOpened(true)
       getItemData(id)
@@ -88,7 +73,7 @@ const CardList: React.FC<CardListProps> = ({ items, isAdminPage, onButtonClick }
         }}
         active={isModalFormOpened}
       >
-        {isItemLoading ? <Loader /> : <DetailedItem {...selectedItemData} />}
+        {isItemLoading ? <Loader /> : <DetailedItem facade={selectedItemData} />}
       </ModalWindow>
     </div>
   )
