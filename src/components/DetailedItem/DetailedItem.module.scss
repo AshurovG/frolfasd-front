@@ -44,8 +44,16 @@
     &_title {
       font-weight: 700;
     }
+
     &_description {
       font-size: 23px;
+    }
+
+    &_actions {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
   }
 }

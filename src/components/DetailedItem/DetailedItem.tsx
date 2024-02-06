@@ -6,6 +6,8 @@ import third from "assets/mockPics/image3.jpg"
 import ArrowDownIcon from "components/Icons/ArrowDownIcon"
 import ArrowRightIcon from "components/Icons/ArrowRightIcon/ArrowRightIcon"
 import ArrowLeftIcon from "components/Icons/ArrowLeftIcon"
+import AddButton from 'components/Icons/AddButton'
+import BasketIcon from 'components/Icons/BasketIcon'
 import SliderButton from "./SliderButton"
 import { ReceivedFacadeData } from "../../../types"
 
@@ -22,20 +24,18 @@ import { ReceivedFacadeData } from "../../../types"
 //   itemPics: [first, second, third],
 // }
 
-const DetailedItem: React.FC<ReceivedFacadeData> = ({
-  // exterior_design_id,
-  exterior_design_title,
-  // exterior_design_url,
-  exterior_design_description,
-  // is_important,
-  items = [], //странный подход, спасибо ts
-}) => {
+export type DetailedProps = {
+  facade: ReceivedFacadeData
+  isAdminPage?: boolean
+};
+
+const DetailedItem: React.FC<DetailedProps> = ({facade, isAdminPage}) => {
   const [slideIndex, setSlideIndex] = useState<number>(1)
 
   const nextSlide = () => {
-    if (slideIndex !== items.length) {
+    if (slideIndex !== facade.items.length) {
       setSlideIndex(slideIndex + 1)
-    } else if (slideIndex === items.length) {
+    } else if (slideIndex === facade.items.length) {
       setSlideIndex(1)
     }
   }
@@ -44,7 +44,7 @@ const DetailedItem: React.FC<ReceivedFacadeData> = ({
     if (slideIndex !== 1) {
       setSlideIndex(slideIndex - 1)
     } else if (slideIndex === 1) {
-      setSlideIndex(items.length)
+      setSlideIndex(facade.items.length)
     }
   }
 
@@ -61,7 +61,7 @@ const DetailedItem: React.FC<ReceivedFacadeData> = ({
           direction="next"
           moveSlide={nextSlide}
         />
-        {items.map((item, index) => {
+        {facade.items.map((item, index) => {
           return (
             <div
               className={
@@ -77,15 +77,23 @@ const DetailedItem: React.FC<ReceivedFacadeData> = ({
         })}
       </div>
       <div className={styles.slider__info}>
-        <div>
-          <h2 className={styles.slider__info_title}>{exterior_design_title}</h2>
+        {!isAdminPage ? <div>
+          <h2 className={styles.slider__info_title}>{facade.exterior_design_title}</h2>
           <p className={styles.slider__info_description}>
-            {exterior_design_description}
+            {facade.exterior_design_description}
           </p>
         </div>
+        : <div>
+             <h2 className={styles.slider__info_title}>У вас есть возможность удалить текущее изображение или добавить новое</h2>
+             <div className={styles.slider__info_actions}>
+                <AddButton onClick={() => {}}/>
+                <BasketIcon/>
+             </div>
+        </div>
+        }
 
         <div>
-          Фото объекта {slideIndex} из {items.length}
+          Фото объекта {slideIndex} из {facade.items.length}
         </div>
       </div>
     </div>
