@@ -9,16 +9,24 @@ import DetailedItem from "components/DetailedItem"
 import ArrowDownIcon from "components/Icons/ArrowDownIcon"
 import Loader from "components/Loader"
 import Skeleton from "components/Skeleton"
+import { useNavigate } from "react-router-dom"
 
 export type CardListProps = {
   items: ReceivedFacadeData[]
   onCardClick?: (a: number) => void
+  onButtonClick?: (item: ReceivedFacadeData) => void
+  isAdminPage?: boolean
   isCardsLoading: boolean
 }
 
-const CardList: React.FC<CardListProps> = ({ items, isCardsLoading }) => {
+const CardList: React.FC<CardListProps> = ({
+  items,
+  isAdminPage,
+  onButtonClick,
+  isCardsLoading,
+}) => {
+  const navigate = useNavigate()
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
-
   const [isItemLoading, setIsItemLoading] = useState<boolean>(true)
   const [selectedItemData, setSelectedItemData] = useState<ReceivedFacadeData>({
     exterior_design_id: 0,
@@ -45,9 +53,14 @@ const CardList: React.FC<CardListProps> = ({ items, isCardsLoading }) => {
       setIsItemLoading(false)
     }
   }
+
   const onCardClick = (id: number) => {
-    setIsModalFormOpened(true)
-    getItemData(id)
+    if (isAdminPage) {
+      navigate(`/facades/${id}`)
+    } else {
+      setIsModalFormOpened(true)
+      getItemData(id)
+    }
   }
 
   return (
@@ -56,11 +69,18 @@ const CardList: React.FC<CardListProps> = ({ items, isCardsLoading }) => {
         ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
         : items.map((item: ReceivedFacadeData) => (
             <Card
-              onCardClick={() => {
-                onCardClick(item.exterior_design_id)
-              }}
+              isAdminPage={isAdminPage}
+              onCardClick={() => onCardClick(item.exterior_design_id)}
               {...item}
               key={item.exterior_design_id}
+              onButtonClick={
+                isAdminPage
+                  ? (event) => {
+                      event.stopPropagation()
+                      onButtonClick && onButtonClick(item)
+                    }
+                  : () => {}
+              }
             ></Card>
           ))}
 
@@ -70,7 +90,11 @@ const CardList: React.FC<CardListProps> = ({ items, isCardsLoading }) => {
         }}
         active={isModalFormOpened}
       >
-        {isItemLoading ? <Loader /> : <DetailedItem {...selectedItemData} />}
+        {isItemLoading ? (
+          <Loader />
+        ) : (
+          <DetailedItem facade={selectedItemData} />
+        )}
       </ModalWindow>
     </div>
   )

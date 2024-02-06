@@ -44,8 +44,16 @@
     &_title {
       font-weight: 700;
     }
+
     &_description {
       font-size: 23px;
+    }
+
+    &_actions {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
   }
 }
@@ -61,4 +69,29 @@
   left: 0px;
   transform: translate(10px, -50%);
   top: 50%;
+}
+
+
+.modal {
+  &__delete {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 20px;
+  }
+
+  &__btns {
+      width: 230px;
+      display: flex;
+      margin: 0 auto;
+      gap: 30px;
+      margin-top: 10px
+  }
+
+  &__btn {
+      width: 100px;
+  }
+
+  &__subtitle {
+    font-size: 20px;
+  }
 }

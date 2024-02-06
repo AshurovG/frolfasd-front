@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 30px;
 
     &__item {
         width: 100%;
@@ -16,6 +17,14 @@
         }
 
         :active {
+            background-color: #8f8e8e;
+        }
+
+        &-active {
+            width: 100%;
+            padding: 10px 10px;
+            text-align: center;
+            cursor: pointer;
             background-color: #8f8e8e;
         }
     }
