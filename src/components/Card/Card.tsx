@@ -11,6 +11,7 @@ export type CardProps = {
 }
 
 const Card: React.FC<CardProps> = ({
+  exterior_design_id,
   exterior_design_title,
   exterior_design_url,
   exterior_design_description,
@@ -27,6 +28,7 @@ const Card: React.FC<CardProps> = ({
       <div className={styles.card__description}>
         {exterior_design_description}
       </div>
+      <div>{exterior_design_id}</div>
     </div>
   )
 }

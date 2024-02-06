@@ -9,6 +9,7 @@ export type ReceivedFacadeData = {
   exterior_design_url: string
   exterior_design_description: string
   is_important: boolean
+  items: ReceivedFacadeItemData[]
 }
 
 export type ReceivedFacadeItemData = {
@@ -31,6 +32,7 @@ export type FacadeData = {
   url: string
   description: string
   isImportant: boolean
+  items: FacadeItemData[]
 }
 
 export type FacadeItemData = {

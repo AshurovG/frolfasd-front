@@ -7,14 +7,13 @@ import ModalWindow from "components/ModalWindow"
 import DetailedItem from "components/DetailedItem"
 import CardList from "components/CardList"
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 export type FacadesBlockProps = {
   items: ReceivedFacadeData[]
 }
 
 const FacadesBlock: React.FC<FacadesBlockProps> = ({ items }) => {
-  const [isModalFormOpened, setIsModalFormOpened] = useState(false)
-
   return (
     <div className={styles.block}>
       <h2 className={styles.block__title}>Вентилируемые фасады</h2>
@@ -23,7 +22,7 @@ const FacadesBlock: React.FC<FacadesBlockProps> = ({ items }) => {
         было бы полезно указать, какие материалы используются.
       </p>
       <h2 className={styles.block__title}>Примеры работ</h2>
-      <CardList items={items} onCardClick={() => setIsModalFormOpened(true)} />
+      <CardList items={items} />
 
       <div className={styles.block__action}>
         <Link to="/portfolio">
@@ -34,12 +33,6 @@ const FacadesBlock: React.FC<FacadesBlockProps> = ({ items }) => {
         Здесь кратко описано, что это за услуга / где и как используется. Также
         было бы полезно указать, какие материалы используются.
       </p>
-      <ModalWindow
-        handleBackdropClick={() => setIsModalFormOpened(false)}
-        active={isModalFormOpened}
-      >
-        <DetailedItem />
-      </ModalWindow>
     </div>
   )
 }

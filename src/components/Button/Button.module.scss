@@ -14,4 +14,8 @@
     border-color: $brand;
     background-color: $brand-secondary;
   }
+  &:disabled {
+    background-color: #634242d1;
+    cursor: default;
+  }
 }
