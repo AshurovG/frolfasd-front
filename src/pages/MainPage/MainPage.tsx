@@ -19,6 +19,7 @@ import FacadesBlock from "components/FacadesBlock"
 const MainPage = () => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isModalSliderOpen, setIsModalSliderOpen] = useState(false)
+  const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
 
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
@@ -32,6 +33,9 @@ const MainPage = () => {
         }
       )
       setFacadesItems(response.data)
+      setTimeout(() => {
+        setIsCardsLoading(false)
+      }, 10000)
     } catch (error) {
       console.log(error)
     }
@@ -61,7 +65,7 @@ const MainPage = () => {
   return (
     <div className={styles.page}>
       <AboutCompanyBlock />
-      <FacadesBlock items={facadesItems} />
+      <FacadesBlock isCardsLoading={isCardsLoading} items={facadesItems} />
       <FaqBlock questions={questions}></FaqBlock>
     </div>
   )

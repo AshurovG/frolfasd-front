@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({
       <div className={styles.card__description}>
         {exterior_design_description}
       </div>
-      <div>{exterior_design_id}</div>
+      {/* <div>{exterior_design_id}</div> */}
     </div>
   )
 }

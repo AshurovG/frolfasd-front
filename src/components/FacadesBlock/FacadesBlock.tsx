@@ -11,9 +11,13 @@ import axios from "axios"
 
 export type FacadesBlockProps = {
   items: ReceivedFacadeData[]
+  isCardsLoading: boolean
 }
 
-const FacadesBlock: React.FC<FacadesBlockProps> = ({ items }) => {
+const FacadesBlock: React.FC<FacadesBlockProps> = ({
+  items,
+  isCardsLoading,
+}) => {
   return (
     <div className={styles.block}>
       <h2 className={styles.block__title}>Вентилируемые фасады</h2>
@@ -22,7 +26,7 @@ const FacadesBlock: React.FC<FacadesBlockProps> = ({ items }) => {
         было бы полезно указать, какие материалы используются.
       </p>
       <h2 className={styles.block__title}>Примеры работ</h2>
-      <CardList items={items} />
+      <CardList isCardsLoading={isCardsLoading} items={items} />
 
       <div className={styles.block__action}>
         <Link to="/portfolio">

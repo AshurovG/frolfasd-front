@@ -8,13 +8,15 @@ import ModalWindow from "components/ModalWindow"
 import DetailedItem from "components/DetailedItem"
 import ArrowDownIcon from "components/Icons/ArrowDownIcon"
 import Loader from "components/Loader"
+import Skeleton from "components/Skeleton"
 
 export type CardListProps = {
   items: ReceivedFacadeData[]
   onCardClick?: (a: number) => void
+  isCardsLoading: boolean
 }
 
-const CardList: React.FC<CardListProps> = ({ items }) => {
+const CardList: React.FC<CardListProps> = ({ items, isCardsLoading }) => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
 
   const [isItemLoading, setIsItemLoading] = useState<boolean>(true)
@@ -50,15 +52,18 @@ const CardList: React.FC<CardListProps> = ({ items }) => {
 
   return (
     <div className={styles.list}>
-      {items.map((item: ReceivedFacadeData) => (
-        <Card
-          onCardClick={() => {
-            onCardClick(item.exterior_design_id)
-          }}
-          {...item}
-          key={item.exterior_design_id}
-        ></Card>
-      ))}
+      {isCardsLoading
+        ? [...new Array(6)].map((_, index) => <Skeleton key={index} />)
+        : items.map((item: ReceivedFacadeData) => (
+            <Card
+              onCardClick={() => {
+                onCardClick(item.exterior_design_id)
+              }}
+              {...item}
+              key={item.exterior_design_id}
+            ></Card>
+          ))}
+
       <ModalWindow
         handleBackdropClick={() => {
           setIsItemLoading(true), setIsModalFormOpened(false)
