@@ -5,6 +5,7 @@
   padding: 30px 50px;
   // position: fixed;
   // width: 100vw;
+  z-index: 2;
 
   &__inner {
     font-size: 26px;
@@ -13,7 +14,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1620px;
+
+    max-width: $content-width;
+    width: 85vw;
     margin: 0 auto;
 
     &_logo {

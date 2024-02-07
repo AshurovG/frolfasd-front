@@ -1,47 +1,56 @@
-import React, { useState } from 'react'
-import styles from './AdminPage.module.scss'
-import Navigation from 'components/Navigation'
-import CardList from 'components/CardList'
-import axios from 'axios'
+import React, { useState } from "react"
+import styles from "./AdminPage.module.scss"
+import Navigation from "components/Navigation"
+import CardList from "components/CardList"
+import axios from "axios"
 import { ReceivedFacadeData, ReceivedQuestionsData } from "../../../types"
-import AddButton from 'components/Icons/AddButton'
-import FacadeForm from 'components/FacadeForm'
-import ModalWindow from 'components/ModalWindow'
-import FaqBlock from 'components/FaqBlock'
-import QuestionForm from 'components/QuestionForm/QuestionForm'
-import Button from 'components/Button'
+import AddButton from "components/Icons/AddButton"
+import FacadeForm from "components/FacadeForm"
+import ModalWindow from "components/ModalWindow"
+import FaqBlock from "components/FaqBlock"
+import QuestionForm from "components/QuestionForm/QuestionForm"
+import Button from "components/Button"
 
 const AdminPage = () => {
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
-  const [active, setActive] = useState<'facades' | 'questions'>('facades')
+  const [active, setActive] = useState<"facades" | "questions">("facades")
   const [isCreateWindowOpened, setIsCreateWindowOpened] = useState(false)
-  const [isCreateQuestionModalOpen, setIsCreateQuestionModalOpen] = useState(false)
+  const [isCreateQuestionModalOpen, setIsCreateQuestionModalOpen] =
+    useState(false)
   const [isEditQuestionModalOpen, setIsEditQuestionModalOpen] = useState(false)
   const [isDeleteWindowOpen, setIsDeleteWindowOpen] = useState(false)
-  const [currentQuestion, setCurrentQuestion] = useState<ReceivedQuestionsData>()
+  const [currentQuestion, setCurrentQuestion] =
+    useState<ReceivedQuestionsData>()
   const [isDeletedQuestionId, setDeletedQuestionId] = useState<number>()
 
+  const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
+  const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
+
   React.useEffect(() => {
-    console.log('render')
+    console.log("render")
   }, [])
 
   const getFacades = async () => {
-    setActive('facades')
+    setActive("facades")
     try {
-      const response = await axios('https://frolfasd.ru/api/exterior_design/')
+      const response = await axios("https://frolfasd.ru/api/exterior_design/")
       setFacadesItems(response.data)
-    } catch(error) {
+      setTimeout(() => {
+        setIsCardsLoading(false)
+      }, 300)
+    } catch (error) {
       throw error
     }
   }
 
   const getQuestions = async () => {
-    setActive('questions')
+    setActive("questions")
     try {
-      const response = await axios('https://frolfasd.ru/api/questions/')
+      const response = await axios("https://frolfasd.ru/api/questions/")
       setQuestions(response.data)
-    } catch(error) {
+      setIsQuestionsLoading(true)
+    } catch (error) {
       throw error
     }
   }
@@ -53,52 +62,56 @@ const AdminPage = () => {
         {
           method: "PUT",
           data: {
-            isImportant: !item.is_important
-          }
+            isImportant: !item.is_important,
+          },
         }
       )
+      setIsCardsLoading(true)
       getFacades()
-    } catch(error) {
+    } catch (error) {
       throw error
     }
   }
 
-  const postFacade = async (title: string, description: string, file: File | null) => {
+  const postFacade = async (
+    title: string,
+    description: string,
+    file: File | null
+  ) => {
     try {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('desc', description);
+      const formData = new FormData()
+      formData.append("title", title)
+      formData.append("desc", description)
       if (file) {
-        formData.append('file', file);
+        formData.append("file", file)
       }
-      await axios('https://frolfasd.ru/api/exterior_design/', {
-        method: 'POST',
+      await axios("https://frolfasd.ru/api/exterior_design/", {
+        method: "POST",
         data: formData,
         headers: {
-          'Content-Type': 'multipart/form-data',
+          "Content-Type": "multipart/form-data",
         },
       })
-
+      setIsCardsLoading(true)
       getFacades()
       setIsCreateWindowOpened(false)
-      
-    } catch(error) {
-       throw error
+    } catch (error) {
+      throw error
     }
   }
 
   const postQuestion = async (question: string, answer: string) => {
     try {
-      await axios('https://frolfasd.ru/api/questions/', {
-        method: 'POST',
+      await axios("https://frolfasd.ru/api/questions/", {
+        method: "POST",
         data: {
           title: question,
-          text: answer
-        }
+          text: answer,
+        },
       })
       getQuestions()
       setIsCreateQuestionModalOpen(false)
-    } catch(error) {
+    } catch (error) {
       throw error
     }
   }
@@ -106,43 +119,43 @@ const AdminPage = () => {
   const putQuestion = async (question: string, answer: string) => {
     try {
       await axios(`https://frolfasd.ru/api/questions/`, {
-        method: 'PUT',
+        method: "PUT",
         data: {
           title: question,
           text: answer,
-          id: currentQuestion?.questions_id
-        }
+          id: currentQuestion?.questions_id,
+        },
       })
       getQuestions()
       setIsEditQuestionModalOpen(false)
-    } catch(error) {
+    } catch (error) {
       throw error
     }
   }
-  
+
   const deleteQuestion = async () => {
     try {
       await axios(`https://frolfasd.ru/api/questions/${isDeletedQuestionId}`, {
-        method: 'DELETE',
+        method: "DELETE",
       })
       getQuestions()
       setIsDeleteWindowOpen(false)
-    } catch(error) {
+    } catch (error) {
       throw error
     }
   }
-  
+
   React.useEffect(() => {
-    getFacades();
+    getFacades()
   }, [])
 
   const onEditButtonClick = (id: number, question: string, answer: string) => {
-    console.log('edit clicked', question)
+    console.log("edit clicked", question)
     // putQuestion(id, question, answer)
     setCurrentQuestion({
       questions_id: id,
       questions_title: question,
-      questions_text: answer
+      questions_text: answer,
     })
     setIsEditQuestionModalOpen(true)
   }
@@ -155,46 +168,105 @@ const AdminPage = () => {
   return (
     <div className={styles.admin}>
       <h1 className={styles.admin__title}>Управление сайтом</h1>
-      <h4 className={styles.admin__subtitle}>Здесь вы можете редактировать данные сайта</h4>
-      <Navigation active={active} onFacadesClick={getFacades} onQuestionsClick={getQuestions}/>
-      {active === 'facades' ? <div className={styles.admin__actions}>
-        <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
-        <AddButton onClick={() => setIsCreateWindowOpened(true)}/>
-      </div>
-      : <div className={styles.admin__actions}>
-        <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
-        <AddButton onClick={() => setIsCreateQuestionModalOpen(true)}/>
-      </div>
-      }
-      
-      { active === 'facades' ? <div className={styles.admin__facades}>
-        <CardList isAdminPage items={facadesItems} onButtonClick={changeImportantItem}/>
-      </div>
-      : <div>
-        <FaqBlock isAdminPage questions={questions} onEditButtonClick={onEditButtonClick} onDeleteButtonClick={onDeleteButtonClick}></FaqBlock>
-      </div>  
-      }
-      <ModalWindow active={isCreateWindowOpened} handleBackdropClick={() => setIsCreateWindowOpened(false)}>
+      <h4 className={styles.admin__subtitle}>
+        Здесь вы можете редактировать данные сайта
+      </h4>
+      <Navigation
+        active={active}
+        onFacadesClick={getFacades}
+        onQuestionsClick={getQuestions}
+      />
+      {active === "facades" ? (
+        <div className={styles.admin__actions}>
+          <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
+          <AddButton onClick={() => setIsCreateWindowOpened(true)} />
+        </div>
+      ) : (
+        <div className={styles.admin__actions}>
+          <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
+          <AddButton onClick={() => setIsCreateQuestionModalOpen(true)} />
+        </div>
+      )}
+
+      {active === "facades" ? (
+        <div className={styles.admin__facades}>
+          <CardList
+            isCardsLoading={isCardsLoading}
+            isAdminPage
+            items={facadesItems}
+            onButtonClick={changeImportantItem}
+          />
+        </div>
+      ) : (
         <div>
-          {<FacadeForm onSubmit={postFacade} title='' description='' fileTitle=''/>}
+          <FaqBlock
+            isQuestionsLoading={isQuestionsLoading}
+            isAdminPage
+            questions={questions}
+            onEditButtonClick={onEditButtonClick}
+            onDeleteButtonClick={onDeleteButtonClick}
+          ></FaqBlock>
+        </div>
+      )}
+      <ModalWindow
+        active={isCreateWindowOpened}
+        handleBackdropClick={() => setIsCreateWindowOpened(false)}
+      >
+        <div>
+          {
+            <FacadeForm
+              onSubmit={postFacade}
+              title=""
+              description=""
+              fileTitle=""
+            />
+          }
         </div>
       </ModalWindow>
 
-      <ModalWindow active={isCreateQuestionModalOpen} handleBackdropClick={() => setIsCreateQuestionModalOpen(false)}>
-        <QuestionForm onSubmit={postQuestion}/>
+      <ModalWindow
+        active={isCreateQuestionModalOpen}
+        handleBackdropClick={() => setIsCreateQuestionModalOpen(false)}
+      >
+        <QuestionForm onSubmit={postQuestion} />
       </ModalWindow>
 
-      <ModalWindow active={isEditQuestionModalOpen} handleBackdropClick={() => setIsEditQuestionModalOpen(false)}>
-        {currentQuestion && <QuestionForm key={currentQuestion.questions_id} question={currentQuestion.questions_title} answer={currentQuestion.questions_text} onSubmit={putQuestion}/>}
+      <ModalWindow
+        active={isEditQuestionModalOpen}
+        handleBackdropClick={() => setIsEditQuestionModalOpen(false)}
+      >
+        {currentQuestion && (
+          <QuestionForm
+            key={currentQuestion.questions_id}
+            question={currentQuestion.questions_title}
+            answer={currentQuestion.questions_text}
+            onSubmit={putQuestion}
+          />
+        )}
       </ModalWindow>
 
-      <ModalWindow active={isDeleteWindowOpen} handleBackdropClick={() => setIsDeleteWindowOpen(false)}>
+      <ModalWindow
+        active={isDeleteWindowOpen}
+        handleBackdropClick={() => setIsDeleteWindowOpen(false)}
+      >
         <div className={styles.modal__delete}>
-            <h4 className={styles.modal__title}>Вы уверены что хотите удалить этот вопрос?</h4>
-            <div className={styles.modal__btns}>
-                <Button className={styles.modal__btn} onClick={() => deleteQuestion()}>Да</Button>
-                <Button className={styles.modal__btn} onClick={() => setIsDeleteWindowOpen(false)}>Нет</Button>
-            </div>
+          <h4 className={styles.modal__title}>
+            Вы уверены что хотите удалить этот вопрос?
+          </h4>
+          <div className={styles.modal__btns}>
+            <Button
+              className={styles.modal__btn}
+              onClick={() => deleteQuestion()}
+            >
+              Да
+            </Button>
+            <Button
+              className={styles.modal__btn}
+              onClick={() => setIsDeleteWindowOpen(false)}
+            >
+              Нет
+            </Button>
+          </div>
         </div>
       </ModalWindow>
     </div>

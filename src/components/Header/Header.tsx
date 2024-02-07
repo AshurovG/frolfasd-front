@@ -9,18 +9,16 @@ import { Link as ScrollLink, scroller } from "react-scroll"
 const Header = () => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   return (
-    <div className={styles.header}>
+    <div className={styles.header} id="header">
       <div className={styles.header__inner}>
         <Link to="/">
           <div className={styles.header__inner_logo}>ФРОЛФАСД</div>
         </Link>
 
         <ul className={styles.header__inner_navmenu}>
-          <li className={styles.header__inner_navmenu_item}>Услуги</li>
           <Link to="/portfolio">
             <li className={styles.header__inner_navmenu_item}>Портфолио</li>
           </Link>
-
           <li className={styles.header__inner_navmenu_item}>
             <Link
               onClick={() => {
@@ -33,6 +31,19 @@ const Header = () => {
               Помощь
             </Link>
           </li>
+          <li className={styles.header__inner_navmenu_item}>
+            <Link
+              onClick={() => {
+                setTimeout(() => {
+                  scroller.scrollTo("contacts", { smooth: true, duration: 500 })
+                }, 100)
+              }}
+              to="/frolfasd"
+            >
+              Контакты
+            </Link>
+          </li>
+
           {/* <li className={styles.header__inner_navmenu_item}>Сделать заказ</li> */}
         </ul>
         <Button

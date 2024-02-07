@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({
   onCardClick,
   onButtonClick,
   isAdminPage,
-  is_important
+  is_important,
 }) => {
   return (
     <div
@@ -31,12 +31,17 @@ const Card: React.FC<CardProps> = ({
       className={styles.card}
     >
       <img className={styles.card__image} src={exterior_design_url}></img>
-      {isAdminPage && <div onClick={onButtonClick ? (event) => onButtonClick(event) : () => {}} className={styles.card__btn}>
-        {is_important && <FavoritesIcon className={styles['card__btn-icon']}/>}
-      </div>}
-      <div className={styles.card__description}>
-        {exterior_design_description}
-      </div>
+      {isAdminPage && (
+        <div
+          onClick={onButtonClick ? (event) => onButtonClick(event) : () => {}}
+          className={styles.card__btn}
+        >
+          {is_important && (
+            <FavoritesIcon className={styles["card__btn-icon"]} />
+          )}
+        </div>
+      )}
+      <div className={styles.card__description}>{exterior_design_title}</div>
       {/* <div>{exterior_design_id}</div> */}
     </div>
   )

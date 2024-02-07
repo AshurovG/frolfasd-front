@@ -7,12 +7,35 @@ import { ReceivedFacadeData, ReceivedQuestionsData } from "../../../types"
 import axios from "axios"
 import { Response } from "../../../types"
 import FacadesBlock from "components/FacadesBlock"
+import Button from "components/Button"
+import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
+import ModalWindow from "components/ModalWindow"
+import OrderForm from "components/OrderForm"
+import { toast } from "react-toastify"
 
 const MainPage = () => {
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
+  const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
+  const [isModalFormOpened, setIsModalFormOpened] = useState(false)
 
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
+
+  const [showButton, setShowButton] = useState(false)
+
+  const handleScroll = () => {
+    const header = document.getElementById("header")
+    if (!header) return
+    const rect = header.getBoundingClientRect()
+    setShowButton(rect.top < -147) //147 это высота хэдера, надо придумать как сделать по-другому
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   const getFacadesMainItems = async () => {
     try {
@@ -38,13 +61,14 @@ const MainPage = () => {
         }
       )
       setQuestions(response.data)
+      setIsQuestionsLoading(false)
     } catch (error) {
       console.log(error)
     }
   }
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-  })
+  }, [])
 
   useEffect(() => {
     getFacadesMainItems()
@@ -53,9 +77,26 @@ const MainPage = () => {
 
   return (
     <div className={styles.page}>
+      {showButton && (
+        <div
+          onClick={() => setIsModalFormOpened(true)}
+          className={styles.order_fix}
+        >
+          <PhoneIcon className={styles.order_fix_icon} />
+        </div>
+      )}
       <AboutCompanyBlock />
       <FacadesBlock isCardsLoading={isCardsLoading} items={facadesItems} />
-      <FaqBlock questions={questions}></FaqBlock>
+      <FaqBlock
+        isQuestionsLoading={isQuestionsLoading}
+        questions={questions}
+      ></FaqBlock>
+      <ModalWindow
+        handleBackdropClick={() => setIsModalFormOpened(false)}
+        active={isModalFormOpened}
+      >
+        <OrderForm />
+      </ModalWindow>
     </div>
   )
 }

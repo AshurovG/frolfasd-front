@@ -10,16 +10,34 @@ import ModalWindow from "components/ModalWindow"
 import DetailedItem from "components/DetailedItem"
 import Button from "components/Button"
 import { Link } from "react-router-dom"
+import OrderForm from "components/OrderForm"
+import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
 
 const PortfolioPage = () => {
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
 
+  const [showButton, setShowButton] = useState(false)
+
+  const handleScroll = () => {
+    const header = document.getElementById("header")
+    if (!header) return
+    const rect = header.getBoundingClientRect()
+    setShowButton(rect.top < -147) //147 это высота хэдера, надо придумать как сделать по-другому
+  }
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
+
   const getFacadesItems = async () => {
     try {
       const response: Response = await axios(
-        `https://frolfasd.ru/api/exterior_design`,
+        `https://frolfasd.ru/api/exterior_design`, //1111111111111
         {
           method: "GET",
         }
@@ -36,10 +54,18 @@ const PortfolioPage = () => {
 
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
-  })
+  }, [])
 
   return (
     <div className={styles.page}>
+      {showButton && (
+        <div
+          onClick={() => setIsModalFormOpened(true)}
+          className={styles.order_fix}
+        >
+          <PhoneIcon className={styles.order_fix_icon} />
+        </div>
+      )}
       <h1 className={styles.page__title}>Портфолио</h1>
       <h2 className={styles.page__subtitle}>Вентилируемые фасады</h2>
       <div className={styles.page__content}>
@@ -56,12 +82,12 @@ const PortfolioPage = () => {
         </Link>
       </div>
 
-      {/* <ModalWindow
+      <ModalWindow
         handleBackdropClick={() => setIsModalFormOpened(false)}
         active={isModalFormOpened}
       >
-        <DetailedItem facade={}/>
-      </ModalWindow> */}
+        <OrderForm />
+      </ModalWindow>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import Button from "components/Button"
 import emailjs from "@emailjs/browser"
 
 import { FieldValues, useForm } from "react-hook-form"
+import { toast } from "react-toastify"
 
 const OrderForm = () => {
   const form = useRef<HTMLFormElement>(null)
@@ -39,6 +40,7 @@ const OrderForm = () => {
     //       }
     //     )
     // }
+    toast.success("Заказ принят! Мы скоро Вам перезвоним.")
   }
 
   return (

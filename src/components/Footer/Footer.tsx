@@ -5,7 +5,7 @@ import TGIcon from "components/Icons/TGIcon"
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
+    <footer id="contacts" className={styles.footer}>
       <div className={styles.footer__inner}>
         <div className={styles.footer__inner_main}>
           ФРОЛФАСД <br /> 2010-2024 <br />
