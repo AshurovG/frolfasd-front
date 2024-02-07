@@ -17,6 +17,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({onSubmit, title, description, fi
     const [descriptionValue, setDescriptionValue] = useState(description)
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        console.log('file changing')
         let file
         if (event.target.files) {
             file = event.target.files[0];
@@ -92,7 +93,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({onSubmit, title, description, fi
                 <input
                     type="file"
                     id="imageFileInput"
-                    accept="image/jpeg, image/png, image/gif, image/bmp"
+                    accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />

@@ -5,6 +5,8 @@ import MainPage from "pages/MainPage"
 import Footer from "components/Footer"
 import PortfolioPage from "pages/PortfolioPage"
 import SelectedFacadePage from "pages/SelectedFacadePage"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -23,6 +25,7 @@ const App = () => {
         </Routes>
         <Footer />
       </HashRouter>
+      <ToastContainer autoClose={1500} pauseOnHover={false} />
     </div>
   )
 }

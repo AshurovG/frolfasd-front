@@ -133,7 +133,8 @@ const SelectedFacadePage = () => {
             </div>}
             <ModalWindow active={isEditFacadeWindowOpened} handleBackdropClick={() => setIsEditFacadeWindowOpened(false)}>
                 <div>
-                    {isEditFacadeWindowOpened && <FacadeForm onSubmit={putFacade} title={facade?.exterior_design_title} description={facade?.exterior_design_description} fileTitle=''/>}
+                    {/* {isEditFacadeWindowOpened && <FacadeForm onSubmit={putFacade} title={facade?.exterior_design_title} description={facade?.exterior_design_description} fileTitle=''/>} */}
+                    {isEditFacadeWindowOpened && <FacadeForm onSubmit={putFacade} title={''} description={''} fileTitle=''/>}
                 </div>
             </ModalWindow>
 

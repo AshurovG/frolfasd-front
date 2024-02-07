@@ -10,6 +10,7 @@ import ModalWindow from 'components/ModalWindow'
 import FaqBlock from 'components/FaqBlock'
 import QuestionForm from 'components/QuestionForm/QuestionForm'
 import Button from 'components/Button'
+import {toast } from 'react-toastify';
 
 const AdminPage = () => {
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
@@ -21,10 +22,6 @@ const AdminPage = () => {
   const [isDeleteWindowOpen, setIsDeleteWindowOpen] = useState(false)
   const [currentQuestion, setCurrentQuestion] = useState<ReceivedQuestionsData>()
   const [isDeletedQuestionId, setDeletedQuestionId] = useState<number>()
-
-  React.useEffect(() => {
-    console.log('render')
-  }, [])
 
   const getFacades = async () => {
     setActive('facades')
@@ -57,8 +54,15 @@ const AdminPage = () => {
           }
         }
       )
+      if (item.is_important === false) {
+        toast.success("Объект добавлен на главную страницу!");
+      } else {
+        toast.success("Объект скрыт из главной страницы!");
+      }
+      
       getFacades()
     } catch(error) {
+      toast.error("Что-то пошло не так...");
       throw error
     }
   }
@@ -78,6 +82,7 @@ const AdminPage = () => {
           'Content-Type': 'multipart/form-data',
         },
       })
+      toast.success("Объект создан успешно!");
 
       getFacades()
       setIsCreateWindowOpened(false)
@@ -98,6 +103,7 @@ const AdminPage = () => {
       })
       getQuestions()
       setIsCreateQuestionModalOpen(false)
+      toast.success("Вопрос создан успешно!");
     } catch(error) {
       throw error
     }
@@ -113,6 +119,8 @@ const AdminPage = () => {
           id: currentQuestion?.questions_id
         }
       })
+
+      toast.success("Информация успешно обновлена!");
       getQuestions()
       setIsEditQuestionModalOpen(false)
     } catch(error) {
@@ -125,6 +133,7 @@ const AdminPage = () => {
       await axios(`https://frolfasd.ru/api/questions/${isDeletedQuestionId}`, {
         method: 'DELETE',
       })
+      toast.success("Информация успешно обновлена!");
       getQuestions()
       setIsDeleteWindowOpen(false)
     } catch(error) {
