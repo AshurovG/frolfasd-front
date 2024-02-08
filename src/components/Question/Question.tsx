@@ -21,11 +21,14 @@ const Question: React.FC<QuestionProps> = ({
         className={clsx(styles.faq__question, isOpen ? styles.open : "")}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <ArrowDownIcon
-          className={styles.faq__question_icon}
-          width={30}
-          height={30}
-        />
+        <div>
+          <ArrowDownIcon
+            className={styles.faq__question_icon}
+            // width={30}
+            // height={30}
+          />
+        </div>
+
         <div>{questions_title}</div>
       </div>
       <div className={clsx(styles.faq__answer, isOpen ? styles.open : "")}>

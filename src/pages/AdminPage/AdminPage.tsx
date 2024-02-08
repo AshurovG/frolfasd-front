@@ -49,7 +49,7 @@ const AdminPage = () => {
     try {
       const response = await axios("https://frolfasd.ru/api/questions/")
       setQuestions(response.data)
-      setIsQuestionsLoading(true)
+      setIsQuestionsLoading(false)
     } catch (error) {
       throw error
     }

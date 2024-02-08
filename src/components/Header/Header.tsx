@@ -5,9 +5,12 @@ import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
 import { Link as ScrollLink, scroller } from "react-scroll"
+import BurgerIcon from "components/Icons/BurgerIcon"
 
 const Header = () => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
+  const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false)
+
   return (
     <div className={styles.header} id="header">
       <div className={styles.header__inner}>
@@ -52,6 +55,59 @@ const Header = () => {
         >
           Сделать заказ
         </Button>
+
+        {isBurgerMenuOpened === false ? (
+          <BurgerIcon
+            className={styles.burger__icon}
+            onClick={() => setIsBurgerMenuOpened(true)}
+          />
+        ) : (
+          <div
+            className={styles.cancel__icon}
+            onClick={() => setIsBurgerMenuOpened(false)}
+          ></div>
+        )}
+        {isBurgerMenuOpened && (
+          <div className={styles.burger__menu}>
+            <Link
+              onClick={() => setIsBurgerMenuOpened(false)}
+              // className={styles["burger__menu-item"]}
+              to={"/portfolio"}
+            >
+              Портфолио
+            </Link>
+            <Link
+              onClick={() => {
+                setIsBurgerMenuOpened(false)
+                setTimeout(() => {
+                  scroller.scrollTo("faq", { smooth: true, duration: 500 })
+                }, 100)
+              }}
+              to="/frolfasd"
+            >
+              Помощь
+            </Link>
+            <Link
+              onClick={() => {
+                setIsBurgerMenuOpened(false)
+                setTimeout(() => {
+                  scroller.scrollTo("contacts", { smooth: true, duration: 500 })
+                }, 100)
+              }}
+              to="/frolfasd"
+            >
+              Контакты
+            </Link>
+            <div
+              onClick={() => {
+                setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
+              }}
+            >
+              {" "}
+              Сделать заказ
+            </div>
+          </div>
+        )}
       </div>
       <ModalWindow
         handleBackdropClick={() => setIsModalFormOpened(false)}

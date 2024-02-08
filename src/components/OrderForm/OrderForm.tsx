@@ -108,9 +108,15 @@ const OrderForm = () => {
             </div>
           )}
         </div>
-        <Button disabled={!isValid} type="submit">
+        {/* <div > */}
+        <Button
+          className={styles.form__submit}
+          disabled={!isValid}
+          type="submit"
+        >
           Сделать заказ
         </Button>
+        {/* </div> */}
       </form>
     </div>
   )

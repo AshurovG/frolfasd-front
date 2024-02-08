@@ -1,17 +1,79 @@
+@import "../../styles/variables.scss";
+@import "../../styles//mixins.scss";
+
 .footer {
   background-color: #130d0dd1;
-  height: 200px;
+  // height: 200px;
   margin-top: 30px;
   color: #fff;
-  font-size: 22px;
-  padding: 0px 50px;
+
+  padding: 20px 0;
   padding-top: 20px;
 
   &__inner {
+    font-size: 22px;
     display: flex;
     justify-content: space-between;
     align-items: start;
-    max-width: 1620px;
+    max-width: $content-width;
+    width: 85vw;
     margin: 0 auto;
+  }
+}
+
+@include tablet {
+  .footer {
+    &__inner {
+      font-size: 22px;
+    }
+  }
+}
+//!!!!!!!!!
+@include mediumTablet {
+  .footer {
+    &__inner {
+      font-size: 18px;
+    }
+  }
+}
+
+@include mobileLandscape {
+  .footer {
+    font-size: 16px;
+    &__inner {
+      &_duty {
+        display: none;
+      }
+    }
+  }
+}
+
+@include extraSmallMobile {
+  .footer {
+    font-size: 16px;
+    &__inner {
+      &_main {
+        div {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@include tinyMobile {
+  .footer {
+    &__inner {
+      flex-direction: column-reverse;
+      align-items: center;
+
+      &_contacts {
+        text-align: center;
+        margin-bottom: 12px;
+      }
+      &_main {
+        text-align: center;
+      }
+    }
   }
 }

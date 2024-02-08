@@ -1,3 +1,4 @@
+@import "../../styles/mixins.scss";
 .block {
   border-bottom: 2px #130d0d73 solid;
   &__title {
@@ -8,5 +9,56 @@
   &__content {
     font-size: 26px;
     margin-bottom: 30px;
+  }
+}
+
+@include mobileLandscape {
+  .block {
+    &__title {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+    &__content {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@include extraSmallMobile {
+  .block {
+    &__title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+    &__content {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+  }
+}
+
+@include ultraSmallMobile {
+  .block {
+    &__title {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+    &__content {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+  }
+}
+@include tinyMobile {
+  .block {
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
   }
 }

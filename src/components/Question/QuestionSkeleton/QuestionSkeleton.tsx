@@ -4,9 +4,9 @@ import ContentLoader from "react-content-loader"
 const QuestionSkeleton = () => (
   <ContentLoader
     speed={2}
-    width={1000}
+    width={`auto`}
     height={45}
-    viewBox="0 0 1000 45"
+    viewBox={`0 0 auto 45`}
     backgroundColor="#bdbdbd"
     foregroundColor="#ecebeb"
   >

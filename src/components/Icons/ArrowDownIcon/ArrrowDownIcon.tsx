@@ -14,8 +14,8 @@ const ArrowDownIcon: React.FC<IconProps> = ({
       viewBox="0 0 24 24"
       onClick={onClick}
       color={color}
-      width={width ? width : 24}
-      height={height ? height : 24}
+      width={width ? width : 30}
+      height={height ? height : 30}
       className={classes}
     >
       <path

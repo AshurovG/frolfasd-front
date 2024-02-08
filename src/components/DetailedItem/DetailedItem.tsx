@@ -120,7 +120,7 @@ const DetailedItem: React.FC<DetailedProps> = ({
         )}
 
         {facade.items.length != 0 ? (
-          <div>
+          <div className={styles.slider__info_count}>
             Фото объекта {slideIndex} из {facade.items.length}
           </div>
         ) : (

@@ -18,9 +18,13 @@ const SliderButton: React.FC<SliderButtonProps> = ({
   return (
     <button
       onClick={moveSlide}
-      className={clsx(styles.slider__button, className)}
+      // className={clsx(styles.slider__button, className)}
     >
-      {direction == "prev" ? <ArrowLeftIcon /> : <ArrowRightIcon />}
+      {direction == "prev" ? (
+        <ArrowLeftIcon className={className} />
+      ) : (
+        <ArrowRightIcon className={className} />
+      )}
     </button>
   )
 }

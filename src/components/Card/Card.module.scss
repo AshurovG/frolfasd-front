@@ -1,11 +1,14 @@
+@import "../../styles/mixins.scss";
+
 .card {
   // width: 400px;
   cursor: pointer;
   position: relative;
-
+  // max-width: 400px;
   &__image {
-    // width: 400px;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    object-fit: cover;
     height: 311px;
   }
 
@@ -24,5 +27,14 @@
       left: 50%;
       transform: translate(-50%, -50%);
     }
+  }
+}
+
+@include extraSmallMobile {
+  .card {
+    width: 85vw;
+    // &__image {
+    //   width: 150px;
+    // }
   }
 }

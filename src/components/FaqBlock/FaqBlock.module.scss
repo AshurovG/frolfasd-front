@@ -1,3 +1,4 @@
+@import "../../styles/mixins.scss";
 .block {
   &__title {
     font-size: 40px;
@@ -16,5 +17,43 @@
     display: flex;
     align-items: center;
     gap: 20px;
+  }
+}
+
+@include mobileLandscape {
+  .block {
+    &__title {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+  }
+}
+
+@include extraSmallMobile {
+  .block {
+    &__title {
+      font-size: 32px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+  }
+}
+@include ultraSmallMobile {
+  .block {
+    &__title {
+      font-size: 28px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
+  }
+}
+@include tinyMobile {
+  .block {
+    &__title {
+      font-size: 24px;
+      font-weight: 700;
+      margin: 15px 0;
+    }
   }
 }

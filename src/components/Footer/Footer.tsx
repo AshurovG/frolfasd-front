@@ -9,8 +9,11 @@ const Footer = () => {
       <div className={styles.footer__inner}>
         <div className={styles.footer__inner_main}>
           ФРОЛФАСД <br /> 2010-2024 <br />
-          <br /> Адрес: <br />
-          Москва, ул Парковая 6
+          <br />
+          <div>
+            Адрес: <br />
+            Москва, ул Парковая 6
+          </div>
         </div>
         <div className={styles.footer__inner_duty}>
           Режим работы:
