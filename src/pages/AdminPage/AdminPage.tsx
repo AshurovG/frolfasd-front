@@ -38,7 +38,7 @@ const AdminPage = () => {
       setFacadesItems(response.data)
       setTimeout(() => {
         setIsCardsLoading(false)
-      }, 300)
+      }, 1000)
     } catch (error) {
       throw error
     }
@@ -49,7 +49,9 @@ const AdminPage = () => {
     try {
       const response = await axios("https://frolfasd.ru/api/questions/")
       setQuestions(response.data)
-      setIsQuestionsLoading(false)
+      setTimeout(() => {
+        setIsQuestionsLoading(false)
+      }, 1000)
     } catch (error) {
       throw error
     }
@@ -109,6 +111,7 @@ const AdminPage = () => {
           text: answer,
         },
       })
+      setIsQuestionsLoading(true)
       getQuestions()
       setIsCreateQuestionModalOpen(false)
     } catch (error) {
@@ -126,6 +129,8 @@ const AdminPage = () => {
           id: currentQuestion?.questions_id,
         },
       })
+      setIsQuestionsLoading(true)
+
       getQuestions()
       setIsEditQuestionModalOpen(false)
     } catch (error) {
@@ -138,6 +143,8 @@ const AdminPage = () => {
       await axios(`https://frolfasd.ru/api/questions/${isDeletedQuestionId}`, {
         method: "DELETE",
       })
+      setIsQuestionsLoading(true)
+
       getQuestions()
       setIsDeleteWindowOpen(false)
     } catch (error) {
