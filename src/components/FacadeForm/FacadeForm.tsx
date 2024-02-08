@@ -22,6 +22,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
   const [descriptionValue, setDescriptionValue] = useState(description)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("file changing")
     let file
     if (event.target.files) {
       file = event.target.files[0]
@@ -39,6 +40,14 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
     mode: "onChange",
   })
   const { register } = forma
+
+  const clearData = () => {
+    setTitleValue("")
+    setDescriptionValue("")
+    setFileName("")
+    setSelectedFile(null)
+  }
+
   return (
     <form
       className={styles.form}
@@ -47,6 +56,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
         titleValue &&
           descriptionValue &&
           onSubmit(titleValue, descriptionValue, selectedFile)
+        clearData()
       }}
     >
       <h1 className={styles.form__header}>Заполните данные</h1>
@@ -91,28 +101,15 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
             )} */}
       </div>
       <div style={{ position: "relative", width: `100%` }}>
-        {/* <input
-            type="file"
-            accept="image/jpeg, image/png, image/gif, image/bmp"
-            {...register("image", {
-                required: "Обязательное поле",
-            })}
-            className={styles.form__input}
-            placeholder="Главное фото*"
-            /> */}
-
         <div className={styles["form__file"]}>
           <input
             type="file"
-            id="imageFileInput"
-            accept="image/jpeg, image/png, image/gif, image/bmp"
+            id="inp"
+            accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
-          <label
-            htmlFor="imageFileInput"
-            className={styles["form__file-label"]}
-          >
+          <label htmlFor="inp" className={styles["form__file-label"]}>
             {selectedFile === null && <>Выберите файл</>}
             {fileName}
           </label>

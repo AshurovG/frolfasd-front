@@ -22,12 +22,18 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
 
   const { register } = forma
 
+  const clearData = () => {
+    setQuestionValue("")
+    setAnswerValue("")
+  }
+
   return (
     <form
       className={styles.form}
       onSubmit={(event) => {
         event.preventDefault()
-        questionValue && answerValue && onSubmit(questionValue, answerValue)
+        questionValue && answerValue && onSubmit(questionValue, answerValue),
+          clearData()
       }}
     >
       <h1 className={styles.form__header}>Заполните данные</h1>

@@ -1,5 +1,6 @@
 import React, { useLayoutEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
+import { toast } from "react-toastify"
 import axios from "axios"
 import styles from "./SelectedFacadePage.module.scss"
 import { ReceivedFacadeData } from "../../../types"
@@ -8,8 +9,8 @@ import BasketIcon from "components/Icons/BasketIcon"
 import EditIcon from "components/Icons/EditIcon"
 import DetailedItem from "components/DetailedItem"
 import Button from "components/Button"
-import ModalWindow from "components/ModalWindow"
 import FacadeForm from "components/FacadeForm"
+import ModalWindow from "components/ModalWindow"
 
 const SelectedFacadePage = () => {
   const { id } = useParams()
@@ -62,8 +63,10 @@ const SelectedFacadePage = () => {
         },
       })
       setIsEditFacadeWindowOpened(false)
+      toast.success("Информация успешно обновлена!")
       getFacade()
     } catch (error) {
+      toast.success("Что-то пошло не так...")
       throw error
     }
   }
@@ -73,7 +76,8 @@ const SelectedFacadePage = () => {
       await axios(`https://frolfasd.ru/api/exterior_design/${id}`, {
         method: "DELETE",
       })
-      setIsDeleteFacadeWindowOpened(false)
+      // setIsDeleteFacadeWindowOpened(false)
+      toast.success("Объект успешно удален!")
       navigate("/administration")
     } catch (error) {
       throw error

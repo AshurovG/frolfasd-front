@@ -5,11 +5,13 @@ import CardList from "components/CardList"
 import axios from "axios"
 import { ReceivedFacadeData, ReceivedQuestionsData } from "../../../types"
 import AddButton from "components/Icons/AddButton"
+import FavoritesIcon from "components/Icons/FavoritesIcon"
 import FacadeForm from "components/FacadeForm"
 import ModalWindow from "components/ModalWindow"
 import FaqBlock from "components/FaqBlock"
 import QuestionForm from "components/QuestionForm/QuestionForm"
 import Button from "components/Button"
+import { toast } from "react-toastify"
 
 const AdminPage = () => {
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
@@ -69,8 +71,15 @@ const AdminPage = () => {
         }
       )
       setIsCardsLoading(true)
+      if (item.is_important === false) {
+        toast.success("Объект добавлен на главную страницу!")
+      } else {
+        toast.success("Объект скрыт из главной страницы!")
+      }
+
       getFacades()
     } catch (error) {
+      toast.error("Что-то пошло не так...")
       throw error
     }
   }
@@ -95,6 +104,8 @@ const AdminPage = () => {
         },
       })
       setIsCardsLoading(true)
+      toast.success("Объект создан успешно!")
+
       getFacades()
       setIsCreateWindowOpened(false)
     } catch (error) {
@@ -114,6 +125,7 @@ const AdminPage = () => {
       setIsQuestionsLoading(true)
       getQuestions()
       setIsCreateQuestionModalOpen(false)
+      toast.success("Вопрос создан успешно!")
     } catch (error) {
       throw error
     }
@@ -131,6 +143,7 @@ const AdminPage = () => {
       })
       setIsQuestionsLoading(true)
 
+      toast.success("Информация успешно обновлена!")
       getQuestions()
       setIsEditQuestionModalOpen(false)
     } catch (error) {
@@ -145,6 +158,7 @@ const AdminPage = () => {
       })
       setIsQuestionsLoading(true)
 
+      toast.success("Информация успешно обновлена!")
       getQuestions()
       setIsDeleteWindowOpen(false)
     } catch (error) {
@@ -183,21 +197,34 @@ const AdminPage = () => {
         onFacadesClick={getFacades}
         onQuestionsClick={getQuestions}
       />
+      {active === "facades" && (
+        <div className={styles["admin__actions-description"]}>
+          <div className={styles["admin__actions-icon"]}>
+            <FavoritesIcon />
+            <p>
+              - значит, что данный объект будет отображаться на главной
+              странице.
+            </p>
+          </div>
+          <p>
+            - Вы можете выбирать любые объекты, которые хотите видеть на
+            главной.
+            <br />
+            - Количество объектов на главной странице должны быть не больше 6!
+            <br />- Остальные объекты будут отображаться на странице
+            "Портфолио".
+          </p>
+        </div>
+      )}
       {active === "facades" ? (
         <div className={styles.admin__actions}>
           <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
-          <AddButton
-            className={styles.admin__actions_add}
-            onClick={() => setIsCreateWindowOpened(true)}
-          />
+          <AddButton onClick={() => setIsCreateWindowOpened(true)} />
         </div>
       ) : (
         <div className={styles.admin__actions}>
           <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
-          <AddButton
-            className={styles.admin__actions_add}
-            onClick={() => setIsCreateQuestionModalOpen(true)}
-          />
+          <AddButton onClick={() => setIsCreateQuestionModalOpen(true)} />
         </div>
       )}
 
