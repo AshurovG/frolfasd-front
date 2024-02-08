@@ -1,66 +1,155 @@
 @import "../../styles/variables.scss";
+@import "../../styles/mixins.scss";
 
 .selected {
-    min-height: 100vh;
-    max-width: $content-width;
-    width: 85vw;
-    margin: 0 auto;
-    margin-top: 50px;
+  min-height: 100vh;
+  max-width: $content-width;
+  width: 85vw;
+  margin: 0 auto;
+  margin-top: 50px;
 
-    &__info {
-        margin-bottom: 30px;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 30px;
+  &__info {
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  }
+
+  &__image {
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 30px;
+    margin-bottom: 20px;
+
+    &-block {
+      display: flex;
+      align-items: start;
+
+      justify-content: space-between;
     }
+  }
 
-    &__image {
-        width: 100%;
+  &__text {
+    font-size: 16px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-height: 50px;
+    margin-bottom: 15px;
+    &_add {
+      width: 40px;
+      height: 40px;
     }
-
-    &__title {
-        font-size: 30px;
-        margin-bottom: 20px;
-
-        &-block {
-            display: flex;
-            justify-content: space-between;
-        }
-    }
-
-    &__text {
-        font-size: 16px;
-    }
-
-    &__actions {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        max-height: 50px;
-        margin-bottom: 15px;
-    }
+  }
+  &__back-button {
+  }
 }
 
 .modal {
+  &__delete {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    align-content: center;
+    width: 40vw;
+  }
+
+  &__btns {
+    width: 230px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+    gap: 10%;
+    margin-top: 10px;
+  }
+
+  &__btn {
+    width: 100px;
+  }
+
+  &__title {
+    font-size: 32px;
+  }
+}
+
+@include smallTablet {
+  .selected {
+    &__title {
+      font-size: 28px;
+    }
+    &__content {
+      width: 100%;
+    }
+    &__back-button {
+      font-size: 18px;
+    }
+  }
+  .modal {
+    &__title {
+      font-size: 28px;
+    }
+  }
+}
+
+@include mobile {
+  .selected {
+    &__title {
+      font-size: 26px;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__back-button {
+      font-size: 16px;
+      margin-left: 40px;
+    }
+    &__actions {
+      &_add {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  .modal {
     &__delete {
-        background-color: #fff;
-        padding: 40px;
-        border-radius: 20px;
+      width: 300px;
+      padding: 20px;
     }
-
-    &__btns {
-        width: 230px;
-        display: flex;
-        margin: 0 auto;
-        gap: 30px;
-        margin-top: 10px
+    &__title {
+      font-size: 24px;
     }
+  }
+}
 
+@include smallMobile {
+}
+@include ultraSmallMobile {
+  .selected {
+    &__back-button {
+      display: none;
+    }
+  }
+  .modal {
+    &__delete {
+      width: 90vw;
+      padding: 10px 5px;
+    }
     &__btn {
-        width: 100px;
+      width: 70px;
+      font-size: 16px;
+      padding: 7px 15px;
     }
-
-    &__subtitle {
-        font-size: 20px;
+    &__title {
+      font-size: 20px;
     }
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import styles from "./Header.module.scss"
 import Button from "components/Button"
 import ModalWindow from "components/ModalWindow"
@@ -10,6 +10,20 @@ import BurgerIcon from "components/Icons/BurgerIcon"
 const Header = () => {
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setIsBurgerMenuOpened(false)
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [])
 
   return (
     <div className={styles.header} id="header">
@@ -68,7 +82,7 @@ const Header = () => {
           ></div>
         )}
         {isBurgerMenuOpened && (
-          <div className={styles.burger__menu}>
+          <div ref={menuRef} className={styles.burger__menu}>
             <Link
               onClick={() => setIsBurgerMenuOpened(false)}
               // className={styles["burger__menu-item"]}

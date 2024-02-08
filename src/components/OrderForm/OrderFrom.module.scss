@@ -29,17 +29,16 @@
     text-align: left;
     padding-left: 10px;
     width: 100%;
+    font-size: 20px;
 
     &_message {
       font-size: 13px;
       color: red;
       // background-color: red;
       position: absolute;
-      // top: 0; /* Располагаем сообщение об ошибке прямо под инпутом */
+      // top: 0;
       left: 0;
     }
-
-    font-size: 20px;
 
     &:focus {
       border: 2px solid $brand;
@@ -54,7 +53,7 @@
 
       width: 100%;
       max-height: 200px;
-      height: 30vw;
+      height: 20vh;
 
       resize: none;
 
@@ -80,6 +79,9 @@
       font-size: 26px;
       margin-bottom: 15px;
     }
+    // &__input {
+    //   font-size: 10px;
+    // }
   }
 }
 
@@ -89,8 +91,17 @@
       font-size: 16px;
     }
     &__header {
-      font-size: 26px;
+      font-size: 24px;
       margin-bottom: 10px;
+    }
+    &__input {
+      font-size: 4vw;
+      &_big {
+        font-size: 4vw;
+      }
+      &_message {
+        font-size: 11px;
+      }
     }
   }
 }

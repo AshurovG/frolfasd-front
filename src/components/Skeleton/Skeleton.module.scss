@@ -1,0 +1,12 @@
+@import "../../styles/mixins.scss";
+
+.skeleton {
+  max-width: 100%;
+}
+
+@include extraSmallMobile {
+  .skeleton {
+    width: 85vw;
+    height: 100%;
+  }
+}

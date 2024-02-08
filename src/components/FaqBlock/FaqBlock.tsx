@@ -39,6 +39,7 @@ const FaqBlock: React.FC<FaqBlockProps> = ({
                 {isAdminPage && (
                   <div className={styles.block__actions}>
                     <EditIcon
+                      className={styles.block__actions_icon}
                       onClick={() => {
                         onEditButtonClick &&
                           onEditButtonClick(

@@ -13,6 +13,7 @@ import ModalWindow from "components/ModalWindow"
 import ImageForm from "components/ImageForm"
 import Button from "components/Button"
 import { ReceivedFacadeData } from "../../../types"
+import clsx from "clsx"
 
 // export type MockItemDataType = {
 //   itemName: string
@@ -28,6 +29,7 @@ import { ReceivedFacadeData } from "../../../types"
 // }
 
 export type DetailedProps = {
+  className?: string
   facade: ReceivedFacadeData
   isAdminPage?: boolean
   onImageFormSubmit?: (file: File) => void
@@ -39,6 +41,7 @@ const DetailedItem: React.FC<DetailedProps> = ({
   isAdminPage,
   onImageFormSubmit,
   onDeleteButtonClick,
+  className,
 }) => {
   const [slideIndex, setSlideIndex] = useState<number>(1)
   const [isAddFacadeItemWindowOpened, setIsAddFacadeItemWindowOpened] =
@@ -63,7 +66,7 @@ const DetailedItem: React.FC<DetailedProps> = ({
   }
 
   return (
-    <div className={styles.slider}>
+    <div className={clsx(styles.slider, className)}>
       <div className={styles.slider__images}>
         <SliderButton
           className={styles.left}
@@ -103,11 +106,13 @@ const DetailedItem: React.FC<DetailedProps> = ({
         ) : (
           <div>
             <h2 className={styles.slider__info_title}>
-              У вас есть возможность удалить текущее изображение или добавить
-              новое
+              Вы можете удалить текущее изображение или добавить новое
             </h2>
             <div className={styles.slider__info_actions}>
-              <AddButton onClick={() => setIsAddFacadeItemWindowOpened(true)} />
+              <AddButton
+                className={styles.slider__info_actions_add}
+                onClick={() => setIsAddFacadeItemWindowOpened(true)}
+              />
               <BasketIcon
                 onClick={
                   facade.items.length
@@ -124,7 +129,9 @@ const DetailedItem: React.FC<DetailedProps> = ({
             Фото объекта {slideIndex} из {facade.items.length}
           </div>
         ) : (
-          <div>Изображения отсутствуют</div>
+          <div className={styles.slider__info_count}>
+            Изображения отсутствуют
+          </div>
         )}
       </div>
 

@@ -179,12 +179,18 @@ const AdminPage = () => {
       {active === "facades" ? (
         <div className={styles.admin__actions}>
           <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
-          <AddButton onClick={() => setIsCreateWindowOpened(true)} />
+          <AddButton
+            className={styles.admin__actions_add}
+            onClick={() => setIsCreateWindowOpened(true)}
+          />
         </div>
       ) : (
         <div className={styles.admin__actions}>
           <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
-          <AddButton onClick={() => setIsCreateQuestionModalOpen(true)} />
+          <AddButton
+            className={styles.admin__actions_add}
+            onClick={() => setIsCreateQuestionModalOpen(true)}
+          />
         </div>
       )}
 
