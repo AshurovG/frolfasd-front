@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import {toast } from 'react-toastify';
 import axios from 'axios'
 import styles from './SelectedFacadePage.module.scss'
 import { ReceivedFacadeData } from '../../../types'
@@ -8,8 +9,8 @@ import BasketIcon from 'components/Icons/BasketIcon'
 import EditIcon from 'components/Icons/EditIcon'
 import DetailedItem from 'components/DetailedItem'
 import Button from 'components/Button'
-import ModalWindow from 'components/ModalWindow'
 import FacadeForm from 'components/FacadeForm'
+import ModalWindow from 'components/ModalWindow'
 
 const SelectedFacadePage = () => {
     const { id } = useParams()
@@ -54,8 +55,10 @@ const SelectedFacadePage = () => {
                 },
             });
             setIsEditFacadeWindowOpened(false)
+            toast.success('Информация успешно обновлена!')
             getFacade()
         } catch (error) {
+            toast.success('Что-то пошло не так...')
             throw error
         }
     };
@@ -65,7 +68,8 @@ const SelectedFacadePage = () => {
             await axios(`https://frolfasd.ru/api/exterior_design/${id}`,{
                 method: 'DELETE'
             })
-            setIsDeleteFacadeWindowOpened(false)
+            // setIsDeleteFacadeWindowOpened(false)
+            toast.success('Объект успешно удален!')
             navigate('/administration')
         } catch(error) {
             throw error
@@ -120,7 +124,6 @@ const SelectedFacadePage = () => {
                     <img className={styles.selected__image} src={facade?.exterior_design_url} alt="image" />
                     <div className={styles.selected__options}>
                         <div className={styles.selected__actions}>
-                            {/* <AddButton onClick={() => setIsEditFacadeWindowOpened(true)}/> */}
                             <EditIcon onClick={() => setIsEditFacadeWindowOpened(true)}/>
                             <BasketIcon onClick={() => setIsDeleteFacadeWindowOpened(true)}/>
                         </div>
@@ -132,10 +135,7 @@ const SelectedFacadePage = () => {
                 {facade && <DetailedItem onDeleteButtonClick={deleteImage} onImageFormSubmit={postImage} isAdminPage facade={facade}/>}
             </div>}
             <ModalWindow active={isEditFacadeWindowOpened} handleBackdropClick={() => setIsEditFacadeWindowOpened(false)}>
-                <div>
-                    {/* {isEditFacadeWindowOpened && <FacadeForm onSubmit={putFacade} title={facade?.exterior_design_title} description={facade?.exterior_design_description} fileTitle=''/>} */}
-                    {isEditFacadeWindowOpened && <FacadeForm onSubmit={putFacade} title={''} description={''} fileTitle=''/>}
-                </div>
+                <FacadeForm onSubmit={putFacade}  key={facade?.exterior_design_id} title={facade?.exterior_design_title} description={facade?.exterior_design_description} fileTitle=''/>
             </ModalWindow>
 
             <ModalWindow active={isDeleteFacadeWindowOpened} handleBackdropClick={() => setIsDeleteFacadeWindowOpened(false)}>

@@ -5,6 +5,7 @@ import CardList from 'components/CardList'
 import axios from 'axios'
 import { ReceivedFacadeData, ReceivedQuestionsData } from "../../../types"
 import AddButton from 'components/Icons/AddButton'
+import FavoritesIcon from 'components/Icons/FavoritesIcon'
 import FacadeForm from 'components/FacadeForm'
 import ModalWindow from 'components/ModalWindow'
 import FaqBlock from 'components/FaqBlock'
@@ -166,13 +167,26 @@ const AdminPage = () => {
       <h1 className={styles.admin__title}>Управление сайтом</h1>
       <h4 className={styles.admin__subtitle}>Здесь вы можете редактировать данные сайта</h4>
       <Navigation active={active} onFacadesClick={getFacades} onQuestionsClick={getQuestions}/>
+      {active === 'facades' && <div className={styles['admin__actions-description']}>
+        <div className={styles['admin__actions-icon']}>
+          <FavoritesIcon/>
+          <p> 
+            - значит, что данный объект будет отображаться на главной странице.
+          </p>
+        </div>
+        <p>
+          - Вы можете выбирать любые объекты, которые хотите видеть на главной.<br/>
+          - Количество объектов на главной странице должны быть не больше 6!<br/>
+          - Остальные объекты будут отображаться на странице "Портфолио".
+        </p>
+      </div>}
       {active === 'facades' ? <div className={styles.admin__actions}>
         <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
         <AddButton onClick={() => setIsCreateWindowOpened(true)}/>
       </div>
       : <div className={styles.admin__actions}>
-        <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
-        <AddButton onClick={() => setIsCreateQuestionModalOpen(true)}/>
+          <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
+          <AddButton onClick={() => setIsCreateQuestionModalOpen(true)}/>
       </div>
       }
       

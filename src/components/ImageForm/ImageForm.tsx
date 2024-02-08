@@ -25,10 +25,15 @@ const ImageForm: React.FC<FacadeItemFormProps> = ({fileTitle, onSubmit}) => {
         }
     };
 
+    const clearData = () => {
+        setSelectedFile(null)
+        setFileName('')
+    }
+
     return (
         <form
             className={styles.form}
-            onSubmit={(event) => { event.preventDefault();  selectedFile && onSubmit(selectedFile)}}
+            onSubmit={(event) => { event.preventDefault();  selectedFile && onSubmit(selectedFile); clearData()}}
         >
             <div className={styles['form__file']}>
                 <input

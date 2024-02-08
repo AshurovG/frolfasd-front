@@ -35,10 +35,18 @@ const FacadeForm: React.FC<FacadeFormProps> = ({onSubmit, title, description, fi
         mode: "onChange"
     })
     const { register } = forma
+
+    const clearData = () => {
+        setTitleValue('')
+        setDescriptionValue('')
+        setFileName('')
+        setSelectedFile(null)
+    }
+
     return (
         <form
             className={styles.form}
-            onSubmit={(event) => { event.preventDefault();  titleValue && descriptionValue && onSubmit(titleValue, descriptionValue, selectedFile)}}
+            onSubmit={(event) => { event.preventDefault();  titleValue && descriptionValue && onSubmit(titleValue, descriptionValue, selectedFile); clearData() }}
         >
             <h1 className={styles.form__header}>Заполните данные</h1>
 
@@ -79,30 +87,20 @@ const FacadeForm: React.FC<FacadeFormProps> = ({onSubmit, title, description, fi
             )} */}
             </div>
             <div style={{ position: "relative", width: `100%` }}>
-            {/* <input
-            type="file"
-            accept="image/jpeg, image/png, image/gif, image/bmp"
-            {...register("image", {
-                required: "Обязательное поле",
-            })}
-            className={styles.form__input}
-            placeholder="Главное фото*"
-            /> */}
 
             <div className={styles['form__file']}>
                 <input
                     type="file"
-                    id="imageFileInput"
+                    id="inp"
                     accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
                     style={{ display: 'none' }}
                     onChange={handleFileChange}
                 />
-                <label htmlFor="imageFileInput" className={styles['form__file-label']}>
+                <label htmlFor="inp" className={styles['form__file-label']}>
                     { selectedFile === null && <>Выберите файл</>}
                     {fileName}
                 </label>
             </div>
-
 
             {/* {errors?.description && touchedFields.description && (
                 <div className={styles.form__input_message}>

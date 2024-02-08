@@ -28,6 +28,13 @@
         align-items: center;
         gap: 30px;
         margin-bottom: 20px;
+        margin-top: 10px;
+
+        &-icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
     }
 }
 
