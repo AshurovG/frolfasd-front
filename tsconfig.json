@@ -26,6 +26,7 @@
       "components/*": ["components/*"],
       "pages/*": ["pages/*"],
       "assets/*": ["assets/*"],
+      "slices/*": ["slices/*"],
       "@styles/*": ["styles/*"]
     }
   },

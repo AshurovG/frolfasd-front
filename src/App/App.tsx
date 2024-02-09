@@ -5,8 +5,9 @@ import MainPage from "pages/MainPage"
 import Footer from "components/Footer"
 import PortfolioPage from "pages/PortfolioPage"
 import SelectedFacadePage from "pages/SelectedFacadePage"
-import { ToastContainer } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
+import LoginPage from "pages/LoginPage"
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           </Route>
           <Route path="/frolfasd" element={<MainPage />}></Route>
           <Route path="/portfolio" element={<PortfolioPage />}></Route>
+          <Route path="/admin" element={<LoginPage />}></Route>
           <Route path="*" element={<Navigate to="/frolfasd" replace />} />
         </Routes>
         <Footer />
