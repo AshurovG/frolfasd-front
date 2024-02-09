@@ -9,8 +9,8 @@ type SkeletonProps = {
 const Skeleton: React.FC<SkeletonProps> = ({ className }) => (
   <ContentLoader
     speed={2}
-    width={400}
-    height={358}
+    // width={400}
+    // height={358}
     viewBox="0 0 400 358"
     backgroundColor="#bdbdbd"
     foregroundColor="#ecebeb"
