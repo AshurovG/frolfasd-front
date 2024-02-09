@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"
 import styles from './LoginPage.module.scss'
 import Button from 'components/Button'
@@ -10,6 +11,7 @@ import { setIsAuthAction } from 'slices/AuthSlice';
 
 const LoginPage = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const [passwordValue, setPasswordValue] = useState('')
 
     const forma = useForm({
@@ -27,6 +29,7 @@ const LoginPage = () => {
             })
             localStorage.setItem('token', response.data.token);
             dispatch(setIsAuthAction(true))
+            navigate('/')
             toast.success('Вы успешно вошли в систему!')
         } catch (error) {
             toast.error('Неверный код доступа!')
@@ -34,12 +37,16 @@ const LoginPage = () => {
         }
     }
 
+    const handleFormSubmit = () => {
+        login()
+    }
+
     return (
         <div className={styles.login}>
             <h1 className={styles.login__title}>Вход администратора системы</h1>
             <form
                     className={styles.form}
-                    onSubmit={(event) => { event.preventDefault(); login()}}
+                    onSubmit={(event) => { event.preventDefault(); handleFormSubmit()}}
                 >
                     <h1 className={styles.form__header}>Заполните данные</h1>
                     <div style={{ position: "relative", width: `100%` }}>
