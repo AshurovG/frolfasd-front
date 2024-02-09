@@ -77,6 +77,14 @@
       font-size: 28px;
     }
   }
+  .modal {
+    &__delete {
+      width: 400px;
+    }
+    &__title {
+      font-size: 28px;
+    }
+  }
 }
 
 @include smallTablet {

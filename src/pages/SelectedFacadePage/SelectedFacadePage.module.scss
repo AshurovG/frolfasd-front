@@ -87,6 +87,17 @@
   }
 }
 
+@include mediumTablet {
+  .modal {
+    &__delete {
+      width: 400px;
+    }
+    &__title {
+      font-size: 28px;
+    }
+  }
+}
+
 @include smallTablet {
   .selected {
     &__title {
@@ -101,7 +112,7 @@
   }
   .modal {
     &__title {
-      font-size: 28px;
+      font-size: 26px;
     }
   }
 }
@@ -130,7 +141,7 @@
   }
   .modal {
     &__delete {
-      width: 300px;
+      width: 350px;
       padding: 20px;
     }
     &__title {
