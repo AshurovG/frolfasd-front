@@ -1,4 +1,8 @@
+import React, { useState } from "react"
 import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { useIsAuth, setIsAuthAction } from "slices/AuthSlice"
+import axios from "axios"
 import Header from "components/Header"
 import AdminPage from "pages/AdminPage"
 import MainPage from "pages/MainPage"
@@ -10,22 +14,71 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+  const dispatch = useDispatch()
+  const isAuth = useIsAuth()
+  const token = localStorage.getItem('token');
+  const [isCheckLoading, setIsCheckLoading] = useState(true)
+  console.log(token)
+  const getIsAuth = async () => {
+    setIsCheckLoading(true)
+    try {
+      await axios('https://frolfasd.ru/api/check', {
+        method: 'POST',
+        data: {
+          token
+        }
+      })
+      dispatch(setIsAuthAction(true))
+      setIsCheckLoading(false)
+    } catch (error) {
+      setIsCheckLoading(false)
+      throw error
+    }
+  }
+
+  const checkAuth =  () => {
+    if (!token) {
+      return false
+    } else {
+      getIsAuth()
+      if (isAuth) {
+        return true
+      } else {
+        return false
+      }
+    }
+  }
+
+  React.useEffect(() => {
+    if (token) {
+      getIsAuth()
+    } else {
+      setIsCheckLoading(false)
+    }
+  }, [])
+
   return (
     <div className="app">
       <HashRouter>
         <Header />
-        <Routes>
-          <Route path="/" element={<MainPage />}></Route>
-          <Route path="/administration" element={<AdminPage />}></Route>
-          <Route path="/facades">
-            <Route path=":id" element={<SelectedFacadePage />} />
-          </Route>
-          <Route path="/frolfasd" element={<MainPage />}></Route>
-          <Route path="/portfolio" element={<PortfolioPage />}></Route>
-          <Route path="/admin" element={<LoginPage />}></Route>
-          <Route path="*" element={<Navigate to="/frolfasd" replace />} />
-        </Routes>
-        <Footer />
+        {!isCheckLoading && 
+        <>
+          <Routes>
+            <Route path="/" element={<MainPage />}></Route>
+            {isAuth &&
+            <>
+              <Route path="/administration" element={<AdminPage />}></Route>
+              <Route path="/facades">
+                <Route path=":id" element={<SelectedFacadePage />} />
+              </Route>
+            </>}
+            <Route path="/frolfasd" element={<MainPage />}></Route>
+            <Route path="/portfolio" element={<PortfolioPage />}></Route>
+            {!isAuth && <Route path="/login" element={<LoginPage />}></Route>}
+            <Route path="*" element={<Navigate to="/frolfasd" replace />} />
+          </Routes>
+          <Footer />
+        </>}
       </HashRouter>
       <ToastContainer autoClose={1500} pauseOnHover={false} />
     </div>
