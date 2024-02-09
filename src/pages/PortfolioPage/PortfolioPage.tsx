@@ -24,11 +24,17 @@ const PortfolioPage = () => {
     const header = document.getElementById("header")
     if (!header) return
     const rect = header.getBoundingClientRect()
-    setShowButton(rect.top < -147) //147 это высота хэдера, надо придумать как сделать по-другому
+    setShowButton(rect.top < -147)
+    if (window.innerWidth < 1050) {
+      setShowButton(true)
+    }
   }
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
+    if (window.innerWidth < 1050) {
+      setShowButton(true)
+    }
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }

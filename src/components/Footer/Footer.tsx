@@ -23,8 +23,8 @@ const Footer = () => {
         </div>
         <div className={styles.footer__inner_contacts}>
           Контакты:
-          <br /> +7-999-999-99-99
-          <br /> firma@mail.ru
+          <br /> <a href="tel:+7-999-999-99-99">+7-999-999-99-99</a>
+          <br /> <a href="mailto:firma@mail.ru">firma@mail.ru</a>
         </div>
       </div>
     </footer>
