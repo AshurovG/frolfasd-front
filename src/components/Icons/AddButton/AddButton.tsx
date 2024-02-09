@@ -11,10 +11,12 @@ const AddButton: React.FC<ButtonProps> = ({ className, onClick }) => {
   return (
     <svg
       onClick={onClick}
-      className={clsx(styles.btn, className)}
-      stroke="#000"
+      className={clsx(styles.icon, className)}
+      stroke="#610a0ad1"
       viewBox="0 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
+      width={30}
+      height={30}
     >
       <defs></defs>
       <title />

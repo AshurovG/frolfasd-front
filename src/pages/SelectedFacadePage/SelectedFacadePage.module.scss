@@ -42,8 +42,8 @@
     max-height: 50px;
     margin-bottom: 15px;
     &_add {
-      width: 40px;
-      height: 40px;
+      width: 30px; // поменял с 40 на 30
+      height: 30px;
     }
   }
   &__back-button {
