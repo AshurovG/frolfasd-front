@@ -6,8 +6,10 @@ import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
 import { Link as ScrollLink, scroller } from "react-scroll"
 import BurgerIcon from "components/Icons/BurgerIcon"
+import { useIsAuth } from "slices/AuthSlice"
 
 const Header = () => {
+  const isAuth = useIsAuth()
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -60,6 +62,10 @@ const Header = () => {
               Контакты
             </Link>
           </li>
+
+          {isAuth && <Link to="/administration">
+            <li className={styles.header__inner_navmenu_item}>Управление</li>
+          </Link>}
 
           {/* <li className={styles.header__inner_navmenu_item}>Сделать заказ</li> */}
         </ul>
