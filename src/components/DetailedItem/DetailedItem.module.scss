@@ -141,6 +141,16 @@
     height: 40px;
   }
 }
+@include mediumTablet {
+  .modal {
+    &__delete {
+      width: 400px;
+    }
+    &__title {
+      font-size: 28px;
+    }
+  }
+}
 @include smallTablet {
   .modal {
     &__title {

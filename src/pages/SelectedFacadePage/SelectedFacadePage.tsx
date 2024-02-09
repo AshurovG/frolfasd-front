@@ -11,6 +11,8 @@ import DetailedItem from "components/DetailedItem"
 import Button from "components/Button"
 import FacadeForm from "components/FacadeForm"
 import ModalWindow from "components/ModalWindow"
+import DetailedItemSkeleton from "components/DetailedItem/DetailedItemSkeleton"
+import QuestionSkeleton from "components/Question/QuestionSkeleton"
 
 const SelectedFacadePage = () => {
   const { id } = useParams()
@@ -23,17 +25,16 @@ const SelectedFacadePage = () => {
     useState(false)
 
   const getFacade = async () => {
-    setIsLoading(true)
     try {
       const response = await axios(
         `https://frolfasd.ru/api/exterior_design/${id}`
       )
       setFacade(response.data)
-      // console.log(response.data)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 200)
     } catch (error) {
       throw error
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -63,6 +64,7 @@ const SelectedFacadePage = () => {
         },
       })
       setIsEditFacadeWindowOpened(false)
+      setIsLoading(true)
       toast.success("Информация успешно обновлена!")
       getFacade()
     } catch (error) {
@@ -78,6 +80,7 @@ const SelectedFacadePage = () => {
       })
       // setIsDeleteFacadeWindowOpened(false)
       toast.success("Объект успешно удален!")
+      setIsLoading(true)
       navigate("/administration")
     } catch (error) {
       throw error
@@ -96,6 +99,7 @@ const SelectedFacadePage = () => {
         data: formData,
       })
       getFacade()
+      setIsLoading(true)
     } catch (error) {
       throw error
     }
@@ -113,6 +117,7 @@ const SelectedFacadePage = () => {
         }
       )
       getFacade()
+      setIsLoading(true)
     } catch (error) {
       throw error
     }
@@ -127,48 +132,60 @@ const SelectedFacadePage = () => {
 
   return (
     <div className={styles.selected}>
-      {isLoading ? (
-        <p>djfkldjfkljsklfdjlks</p>
-      ) : (
-        <div>
-          <div className={styles["selected__title-block"]}>
+      <div>
+        <div className={styles["selected__title-block"]}>
+          {isLoading ? (
+            <QuestionSkeleton className={styles.selected__title_skeleton} />
+          ) : (
             <h1 className={styles.selected__title}>
               {facade?.exterior_design_title}
             </h1>
-            <Button
-              className={styles["selected__back-button"]}
-              onClick={() => {
-                navigate("/administration")
-              }}
-            >
-              Назад
-            </Button>
-          </div>
-          <div className={styles.selected__info}>
+          )}
+
+          <Button
+            className={styles["selected__back-button"]}
+            onClick={() => {
+              navigate("/administration")
+            }}
+          >
+            Назад
+          </Button>
+        </div>
+        <div className={styles.selected__info}>
+          {isLoading ? (
+            <DetailedItemSkeleton className={styles.selected__image} />
+          ) : (
             <img
               className={styles.selected__image}
               src={facade?.exterior_design_url}
               alt="image"
             />
-            <div className={styles.selected__options}>
-              <div className={styles.selected__actions}>
-                {/* <AddButton onClick={() => setIsEditFacadeWindowOpened(true)}/> */}
-                <EditIcon
-                  className={styles.selected__actions_add}
-                  onClick={() => setIsEditFacadeWindowOpened(true)}
-                />
-                <BasketIcon
-                  onClick={() => setIsDeleteFacadeWindowOpened(true)}
-                />
-              </div>
-              <h4 className={styles.selected__subtitle}>Описание:</h4>
+          )}
+
+          <div className={styles.selected__options}>
+            <div className={styles.selected__actions}>
+              {/* <AddButton onClick={() => setIsEditFacadeWindowOpened(true)}/> */}
+              <EditIcon
+                className={styles.selected__actions_add}
+                onClick={() => setIsEditFacadeWindowOpened(true)}
+              />
+              <BasketIcon onClick={() => setIsDeleteFacadeWindowOpened(true)} />
+            </div>
+            <h4 className={styles.selected__subtitle}>Описание:</h4>
+            {isLoading ? (
+              <QuestionSkeleton className={styles.selected__text_skeleton} />
+            ) : (
               <p className={styles.selected__text}>
                 {facade?.exterior_design_description}
               </p>
-            </div>
+            )}
           </div>
-          <h1 className={styles.selected__title}>Галлерея</h1>
-          {facade && (
+        </div>
+        <h1 className={styles.selected__title}>Галлерея</h1>
+        {isLoading ? (
+          <DetailedItemSkeleton className={styles.selected__content} />
+        ) : (
+          facade && (
             <DetailedItem
               className={styles.selected__content}
               onDeleteButtonClick={deleteImage}
@@ -176,9 +193,10 @@ const SelectedFacadePage = () => {
               isAdminPage
               facade={facade}
             />
-          )}
-        </div>
-      )}
+          )
+        )}
+      </div>
+
       <ModalWindow
         active={isEditFacadeWindowOpened}
         handleBackdropClick={() => setIsEditFacadeWindowOpened(false)}

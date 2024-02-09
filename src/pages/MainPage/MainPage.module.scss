@@ -24,6 +24,20 @@
   }
 }
 
+@include mediumTablet {
+  .order_fix {
+    position: sticky;
+    // left: 100%;
+    // margin-right: -65px;
+    float: right;
+    top: 85%;
+    &_icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
+
 @include mobileLandscape {
   .order_fix {
     &_icon {

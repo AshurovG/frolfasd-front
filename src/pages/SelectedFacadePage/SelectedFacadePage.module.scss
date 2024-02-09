@@ -22,6 +22,9 @@
   &__title {
     font-size: 30px;
     margin-bottom: 20px;
+    &_skeleton {
+      width: 60%;
+    }
 
     &-block {
       display: flex;
@@ -33,6 +36,11 @@
 
   &__text {
     font-size: 16px;
+
+    &_skeleton {
+      height: 30px;
+      width: 70%;
+    }
   }
 
   &__actions {
@@ -46,7 +54,8 @@
       height: 40px;
     }
   }
-  &__back-button {
+  &__content {
+    max-width: 1000px;
   }
 }
 
@@ -78,6 +87,17 @@
   }
 }
 
+@include mediumTablet {
+  .modal {
+    &__delete {
+      width: 400px;
+    }
+    &__title {
+      font-size: 28px;
+    }
+  }
+}
+
 @include smallTablet {
   .selected {
     &__title {
@@ -92,7 +112,7 @@
   }
   .modal {
     &__title {
-      font-size: 28px;
+      font-size: 26px;
     }
   }
 }
@@ -121,7 +141,7 @@
   }
   .modal {
     &__delete {
-      width: 300px;
+      width: 350px;
       padding: 20px;
     }
     &__title {
