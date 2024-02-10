@@ -90,11 +90,15 @@ const AdminPage = () => {
     file: File | null
   ) => {
     try {
+      console.log("aaaaaaaaaaaaa")
       const formData = new FormData()
       formData.append("title", title)
       formData.append("desc", description)
       if (file) {
         formData.append("file", file)
+      }
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + ", " + pair[1])
       }
       await axios("https://frolfasd.ru/api/exterior_design/", {
         method: "POST",
@@ -109,6 +113,7 @@ const AdminPage = () => {
       getFacades()
       setIsCreateWindowOpened(false)
     } catch (error) {
+      console.log(error)
       throw error
     }
   }

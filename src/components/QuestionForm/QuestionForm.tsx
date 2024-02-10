@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { useForm } from "react-hook-form"
+import React, { useRef, useState } from "react"
+import { FieldValues, useForm } from "react-hook-form"
 import styles from "./QuestionForm.module.scss"
 import Button from "components/Button"
 export type FacadeFormProps = {
@@ -13,28 +13,32 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
   answer,
   onSubmit,
 }) => {
-  const [questionValue, setQuestionValue] = useState(question)
-  const [answerValue, setAnswerValue] = useState(answer)
+  const form = useRef<HTMLFormElement>(null)
 
   const forma = useForm({
     mode: "onChange",
   })
+  const { register, handleSubmit, formState, reset } = forma
+  const { isValid, touchedFields, errors } = formState
 
-  const { register } = forma
-
-  const clearData = () => {
-    setQuestionValue("")
-    setAnswerValue("")
+  const handleFormSubmit = (data: FieldValues) => {
+    data.question && data.answer && onSubmit(data.question, data.answer)
+    reset({
+      question: "",
+      answer: "",
+    })
   }
 
   return (
     <form
+      ref={form}
       className={styles.form}
-      onSubmit={(event) => {
-        event.preventDefault()
-        questionValue && answerValue && onSubmit(questionValue, answerValue),
-          clearData()
-      }}
+      onSubmit={handleSubmit(handleFormSubmit)}
+      //   onSubmit={(event) => {
+      //     event.preventDefault()
+      //     questionValue && answerValue && onSubmit(questionValue, answerValue),
+      //       clearData()
+      //   }}
     >
       <h1 className={styles.form__header}>Заполните данные</h1>
       <div style={{ position: "relative", width: `100%` }}>
@@ -44,9 +48,14 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
           })}
           className={styles.form__input_big}
           placeholder="Вопрос*"
-          value={questionValue}
-          onChange={(e) => setQuestionValue(e.target.value)}
+          //   value={questionValue}
+          //   onChange={(e) => setQuestionValue(e.target.value)}
         ></textarea>
+        {errors?.question && touchedFields.question && (
+          <div className={styles.form__input_message}>
+            {errors?.question?.message?.toString()}
+          </div>
+        )}
       </div>
 
       <div style={{ position: "relative", width: `100%` }}>
@@ -56,12 +65,17 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
           })}
           className={styles.form__input_big}
           placeholder="Ответ на вопрос*"
-          value={answerValue}
-          onChange={(e) => setAnswerValue(e.target.value)}
+          //   value={answerValue}
+          //   onChange={(e) => setAnswerValue(e.target.value)}
         ></textarea>
+        {errors?.answer && touchedFields.answer && (
+          <div className={styles.form__input_message}>
+            {errors?.answer?.message?.toString()}
+          </div>
+        )}
       </div>
 
-      <Button className={styles.form__submit} type="submit">
+      <Button disabled={!isValid} className={styles.form__submit} type="submit">
         Сохранить
       </Button>
     </form>
