@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import styles from "./FacadeForm.module.scss"
-import { FieldValues, useForm } from "react-hook-form"
+import { Controller, FieldValues, useForm } from "react-hook-form"
 import Button from "components/Button"
 
 export type FacadeFormProps = {
@@ -19,16 +19,10 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
   const form = useRef<HTMLFormElement>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState("")
-  const [titleValue, setTitleValue] = useState(title)
-  const [descriptionValue, setDescriptionValue] = useState(description)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("file changing")
-    let file
     if (event.target.files) {
-      file = event.target.files[0]
-    }
-    if (file) {
+      const file = event.target.files[0]
       setSelectedFile(file)
       setFileName(file.name)
     } else {
@@ -38,16 +32,13 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
   }
 
   const forma = useForm({
-    mode: "onChange", // I want to change it to onBlur
+    mode: "onChange",
   })
-  const { register, handleSubmit, formState, reset } = forma
+  const { register, handleSubmit, formState, reset, control } = forma
   const { isValid, touchedFields, errors } = formState
 
   const clearData = () => {
-    setTitleValue("")
-    setDescriptionValue("")
     setFileName("")
-    setSelectedFile(null)
   }
 
   const submitForm = (data: FieldValues) => {
@@ -66,13 +57,6 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
       ref={form}
       className={styles.form}
       onSubmit={handleSubmit(submitForm)}
-      //   onSubmit={(event) => {
-      //     event.preventDefault()
-      //     titleValue &&
-      //       descriptionValue &&
-      //       onSubmit(titleValue, descriptionValue, selectedFile)
-      //     clearData()
-      //   }}
     >
       <h1 className={styles.form__header}>Заполните данные</h1>
 
@@ -80,17 +64,8 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
         <input
           {...register("title", {
             required: "Обязательное поле",
-            // pattern: {
-            //     value: /^\w+\s(\w+\s)?\w+$/,
-            //     message: "Некорректные данные",
-            // },
           })}
           className={styles.form__input}
-          //   value={titleValue}
-          //   onChange={(e) => {
-          //     setTitleValue(e.target.value)
-          //     console.log(titleValue)
-          //   }}
           placeholder="Название*"
         />
         {errors?.title && touchedFields.title && (
@@ -106,8 +81,6 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
           })}
           className={styles.form__input_big}
           placeholder="Введите описание*"
-          //   value={descriptionValue}
-          //   onChange={(e) => setDescriptionValue(e.target.value)}
         ></textarea>
         {errors?.description && touchedFields.description && (
           <div className={styles.form__input_message}>
@@ -115,26 +88,38 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
           </div>
         )}
       </div>
+
       <div style={{ position: "relative", width: `100%` }}>
         <div className={styles["form__file"]}>
-          <input
-            type="file"
-            id="inp"
-            accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
-            style={{ display: "none" }}
-            onChange={handleFileChange}
+          <Controller
+            control={control}
+            name="file"
+            rules={{ required: "Обязательное поле" }}
+            render={({ field }) => (
+              <input
+                {...field}
+                type="file"
+                id="inp"
+                accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
+                style={{ display: "none" }}
+                onChange={(e) => {
+                  field.onChange(e)
+                  handleFileChange(e)
+                }}
+              />
+            )}
           />
+
           <label htmlFor="inp" className={styles["form__file-label"]}>
-            {selectedFile === null && <>Выберите файл</>}
+            {fileName === "" && <>Выберите файл</>}
             {fileName}
           </label>
+          {errors?.file && touchedFields.file && (
+            <div className={styles.form__input_message}>
+              {errors?.file?.message?.toString()}
+            </div>
+          )}
         </div>
-
-        {/* {errors?.description && touchedFields.description && (
-                <div className={styles.form__input_message}>
-                {errors?.description?.message?.toString()}
-                </div>
-            )} */}
       </div>
       <Button disabled={!isValid} className={styles.form__submit} type="submit">
         Сохранить

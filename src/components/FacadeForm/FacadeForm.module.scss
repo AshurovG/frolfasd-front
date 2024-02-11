@@ -58,6 +58,7 @@
       border: 2px solid $brand;
     }
     &_big {
+      display: block;
       border: 1px $brand solid;
       box-sizing: border-box;
       border-radius: 5px;
@@ -87,7 +88,7 @@
 
 @include mobileLandscape {
   .form {
-    gap: 10px;
+    gap: 20px;
     padding: 30px 6vw;
     width: 60vw;
     &__submit {

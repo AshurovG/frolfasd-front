@@ -3,6 +3,7 @@
   display: flex;
   width: 60vw;
   height: 600px;
+  // height: 90vh;
   background-color: #fff;
   border-radius: 30px;
 
@@ -162,7 +163,7 @@
 @include mobileLandscape {
   .slider {
     width: 70vw;
-    height: 400px;
+    height: 90vh;
     flex-direction: column;
     &__images {
       width: 100%;
