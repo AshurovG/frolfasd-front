@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styles from "./DetailedItem.module.scss"
-import first from "assets/mockPics/image1.png"
-import second from "assets/mockPics/image2.jpg"
-import third from "assets/mockPics/image3.jpg"
-import ArrowDownIcon from "components/Icons/ArrowDownIcon"
-import ArrowRightIcon from "components/Icons/ArrowRightIcon/ArrowRightIcon"
-import ArrowLeftIcon from "components/Icons/ArrowLeftIcon"
 import AddButton from "components/Icons/AddButton"
 import BasketIcon from "components/Icons/BasketIcon"
 import SliderButton from "./SliderButton"
@@ -14,19 +8,6 @@ import ImageForm from "components/ImageForm"
 import Button from "components/Button"
 import { ReceivedFacadeData } from "../../../types"
 import clsx from "clsx"
-
-// export type MockItemDataType = {
-//   itemName: string
-//   itemDescription: string
-//   itemPics: string[]
-// }
-
-// const MockItemData: MockItemDataType = {
-//   itemName: "Пример работы по наружнему оформления фасада",
-//   itemDescription:
-//     "Описание работы, используемные технологии, перечисление плюсов и особенностей",
-//   itemPics: [first, second, third],
-// }
 
 export type DetailedProps = {
   className?: string

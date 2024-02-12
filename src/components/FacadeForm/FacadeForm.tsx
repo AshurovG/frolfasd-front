@@ -12,9 +12,6 @@ export type FacadeFormProps = {
 
 const FacadeForm: React.FC<FacadeFormProps> = ({
   onSubmit,
-  title,
-  description,
-  fileTitle,
 }) => {
   const form = useRef<HTMLFormElement>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)

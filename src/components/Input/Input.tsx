@@ -1,6 +1,5 @@
 import React, { useCallback } from "react"
 import styles from "./Input.module.scss"
-import clsx from "clsx"
 
 export type InputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -16,7 +15,6 @@ export type InputProps = Omit<
 const Input: React.FC<InputProps> = ({
   onChangeValue,
   searchValue,
-  className,
   value,
   placeholder,
 }) => {

@@ -7,7 +7,7 @@ export type FacadeItemFormProps = {
   fileTitle?: string
 }
 
-const ImageForm: React.FC<FacadeItemFormProps> = ({ fileTitle, onSubmit }) => {
+const ImageForm: React.FC<FacadeItemFormProps> = ({ onSubmit }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState("")
 
@@ -23,11 +23,6 @@ const ImageForm: React.FC<FacadeItemFormProps> = ({ fileTitle, onSubmit }) => {
       setSelectedFile(null)
       setFileName("")
     }
-  }
-
-  const clearData = () => {
-    setSelectedFile(null)
-    setFileName("")
   }
 
   return (

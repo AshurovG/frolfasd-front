@@ -1,10 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import styles from "./Header.module.scss"
 import Button from "components/Button"
 import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
-import { Link as ScrollLink, scroller } from "react-scroll"
+// import { Link as ScrollLink, scroller } from "react-scroll"
+import {scroller} from "react-scroll"
 import BurgerIcon from "components/Icons/BurgerIcon"
 import { useIsAuth } from "slices/AuthSlice"
 

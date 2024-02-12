@@ -3,10 +3,6 @@ import { IconProps } from "../Icon"
 
 const PhoneIcon: React.FC<IconProps> = ({
   className,
-  color,
-  width,
-  height,
-  onClick,
 }) => {
   let classes = `icon_wrapper arrow_down_icon ${className}`
   return (

@@ -2,13 +2,9 @@ import * as React from "react"
 import { IconProps } from "../Icon"
 
 const WAIcon: React.FC<IconProps> = ({
-  className,
-  color,
   width,
   height,
-  onClick,
 }) => {
-  let classes = `icon_wrapper arrow_down_icon ${className}`
   return (
     <svg
       width={width ? width : `24px`}

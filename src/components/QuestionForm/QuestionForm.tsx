@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import React, { useRef } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import styles from "./QuestionForm.module.scss"
 import Button from "components/Button"
@@ -9,8 +9,6 @@ export type FacadeFormProps = {
 }
 
 const QuestionForm: React.FC<FacadeFormProps> = ({
-  question,
-  answer,
   onSubmit,
 }) => {
   const form = useRef<HTMLFormElement>(null)

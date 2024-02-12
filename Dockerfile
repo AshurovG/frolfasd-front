@@ -1,12 +1,15 @@
-FROM node:16.13.2-alpine as build
-WORKDIR /app
-COPY package.json ./
+FROM node:16
+
+WORKDIR /usr/src/app
+
+COPY package*.json ./
 RUN npm install
-COPY . ./
+
+COPY . .
+
 RUN npm run build
 
 FROM alpine:latest
-WORKDIR /app
-COPY --from=build /app/build /app/build
-
-CMD ["npm", "run", "serve"]
+WORKDIR /usr/src/app
+COPY --from=0 /usr/src/app/build /usr/src/app/build
+CMD ["npm", "run", "dev"]

@@ -7,11 +7,9 @@ import { ReceivedFacadeData, ReceivedQuestionsData } from "../../../types"
 import axios from "axios"
 import { Response } from "../../../types"
 import FacadesBlock from "components/FacadesBlock"
-import Button from "components/Button"
 import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
 import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
-import { toast } from "react-toastify"
 
 const MainPage = () => {
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)

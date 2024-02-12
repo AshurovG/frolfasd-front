@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react"
+import { useRef } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
@@ -12,12 +12,11 @@ const LoginPage = () => {
   const form = useRef<HTMLFormElement>(null)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [passwordValue, setPasswordValue] = useState("")
 
   const forma = useForm({
     mode: "onChange", // I want to change it to onBlur
   })
-  const { register, handleSubmit, formState, reset } = forma
+  const { register, handleSubmit, formState } = forma
   const { isValid, touchedFields, errors } = formState
 
   const login = async (password: any) => {

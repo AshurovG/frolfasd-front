@@ -4,7 +4,6 @@ import styles from "./OrderFrom.module.scss"
 import Button from "components/Button"
 import ReCAPTCHA from "react-google-recaptcha"
 
-import emailjs from "@emailjs/browser"
 
 import { FieldValues, useForm } from "react-hook-form"
 import { toast } from "react-toastify"
@@ -23,7 +22,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
   })
   const { register, handleSubmit, formState, reset } = forma
   const { isValid, touchedFields, errors } = formState
-  const [isCompactMode, setIsCompactMode] = useState(window.innerWidth <= 460)
+  const [isCompactMode, _] = useState(window.innerWidth <= 460)
 
   const postFacade = async (
     fio: string,
