@@ -18,7 +18,6 @@ const App = () => {
   const isAuth = useIsAuth()
   const token = localStorage.getItem('token');
   const [isCheckLoading, setIsCheckLoading] = useState(true)
-  console.log(token)
   const getIsAuth = async () => {
     setIsCheckLoading(true)
     try {

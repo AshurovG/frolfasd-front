@@ -14,6 +14,7 @@ import DetailedItemSkeleton from "components/DetailedItem/DetailedItemSkeleton"
 import QuestionSkeleton from "components/Question/QuestionSkeleton"
 
 const SelectedFacadePage = () => {
+  const token = localStorage.getItem('token');
   const { id } = useParams()
   const navigate = useNavigate()
   const [facade, setFacade] = useState<ReceivedFacadeData>()
@@ -42,9 +43,11 @@ const SelectedFacadePage = () => {
     description: string,
     file: File | null
   ) => {
-    console.log("file", file)
     try {
       const formData = new FormData()
+      if (token) {
+        formData.append("jwt", token)
+      }
       formData.append("title", title)
       formData.append("desc", description)
       if (file) {
@@ -76,8 +79,10 @@ const SelectedFacadePage = () => {
     try {
       await axios(`https://frolfasd.ru/api/exterior_design/${id}`, {
         method: "DELETE",
+        data: {
+          jwt: token
+        }
       })
-      // setIsDeleteFacadeWindowOpened(false)
       toast.success("Объект успешно удален!")
       setIsLoading(true)
       navigate("/administration")
@@ -88,6 +93,9 @@ const SelectedFacadePage = () => {
 
   const postImage = async (file: File) => {
     const formData = new FormData()
+    if (token) {
+      formData.append('jwt', token) 
+    }
     formData.append("file", file)
     if (facade) {
       formData.append("exteriorDesignId", String(facade.exterior_design_id))
@@ -112,6 +120,7 @@ const SelectedFacadePage = () => {
           method: "DELETE",
           data: {
             idMany: imageId,
+            jwt: token
           },
         }
       )

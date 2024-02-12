@@ -14,6 +14,7 @@ import Button from "components/Button"
 import { toast } from "react-toastify"
 
 const AdminPage = () => {
+  const token = localStorage.getItem('token');
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
   const [active, setActive] = useState<"facades" | "questions">("facades")
@@ -67,6 +68,7 @@ const AdminPage = () => {
           method: "PUT",
           data: {
             isImportant: !item.is_important,
+            jwt: token
           },
         }
       )
@@ -91,6 +93,9 @@ const AdminPage = () => {
   ) => {
     try {
       const formData = new FormData()
+      // if (token) {
+      //   formData.append("jwt", token)
+      // }
       formData.append("title", title)
       formData.append("desc", description)
       if (file) {
@@ -124,6 +129,7 @@ const AdminPage = () => {
         data: {
           title: question,
           text: answer,
+          jwt: token
         },
       })
       setIsQuestionsLoading(true)
@@ -143,6 +149,7 @@ const AdminPage = () => {
           title: question,
           text: answer,
           id: currentQuestion?.questions_id,
+          jwt: token
         },
       })
       setIsQuestionsLoading(true)
@@ -159,6 +166,9 @@ const AdminPage = () => {
     try {
       await axios(`https://frolfasd.ru/api/questions/${isDeletedQuestionId}`, {
         method: "DELETE",
+        data: {
+          jwt: token
+        }
       })
       setIsQuestionsLoading(true)
 
