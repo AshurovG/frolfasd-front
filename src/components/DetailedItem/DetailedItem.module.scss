@@ -116,7 +116,7 @@
   }
 
   &__title {
-    font-size: 32px;
+    font-size: 24px;
   }
 }
 //1150
@@ -148,16 +148,16 @@
       width: 400px;
     }
     &__title {
-      font-size: 28px;
+      font-size: 20px;
     }
   }
 }
 @include smallTablet {
-  .modal {
-    &__title {
-      font-size: 28px;
-    }
-  }
+  // .modal {
+    // &__title {
+    //   font-size: 28px;
+    // }
+  // }
 }
 //750
 @include mobileLandscape {
@@ -237,7 +237,7 @@
       padding: 20px;
     }
     &__title {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 }
@@ -292,7 +292,7 @@
       padding: 7px 15px;
     }
     &__title {
-      font-size: 20px;
+      font-size: 16px;
     }
   }
 }

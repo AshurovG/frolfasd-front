@@ -83,7 +83,7 @@
   }
 
   &__title {
-    font-size: 32px;
+    font-size: 24px;
   }
 }
 
@@ -93,7 +93,7 @@
       width: 400px;
     }
     &__title {
-      font-size: 28px;
+      font-size: 20px;
     }
   }
 }
@@ -110,11 +110,11 @@
       font-size: 18px;
     }
   }
-  .modal {
-    &__title {
-      font-size: 26px;
-    }
-  }
+  // .modal {
+    // &__title {
+    //   font-size: 26px;
+    // }
+  // }
 }
 
 @include mobile {
@@ -145,13 +145,11 @@
       padding: 20px;
     }
     &__title {
-      font-size: 24px;
+      font-size: 18px;
     }
   }
 }
 
-@include smallMobile {
-}
 @include ultraSmallMobile {
   .selected {
     &__back-button {
@@ -169,7 +167,7 @@
       padding: 7px 15px;
     }
     &__title {
-      font-size: 20px;
+      font-size: 16px;
     }
   }
 }
