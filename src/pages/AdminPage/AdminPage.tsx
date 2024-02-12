@@ -96,6 +96,9 @@ const AdminPage = () => {
       if (file) {
         formData.append("file", file)
       }
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + ", " + pair[1])
+      // }
       await axios("https://frolfasd.ru/api/exterior_design/", {
         method: "POST",
         data: formData,
