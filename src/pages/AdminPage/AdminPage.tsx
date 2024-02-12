@@ -14,7 +14,7 @@ import Button from "components/Button"
 import { toast } from "react-toastify"
 
 const AdminPage = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token")
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
   const [active, setActive] = useState<"facades" | "questions">("facades")
@@ -68,7 +68,7 @@ const AdminPage = () => {
           method: "PUT",
           data: {
             isImportant: !item.is_important,
-            jwt: token
+            jwt: token,
           },
         }
       )
@@ -129,7 +129,7 @@ const AdminPage = () => {
         data: {
           title: question,
           text: answer,
-          jwt: token
+          jwt: token,
         },
       })
       setIsQuestionsLoading(true)
@@ -149,7 +149,7 @@ const AdminPage = () => {
           title: question,
           text: answer,
           id: currentQuestion?.questions_id,
-          jwt: token
+          jwt: token,
         },
       })
       setIsQuestionsLoading(true)
@@ -167,8 +167,8 @@ const AdminPage = () => {
       await axios(`https://frolfasd.ru/api/questions/${isDeletedQuestionId}`, {
         method: "DELETE",
         data: {
-          jwt: token
-        }
+          jwt: token,
+        },
       })
       setIsQuestionsLoading(true)
 
@@ -186,12 +186,14 @@ const AdminPage = () => {
 
   const onEditButtonClick = (id: number, question: string, answer: string) => {
     console.log("edit clicked", question)
+    console.log(id, question, answer)
     // putQuestion(id, question, answer)
     setCurrentQuestion({
       questions_id: id,
       questions_title: question,
       questions_text: answer,
     })
+    console.log(currentQuestion)
     setIsEditQuestionModalOpen(true)
   }
 
@@ -275,6 +277,7 @@ const AdminPage = () => {
         <div>
           {
             <FacadeForm
+              isEditing={false}
               onSubmit={postFacade}
               title=""
               description=""

@@ -8,14 +8,21 @@ export type FacadeFormProps = {
   title?: string
   description?: string
   fileTitle?: string
+  isEditing?: boolean
 }
 
 const FacadeForm: React.FC<FacadeFormProps> = ({
   onSubmit,
+  title,
+  description,
+  fileTitle,
+  isEditing,
 }) => {
   const form = useRef<HTMLFormElement>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
-  const [fileName, setFileName] = useState("")
+  const [fileName, setFileName] = useState(fileTitle)
+  const [titleValue, setTitleValue] = useState(title)
+  const [descriptionValue, setDescriptionValue] = useState(description)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
@@ -39,9 +46,9 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
   }
 
   const submitForm = (data: FieldValues) => {
-    data.title &&
-      data.description &&
-      onSubmit(data.title, data.description, selectedFile)
+    titleValue &&
+      descriptionValue &&
+      onSubmit(titleValue, descriptionValue, selectedFile)
     reset({
       title: "",
       description: "",
@@ -58,12 +65,30 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
       <h1 className={styles.form__header}>Заполните данные</h1>
 
       <div style={{ position: "relative", width: `100%` }}>
-        <input
+        {/* <input
           {...register("title", {
             required: "Обязательное поле",
           })}
           className={styles.form__input}
           placeholder="Название*"
+        /> */}
+        <Controller
+          control={control}
+          name="title"
+          rules={{ required: "Обязательное поле" }}
+          render={({ field }) => (
+            <input
+              {...register("title", {
+                required: "Обязательное поле",
+              })}
+              className={styles.form__input}
+              placeholder="Название*"
+              value={titleValue}
+              onChange={(e) => {
+                field.onChange(e), setTitleValue(e.target.value)
+              }}
+            />
+          )}
         />
         {errors?.title && touchedFields.title && (
           <div className={styles.form__input_message}>
@@ -72,13 +97,31 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
         )}
       </div>
       <div style={{ position: "relative", width: `100%` }}>
-        <textarea
+        <Controller
+          control={control}
+          name="description"
+          rules={{ required: "Обязательное поле" }}
+          render={({ field }) => (
+            <textarea
+              {...register("description", {
+                required: "Обязательное поле",
+              })}
+              className={styles.form__input_big}
+              placeholder="Введите описание*"
+              value={descriptionValue}
+              onChange={(e) => {
+                field.onChange(e), setDescriptionValue(e.target.value)
+              }}
+            ></textarea>
+          )}
+        />
+        {/* <textarea
           {...register("description", {
             required: "Обязательное поле",
           })}
           className={styles.form__input_big}
           placeholder="Введите описание*"
-        ></textarea>
+        ></textarea> */}
         {errors?.description && touchedFields.description && (
           <div className={styles.form__input_message}>
             {errors?.description?.message?.toString()}
@@ -91,7 +134,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
           <Controller
             control={control}
             name="file"
-            rules={{ required: "Обязательное поле" }}
+            rules={{ required: isEditing ? false : "Обязательное поле" }}
             render={({ field }) => (
               <input
                 {...field}
@@ -108,8 +151,19 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
           />
 
           <label htmlFor="inp" className={styles["form__file-label"]}>
-            {fileName === "" && <>Выберите файл</>}
-            {fileName}
+            {isEditing ? (
+              !selectedFile ? (
+                <>Измените файл</>
+              ) : (
+                <>{fileName}</>
+              )
+            ) : !selectedFile ? (
+              <>Выберите файл</>
+            ) : (
+              <>{fileName}</>
+            )}
+            {/* {fileName === "" && <>Выберите файл</>}
+            {fileName} */}
           </label>
           {errors?.file && touchedFields.file && (
             <div className={styles.form__input_message}>

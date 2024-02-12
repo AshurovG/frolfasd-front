@@ -1,5 +1,5 @@
-import React, { useRef } from "react"
-import { FieldValues, useForm } from "react-hook-form"
+import React, { useRef, useState } from "react"
+import { Controller, FieldValues, useForm } from "react-hook-form"
 import styles from "./QuestionForm.module.scss"
 import Button from "components/Button"
 export type FacadeFormProps = {
@@ -10,21 +10,27 @@ export type FacadeFormProps = {
 
 const QuestionForm: React.FC<FacadeFormProps> = ({
   onSubmit,
+  question,
+  answer,
 }) => {
+  const [questionValue, setQuestionValue] = useState(question)
+  const [answerValue, setAnswerValue] = useState(answer)
   const form = useRef<HTMLFormElement>(null)
 
   const forma = useForm({
     mode: "onChange",
   })
-  const { register, handleSubmit, formState, reset } = forma
+  const { register, handleSubmit, formState, reset, control } = forma
   const { isValid, touchedFields, errors } = formState
 
   const handleFormSubmit = (data: FieldValues) => {
-    data.question && data.answer && onSubmit(data.question, data.answer)
-    reset({
-      question: "",
-      answer: "",
-    })
+    questionValue && answerValue && onSubmit(questionValue, answerValue)
+    clearData()
+  }
+
+  const clearData = () => {
+    setQuestionValue("")
+    setAnswerValue("")
   }
 
   return (
@@ -40,15 +46,24 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
     >
       <h1 className={styles.form__header}>Заполните данные</h1>
       <div style={{ position: "relative", width: `100%` }}>
-        <textarea
-          {...register("question", {
-            required: "Обязательное поле",
-          })}
-          className={styles.form__input_big}
-          placeholder="Вопрос*"
-          //   value={questionValue}
-          //   onChange={(e) => setQuestionValue(e.target.value)}
-        ></textarea>
+        <Controller
+          control={control}
+          name="question"
+          rules={{ required: "Обязательное поле" }}
+          render={({ field }) => (
+            <textarea
+              {...register("question", {
+                required: "Обязательное поле",
+              })}
+              className={styles.form__input_big}
+              placeholder="Вопрос*"
+              value={questionValue}
+              onChange={(e) => {
+                field.onChange(e), setQuestionValue(e.target.value)
+              }}
+            ></textarea>
+          )}
+        />
         {errors?.question && touchedFields.question && (
           <div className={styles.form__input_message}>
             {errors?.question?.message?.toString()}
@@ -57,15 +72,24 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
       </div>
 
       <div style={{ position: "relative", width: `100%` }}>
-        <textarea
-          {...register("answer", {
-            required: "Обязательное поле",
-          })}
-          className={styles.form__input_big}
-          placeholder="Ответ на вопрос*"
-          //   value={answerValue}
-          //   onChange={(e) => setAnswerValue(e.target.value)}
-        ></textarea>
+        <Controller
+          control={control}
+          name="answer"
+          rules={{ required: "Обязательное поле" }}
+          render={({ field }) => (
+            <textarea
+              {...register("answer", {
+                required: "Обязательное поле",
+              })}
+              className={styles.form__input_big}
+              placeholder="Ответ на вопрос*"
+              value={answerValue}
+              onChange={(e) => {
+                field.onChange(e), setAnswerValue(e.target.value)
+              }}
+            ></textarea>
+          )}
+        />
         {errors?.answer && touchedFields.answer && (
           <div className={styles.form__input_message}>
             {errors?.answer?.message?.toString()}
