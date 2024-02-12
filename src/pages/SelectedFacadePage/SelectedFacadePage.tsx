@@ -14,7 +14,7 @@ import DetailedItemSkeleton from "components/DetailedItem/DetailedItemSkeleton"
 import QuestionSkeleton from "components/Question/QuestionSkeleton"
 
 const SelectedFacadePage = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token")
   const { id } = useParams()
   const navigate = useNavigate()
   const [facade, setFacade] = useState<ReceivedFacadeData>()
@@ -80,8 +80,8 @@ const SelectedFacadePage = () => {
       await axios(`https://frolfasd.ru/api/exterior_design/${id}`, {
         method: "DELETE",
         data: {
-          jwt: token
-        }
+          jwt: token,
+        },
       })
       toast.success("Объект успешно удален!")
       setIsLoading(true)
@@ -94,7 +94,7 @@ const SelectedFacadePage = () => {
   const postImage = async (file: File) => {
     const formData = new FormData()
     if (token) {
-      formData.append('jwt', token) 
+      formData.append("jwt", token)
     }
     formData.append("file", file)
     if (facade) {
@@ -120,7 +120,7 @@ const SelectedFacadePage = () => {
           method: "DELETE",
           data: {
             idMany: imageId,
-            jwt: token
+            jwt: token,
           },
         }
       )
@@ -175,7 +175,9 @@ const SelectedFacadePage = () => {
               {/* <AddButton onClick={() => setIsEditFacadeWindowOpened(true)}/> */}
               <EditIcon
                 className={styles.selected__actions_add}
-                onClick={() => setIsEditFacadeWindowOpened(true)}
+                onClick={() => {
+                  setIsEditFacadeWindowOpened(true)
+                }}
               />
               <BasketIcon onClick={() => setIsDeleteFacadeWindowOpened(true)} />
             </div>
@@ -216,6 +218,8 @@ const SelectedFacadePage = () => {
               title={facade?.exterior_design_title}
               description={facade?.exterior_design_description}
               fileTitle=""
+              isEditing={true}
+              //   fileTitle={decodeURIComponent(facade?.exterior_design_url)}
             />
           )}
         </div>
