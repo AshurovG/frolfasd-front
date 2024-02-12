@@ -93,9 +93,9 @@ const AdminPage = () => {
   ) => {
     try {
       const formData = new FormData()
-      // if (token) {
-      //   formData.append("jwt", token)
-      // }
+      if (token) {
+        formData.append("jwt", token)
+      }
       formData.append("title", title)
       formData.append("desc", description)
       if (file) {

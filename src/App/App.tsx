@@ -59,10 +59,10 @@ const App = () => {
                 <Route path=":id" element={<SelectedFacadePage />} />
               </Route>
             </>}
-            <Route path="/frolfasd" element={<MainPage />}></Route>
+            <Route path="/" element={<MainPage />}></Route>
             <Route path="/portfolio" element={<PortfolioPage />}></Route>
             {!isAuth && <Route path="/login" element={<LoginPage />}></Route>}
-            <Route path="*" element={<Navigate to="/frolfasd" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Footer />
         </>}

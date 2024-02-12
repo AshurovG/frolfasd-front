@@ -1,11 +1,22 @@
+# version: '3.8'
+# services:
+#   frolfasd_front:
+#     container_name: frolfasd_front
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     ports:
+#       - '80:80' # Map the host's port  80 to the container's port  80
+#     volumes:
+#       - .:/app # Mount the current directory to /app in the container
+
 version: '3.8'
 services:
   frolfasd_front:
     container_name: frolfasd_front
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     ports:
-      - '80:80' # Map the host's port  80 to the container's port  80
+      - '3000:80'
     volumes:
-      - .:/app # Mount the current directory to /app in the container
+      - .:/app
+    command: ["nginx", "-g", "daemon off;"]
