@@ -64,7 +64,7 @@ const OrderForm = () => {
             {...register("fio", {
               required: "Обязательное поле",
               pattern: {
-                value: /^\w+\s(\w+\s)?\w+$/,
+                value: /^([\wа-яА-ЯёЁ]+[\s]){1,2}[\wа-яА-ЯёЁ]+$/,
                 message: "Введите корректные данные...",
               },
             })}
