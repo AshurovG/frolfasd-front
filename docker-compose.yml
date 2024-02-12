@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  frolfasd_front:
+    container_name: frolfasd_front
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '80:80' # Map the host's port  80 to the container's port  80
+    volumes:
+      - .:/app # Mount the current directory to /app in the container

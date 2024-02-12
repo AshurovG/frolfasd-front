@@ -14,10 +14,8 @@ export type CardProps = {
 }
 
 const Card: React.FC<CardProps> = ({
-  exterior_design_id,
   exterior_design_title,
   exterior_design_url,
-  exterior_design_description,
   onCardClick,
   onButtonClick,
   isAdminPage,

@@ -36,18 +36,6 @@ const App = () => {
     }
   }
 
-  const checkAuth =  () => {
-    if (!token) {
-      return false
-    } else {
-      getIsAuth()
-      if (isAuth) {
-        return true
-      } else {
-        return false
-      }
-    }
-  }
 
   React.useEffect(() => {
     if (token) {
