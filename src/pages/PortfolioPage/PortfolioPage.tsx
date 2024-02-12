@@ -92,7 +92,11 @@ const PortfolioPage = () => {
         handleBackdropClick={() => setIsModalFormOpened(false)}
         active={isModalFormOpened}
       >
-        <OrderForm />
+        <OrderForm
+          onSuccessfulSubmit={() => {
+            setIsModalFormOpened(false)
+          }}
+        />
       </ModalWindow>
     </div>
   )

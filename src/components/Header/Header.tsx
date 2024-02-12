@@ -63,9 +63,11 @@ const Header = () => {
             </Link>
           </li>
 
-          {isAuth && <Link to="/administration">
-            <li className={styles.header__inner_navmenu_item}>Управление</li>
-          </Link>}
+          {isAuth && (
+            <Link to="/administration">
+              <li className={styles.header__inner_navmenu_item}>Управление</li>
+            </Link>
+          )}
 
           {/* <li className={styles.header__inner_navmenu_item}>Сделать заказ</li> */}
         </ul>
@@ -118,9 +120,7 @@ const Header = () => {
             >
               Контакты
             </Link>
-            {isAuth && <Link to="/administration">
-              Управление
-            </Link>}
+            {isAuth && <Link to="/administration">Управление</Link>}
             <div
               onClick={() => {
                 setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
@@ -136,7 +136,11 @@ const Header = () => {
         handleBackdropClick={() => setIsModalFormOpened(false)}
         active={isModalFormOpened}
       >
-        <OrderForm />
+        <OrderForm
+          onSuccessfulSubmit={() => {
+            setIsModalFormOpened(false)
+          }}
+        />
       </ModalWindow>
     </div>
   )
