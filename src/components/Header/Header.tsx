@@ -92,16 +92,16 @@ const Header = () => {
           ></div>
         )}
 
-
+        
         <AnimatePresence>
           {isBurgerMenuOpened && (
               <motion.div
-              initial={{ opacity: 0, y: -50 }}
+              initial={{ opacity: 0, y: -80 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -50 }}
+              exit={{ opacity: 0, y: -80 }}
               transition={{ duration: 0.3 }}
               style={{
-                  marginTop: 10,
+                  marginTop: -20,
                   position: "absolute",
                   right: 0,
               }}

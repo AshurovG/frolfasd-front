@@ -72,6 +72,8 @@ const PortfolioPage = () => {
       )}
       <h1 className={styles.page__title}>Портфолио</h1>
       <h2 className={styles.page__subtitle}>Вентилируемые фасады</h2>
+      <h4 className={styles.page__text}>Здесь вы можете посмотреть выполненные работы и подробную информацию о них</h4>
+
       <div className={styles.page__content}>
         <CardList
           isCardsLoading={isCardsLoading}

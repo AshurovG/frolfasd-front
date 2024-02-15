@@ -7,6 +7,7 @@
   margin: 0 auto;
 
   &__title {
+    // text-align: center;
     margin-bottom: 40px;
     font-size: 40px;
     font-weight: 700;
@@ -14,11 +15,18 @@
   }
 
   &__subtitle {
+    // text-align: center;
     font-size: 32px;
     margin: 15px 0;
   }
 
-  &__content {
+  &__text {
+    font-size: 30px;
+    color: rgb(125, 125, 125);
+    padding-bottom: 30px;
+    max-width: 700px;
+    margin-left:  0; /* Устанавливаем только левый отступ */
+    margin-right: auto;
   }
 
   &__action {
