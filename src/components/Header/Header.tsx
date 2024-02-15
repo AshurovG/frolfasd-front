@@ -5,7 +5,7 @@ import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
 // import { Link as ScrollLink, scroller } from "react-scroll"
-import {scroller} from "react-scroll"
+import { scroller } from "react-scroll"
 import BurgerIcon from "components/Icons/BurgerIcon"
 import { useIsAuth } from "slices/AuthSlice"
 
