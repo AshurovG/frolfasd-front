@@ -5,6 +5,7 @@ import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
 // import { Link as ScrollLink, scroller } from "react-scroll"
+import { motion, AnimatePresence } from "framer-motion";
 import {scroller} from "react-scroll"
 import BurgerIcon from "components/Icons/BurgerIcon"
 import { useIsAuth } from "slices/AuthSlice"
@@ -90,49 +91,65 @@ const Header = () => {
             onClick={() => setIsBurgerMenuOpened(false)}
           ></div>
         )}
-        {isBurgerMenuOpened && (
-          <div ref={menuRef} className={styles.burger__menu}>
-            <Link
-              onClick={() => setIsBurgerMenuOpened(false)}
-              // className={styles["burger__menu-item"]}
-              to={"/portfolio"}
-            >
-              Портфолио
-            </Link>
-            <Link
-              onClick={() => {
-                setIsBurgerMenuOpened(false)
-                setTimeout(() => {
-                  scroller.scrollTo("faq", { smooth: true, duration: 500 })
-                }, 100)
+
+
+        <AnimatePresence>
+          {isBurgerMenuOpened && (
+              <motion.div
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -50 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                  marginTop: 10,
+                  position: "absolute",
+                  right: 0,
               }}
-              to="/frolfasd"
-            >
-              Помощь
-            </Link>
-            <Link
-              onClick={() => {
-                setIsBurgerMenuOpened(false)
-                setTimeout(() => {
-                  scroller.scrollTo("contacts", { smooth: true, duration: 500 })
-                }, 100)
-              }}
-              to="/frolfasd"
-            >
-              Контакты
-            </Link>
-            {isAuth && <Link onClick={() => {
-                setIsBurgerMenuOpened(false)}} to="/administration">Управление</Link>}
-            <div
-              onClick={() => {
-                setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
-              }}
-            >
-              {" "}
-              Сделать заказ
-            </div>
-          </div>
-        )}
+              >
+              <div ref={menuRef} className={styles.burger__menu}>
+                <Link
+                  onClick={() => setIsBurgerMenuOpened(false)}
+                  // className={styles["burger__menu-item"]}
+                  to={"/portfolio"}
+                >
+                  Портфолио
+                </Link>
+                <Link
+                  onClick={() => {
+                    setIsBurgerMenuOpened(false)
+                    setTimeout(() => {
+                      scroller.scrollTo("faq", { smooth: true, duration: 500 })
+                    }, 100)
+                  }}
+                  to="/frolfasd"
+                >
+                  Помощь
+                </Link>
+                <Link
+                  onClick={() => {
+                    setIsBurgerMenuOpened(false)
+                    setTimeout(() => {
+                      scroller.scrollTo("contacts", { smooth: true, duration: 500 })
+                    }, 100)
+                  }}
+                  to="/frolfasd"
+                >
+                  Контакты
+                </Link>
+                {isAuth && <Link onClick={() => {
+                    setIsBurgerMenuOpened(false)}} to="/administration">Управление</Link>}
+                <div
+                  onClick={() => {
+                    setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
+                  }}
+                >
+                  {" "}
+                  Сделать заказ
+                </div>
+              </div>
+              </motion.div>
+          )}
+        </AnimatePresence>
       </div>
       <ModalWindow
         handleBackdropClick={() => setIsModalFormOpened(false)}
