@@ -8,6 +8,7 @@ import axios from "axios"
 import { Response } from "../../../types"
 import FacadesBlock from "components/FacadesBlock"
 import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
+import ApplicationIcon from "components/Icons/ApplicationIcon"
 import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 
@@ -86,7 +87,8 @@ const MainPage = () => {
           onClick={() => setIsModalFormOpened(true)}
           className={styles.order_fix}
         >
-          <PhoneIcon className={styles.order_fix_icon} />
+          {/* <PhoneIcon className={styles.order_fix_icon} /> */}
+          <ApplicationIcon className={styles.order_fix_icon}/>
         </div>
       )}
       <AboutCompanyBlock />

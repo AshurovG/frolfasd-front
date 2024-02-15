@@ -121,7 +121,8 @@ const Header = () => {
             >
               Контакты
             </Link>
-            {isAuth && <Link to="/administration">Управление</Link>}
+            {isAuth && <Link onClick={() => {
+                setIsBurgerMenuOpened(false)}} to="/administration">Управление</Link>}
             <div
               onClick={() => {
                 setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
