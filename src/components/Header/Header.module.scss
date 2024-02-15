@@ -1,7 +1,10 @@
 @import "../../styles/variables.scss";
-@import "../../styles//mixins.scss";
+@import "../../styles/mixins.scss";
+
 .header {
   background-color: $brand;
+  // background-color: none;
+  // border-bottom: 1px solid #fff;
   padding: 30px 0px;
   z-index: 2;
 
@@ -36,8 +39,12 @@
     }
 
     &_action {
+      background-color: #ffffff00 !important;
+      // background-color: !important;
       cursor: pointer;
-      background-color: #fff;
+      background: none;
+      // background-color: #fff;
+      background-color: none;
       color: $brand;
       font-size: 30px;
       font-weight: 600;
@@ -61,6 +68,7 @@
   }
   .header__inner_action {
     display: none;
+    // background-color: red !important;
   }
 
   .burger__icon {
@@ -108,10 +116,13 @@
     right: 0;
 
     width: 250px;
-    text-decoration: underline;
+    // text-decoration: underline;
+
     padding: 15px;
     height: auto;
-    background-color: $brand;
+    // background-color: $brand;
+    background-color: #fff;
+    color: $brand;
     display: flex;
     flex-direction: column;
     // box-shadow: $box-shadow;

@@ -81,29 +81,33 @@ const MainPage = () => {
   }, [])
 
   return (
-    <div className={styles.page}>
-      {showButton && (
-        <div
-          onClick={() => setIsModalFormOpened(true)}
-          className={styles.order_fix}
-        >
-          {/* <PhoneIcon className={styles.order_fix_icon} /> */}
-          <ApplicationIcon className={styles.order_fix_icon}/>
-        </div>
-      )}
+    <>
       <AboutCompanyBlock />
-      <FacadesBlock isCardsLoading={isCardsLoading} items={facadesItems} />
-      <FaqBlock
-        isQuestionsLoading={isQuestionsLoading}
-        questions={questions}
-      ></FaqBlock>
-      <ModalWindow
-        handleBackdropClick={() => setIsModalFormOpened(false)}
-        active={isModalFormOpened}
-      >
-        <OrderForm onSuccessfulSubmit={() => setIsModalFormOpened(false)} />
-      </ModalWindow>
-    </div>
+
+      <div className={styles.page}>
+        {showButton && (
+          <div
+            onClick={() => setIsModalFormOpened(true)}
+            className={styles.order_fix}
+          >
+            {/* <PhoneIcon className={styles.order_fix_icon} /> */}
+          <ApplicationIcon className={styles.order_fix_icon}/>
+          </div>
+        )}
+        {/* <AboutCompanyBlock /> */}
+        <FacadesBlock isCardsLoading={isCardsLoading} items={facadesItems} />
+        <FaqBlock
+          isQuestionsLoading={isQuestionsLoading}
+          questions={questions}
+        ></FaqBlock>
+        <ModalWindow
+          handleBackdropClick={() => setIsModalFormOpened(false)}
+          active={isModalFormOpened}
+        >
+          <OrderForm onSuccessfulSubmit={() => setIsModalFormOpened(false)} />
+        </ModalWindow>
+      </div>
+    </>
   )
 }
 
