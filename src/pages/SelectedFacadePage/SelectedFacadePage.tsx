@@ -106,8 +106,10 @@ const SelectedFacadePage = () => {
         data: formData,
       })
       getFacade()
+      toast.success('Фото успешно добавлено!')
       setIsLoading(true)
     } catch (error) {
+      toast.error('Размер фото не должен превышать 5 МБ!')
       throw error
     }
   }
@@ -125,8 +127,10 @@ const SelectedFacadePage = () => {
         }
       )
       getFacade()
+      toast.success('Фото успешно удалено!')
       setIsLoading(true)
     } catch (error) {
+      toast.error('Что-то пошло не так...')
       throw error
     }
   }
@@ -172,7 +176,6 @@ const SelectedFacadePage = () => {
 
           <div className={styles.selected__options}>
             <div className={styles.selected__actions}>
-              {/* <AddButton onClick={() => setIsEditFacadeWindowOpened(true)}/> */}
               <EditIcon
                 className={styles.selected__actions_add}
                 onClick={() => {
@@ -191,7 +194,7 @@ const SelectedFacadePage = () => {
             )}
           </div>
         </div>
-        <h1 className={styles.selected__title}>Галлерея</h1>
+        <h1 className={styles.selected__title}>Галерея</h1>
         {isLoading ? (
           <DetailedItemSkeleton className={styles.selected__content} />
         ) : (
