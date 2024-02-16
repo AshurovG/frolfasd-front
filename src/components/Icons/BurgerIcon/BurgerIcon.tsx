@@ -19,19 +19,19 @@ const BurgerIcon: React.FC<IconProps> = ({
     >
       <path
         d="M4 18L20 18"
-        stroke="#fff"
+        stroke="#610a0a"
         stroke-width="2"
         stroke-linecap="round"
       />
       <path
         d="M4 12L20 12"
-        stroke="#fff"
+        stroke="#610a0a"
         stroke-width="2"
         stroke-linecap="round"
       />
       <path
         d="M4 6L20 6"
-        stroke="#fff"
+        stroke="#610a0a"
         stroke-width="2"
         stroke-linecap="round"
       />

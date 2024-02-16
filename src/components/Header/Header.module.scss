@@ -2,16 +2,20 @@
 @import "../../styles/mixins.scss";
 
 .header {
-  background-color: $brand;
+  // background-color: $brand;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #000;
   // background-color: none;
   // border-bottom: 1px solid #fff;
   padding: 30px 0px;
   z-index: 2;
+  box-shadow:  0  5px  10px rgba(0,  0,  0,  0.15);
+
 
   &__inner {
     font-size: 20px;
     position: relative;
-    color: #fff;
+    color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -24,6 +28,7 @@
       cursor: pointer;
       font-size: 30px;
       font-weight: 700;
+      color: $brand;
     }
 
     &_navmenu {
@@ -42,15 +47,19 @@
       background-color: #ffffff00 !important;
       // background-color: !important;
       cursor: pointer;
-      background: none;
+      // background: none;
       // background-color: #fff;
+      border-color: $brand !important;
       background-color: none;
-      color: $brand;
+      // color: $brand;
+      color: $brand !important;
       font-size: 30px;
       font-weight: 600;
+      transition: background .2s linear, color .2s linear !important;
 
       &:hover {
-        background-color: #a2a2a2;
+        background: $brand !important;
+        color: #fff !important;
       }
     }
   }
@@ -92,7 +101,7 @@
     left: 50%;
     width: 100%;
     height: 2px;
-    background-color: #fff;
+    background-color: $brand;
     transform-origin: center;
   }
 
@@ -109,9 +118,8 @@
   }
 
   .burger__menu {
-    display: block;
-    z-index: 1000;
     position: absolute;
+    z-index: 1000;
     top: 80px;
     right: 0;
 
@@ -125,8 +133,8 @@
     color: $brand;
     display: flex;
     flex-direction: column;
-    // box-shadow: $box-shadow;
     border-radius: 10px;
+    box-shadow:  0  5px  10px rgba(0,  0,  0,  0.15);
 
     &-item {
       padding: 5px;

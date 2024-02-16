@@ -9,7 +9,8 @@ import ModalWindow from "components/ModalWindow"
 import Button from "components/Button"
 import { Link } from "react-router-dom"
 import OrderForm from "components/OrderForm"
-import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
+import ApplicationIcon from "components/Icons/ApplicationIcon"
+// import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
 
 const PortfolioPage = () => {
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
@@ -67,12 +68,14 @@ const PortfolioPage = () => {
           onClick={() => setIsModalFormOpened(true)}
           className={styles.order_fix}
         >
-          <PhoneIcon className={styles.order_fix_icon} />
+          {/* <PhoneIcon className={styles.order_fix_icon} /> */}
+          <ApplicationIcon className={styles.order_fix_icon}/>
         </div>
       )}
       <h1 className={styles.page__title}>Портфолио</h1>
       <h2 className={styles.page__subtitle}>Вентилируемые фасады</h2>
-      <h4 className={styles.page__text}>Здесь вы можете посмотреть выполненные работы и подробную информацию о них</h4>
+      <p className={styles.page__text}>Здесь кратко описано, что это за услуга / где и как используется. Также
+        было бы полезно указать, какие материалы используются.</p>
 
       <div className={styles.page__content}>
         <CardList

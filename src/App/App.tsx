@@ -3,6 +3,7 @@ import { HashRouter, Routes, Route, Navigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { useIsAuth, setIsAuthAction } from "slices/AuthSlice"
 import axios from "axios"
+import styles from './App.module.scss'
 import Header from "components/Header"
 import AdminPage from "pages/AdminPage"
 import MainPage from "pages/MainPage"
@@ -10,6 +11,7 @@ import Footer from "components/Footer"
 import PortfolioPage from "pages/PortfolioPage"
 import SelectedFacadePage from "pages/SelectedFacadePage"
 import LoginPage from "pages/LoginPage"
+import Loader from "components/Loader"
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -35,7 +37,6 @@ const App = () => {
     }
   }
 
-
   React.useEffect(() => {
     if (token) {
       getIsAuth()
@@ -47,9 +48,14 @@ const App = () => {
   return (
     <div className="app">
       <HashRouter>
+      {isCheckLoading ? 
+          <Loader className={styles.loader}/>
+        
+        :
+      <>
         <Header />
-        {!isCheckLoading && 
-        <>
+        
+        
           <Routes>
             <Route path="/" element={<MainPage />}></Route>
             {isAuth &&

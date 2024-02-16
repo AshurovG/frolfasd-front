@@ -1,8 +1,13 @@
 import styles from "./Loader.module.scss"
+import React from "react"
 
-const Loader = () => {
+type LoaderProps = {
+  className?: string
+}
+
+const Loader: React.FC<LoaderProps> = ({className}) => {
   return (
-    <div id={styles["wifi-loader"]}>
+    <div className={className}  id={styles["wifi-loader"]}>
       <svg className={styles["circle-outer"]} viewBox="0 0 86 86">
         <circle className={styles["back"]} cx="43" cy="43" r="40"></circle>
         <circle className={styles["front"]} cx="43" cy="43" r="40"></circle>

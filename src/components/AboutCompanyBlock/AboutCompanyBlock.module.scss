@@ -10,8 +10,8 @@
     max-width: $content-width;
     width: 85vw;
     margin: 0 auto;
-    padding: 150px 0 30px 0;
-    margin-top: -140px;
+    padding: 100px 0 100px 0;
+    // margin-top: -140px;
     color: #fff;
     &_title {
       font-size: 40px;
@@ -26,16 +26,16 @@
 }
 @include mediumTablet {
   .block {
-    &__inner {
-      padding: 140px 0 60px 0;
-    }
+    // &__inner {
+    //   padding: 140px 0 60px 0;
+    // }
   }
 }
 
 @include smallTablet {
   .block {
     &__inner {
-      padding: 120px 0 50px 0;
+      // padding: 120px 0 50px 0;
     }
   }
 }
@@ -43,7 +43,7 @@
 @include mobileLandscape {
   .block {
     &__inner {
-      padding: 120px 0 40px 0;
+      // padding: 120px 0 40px 0;
       &_title {
         font-size: 36px;
         font-weight: 700;
@@ -68,7 +68,7 @@
 @include extraSmallMobile {
   .block {
     &__inner {
-      padding: 120px 0 30px 0;
+      // padding: 120px 0 30px 0;
       &_title {
         font-size: 32px;
         font-weight: 700;
@@ -85,7 +85,7 @@
 @include ultraSmallMobile {
   .block {
     &__inner {
-      padding: 120px 0 20px 0;
+      // padding: 120px 0 20px 0;
       &_title {
         font-size: 28px;
         font-weight: 700;

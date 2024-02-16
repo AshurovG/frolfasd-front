@@ -8,9 +8,11 @@ import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion";
 import {scroller} from "react-scroll"
 import BurgerIcon from "components/Icons/BurgerIcon"
-import { useIsAuth } from "slices/AuthSlice"
-
+import { useIsAuth, setIsAuthAction } from "slices/AuthSlice"
+import { useDispatch } from "react-redux"
+import { toast } from "react-toastify"
 const Header = () => {
+  const dispatch = useDispatch()
   const isAuth = useIsAuth()
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false)
@@ -28,6 +30,12 @@ const Header = () => {
       document.removeEventListener("mousedown", checkIfClickedOutside)
     }
   }, [])
+
+  const onExitButtonClick = () => {
+    dispatch(setIsAuthAction(false))
+    localStorage.removeItem('token')
+    toast.success('Вы успешно вышли из режима администратора!')
+  }
 
   return (
     <div className={styles.header} id="header">
@@ -73,12 +81,19 @@ const Header = () => {
 
           {/* <li className={styles.header__inner_navmenu_item}>Сделать заказ</li> */}
         </ul>
-        <Button
+        {!isAuth && <Button
           onClick={() => setIsModalFormOpened(true)}
           className={styles.header__inner_action}
         >
           Сделать заказ
-        </Button>
+        </Button>}
+
+        {isAuth && <Button
+          onClick={onExitButtonClick}
+          className={styles.header__inner_action}
+        >
+          Выйти
+        </Button>}
 
         {isBurgerMenuOpened === false ? (
           <BurgerIcon
