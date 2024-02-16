@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react"
-import { Controller, FieldValues, useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import styles from "./QuestionForm.module.scss"
 import Button from "components/Button"
 export type FacadeFormProps = {
@@ -20,10 +20,10 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
   const forma = useForm({
     mode: "onChange",
   })
-  const { register, handleSubmit, formState, reset, control } = forma
+  const { register, handleSubmit, formState, control } = forma
   const { isValid, touchedFields, errors } = formState
 
-  const handleFormSubmit = (data: FieldValues) => {
+  const handleFormSubmit = () => {
     questionValue && answerValue && onSubmit(questionValue, answerValue)
     clearData()
   }

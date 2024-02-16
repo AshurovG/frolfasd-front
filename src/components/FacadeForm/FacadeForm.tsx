@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react"
 import styles from "./FacadeForm.module.scss"
-import { Controller, FieldValues, useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import Button from "components/Button"
 
 export type FacadeFormProps = {
@@ -45,7 +45,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
     setFileName("")
   }
 
-  const submitForm = (data: FieldValues) => {
+  const submitForm = () => {
     titleValue &&
       descriptionValue &&
       onSubmit(titleValue, descriptionValue, selectedFile)
