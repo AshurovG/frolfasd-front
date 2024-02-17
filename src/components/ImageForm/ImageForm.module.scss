@@ -13,6 +13,10 @@
   align-items: center;
   gap: 20px;
 
+  &__input_message {
+    color: red;
+  }
+
   &__file {
     border-radius: 5px;
     border: 1px solid $brand;
