@@ -140,10 +140,10 @@
 @include extraSmallMobile {
   .admin {
     &__actions {
-      &_add {
-        width: 30px;
-        height: 30px;
-      }
+      // &_add {
+        // width: 35px;
+        // height: 35px;
+      // }
     }
     &__text {
       font-size: 18px;
@@ -163,10 +163,10 @@
       font-size: 16px;
     }
     &__actions {
-      &_add {
-        width: 20px;
-        height: 20px;
-      }
+      // &_add {
+      //   width: 20px;
+      //   height: 20px;
+      // }
     }
   }
   .modal {

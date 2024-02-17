@@ -150,16 +150,23 @@
   }
 }
 
-@include mobileLandscape {
+// @include mobileLandscape {
+  // .burger__menu {
+  //   width: 200px;
+  //   font-size: 22px;
+  // }
+// }
+
+@include mobile {
   .burger__menu {
     width: 200px;
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 
-@include extraSmallMobile {
-  .burger__menu {
-    width: 150px;
-    font-size: 18px;
-  }
-}
+// @include extraSmallMobile {
+//   .burger__menu {
+//     width: 150px;
+//     font-size: 18px;
+//   }
+// }

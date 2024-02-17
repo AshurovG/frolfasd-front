@@ -23,6 +23,14 @@ const ModalWindow: React.FC<ModalProps> = ({
     e.stopPropagation()
   }
 
+  React.useEffect(() => {
+    if (active) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [active])
+
   return (
     <div
       onClick={handleBackdropClick}
