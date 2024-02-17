@@ -73,15 +73,16 @@ const AdminPage = () => {
         }
       )
       setIsCardsLoading(true)
-      if (item.is_important === false) {
-        toast.success("Объект добавлен на главную страницу!")
-      } else {
-        toast.success("Объект скрыт из главной страницы!")
-      }
+      // if (item.is_important === false) {
+      //   toast.success("Объект добавлен на главную страницу!")
+      // } else {
+      //   toast.success("Объект скрыт из главной страницы!")
+      // }
+      toast.success('Информация успешно обновлена!')
 
       getFacades()
     } catch (error) {
-      toast.error("Что-то пошло не так...")
+      toast.error("Нельзя добавлять более 6 объектов!")
       throw error
     }
   }

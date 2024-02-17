@@ -11,8 +11,10 @@ import FacadesBlock from "components/FacadesBlock"
 import ApplicationIcon from "components/Icons/ApplicationIcon"
 import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
+import { useIsAuth } from "slices/AuthSlice"
 
 const MainPage = () => {
+  const isAuth = useIsAuth()
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
   const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
@@ -33,6 +35,7 @@ const MainPage = () => {
   }
 
   useEffect(() => {
+    console.log('TTTTTT')
     window.addEventListener("scroll", handleScroll)
     if (window.innerWidth < 1050) {
       setShowButton(true)
@@ -85,16 +88,14 @@ const MainPage = () => {
       <AboutCompanyBlock />
 
       <div className={styles.page}>
-        {showButton && (
+        {showButton && !isAuth && (
           <div
             onClick={() => setIsModalFormOpened(true)}
             className={styles.order_fix}
           >
-            {/* <PhoneIcon className={styles.order_fix_icon} /> */}
           <ApplicationIcon className={styles.order_fix_icon}/>
           </div>
         )}
-        {/* <AboutCompanyBlock /> */}
         <FacadesBlock isCardsLoading={isCardsLoading} items={facadesItems} />
         <FaqBlock
           isQuestionsLoading={isQuestionsLoading}

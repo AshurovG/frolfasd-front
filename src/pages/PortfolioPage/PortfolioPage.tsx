@@ -10,9 +10,10 @@ import Button from "components/Button"
 import { Link } from "react-router-dom"
 import OrderForm from "components/OrderForm"
 import ApplicationIcon from "components/Icons/ApplicationIcon"
-// import PhoneIcon from "components/Icons/PhoneIcon/PhoneIcon"
+import { useIsAuth } from "slices/AuthSlice"
 
 const PortfolioPage = () => {
+  const isAuth = useIsAuth()
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
@@ -63,12 +64,11 @@ const PortfolioPage = () => {
 
   return (
     <div className={styles.page}>
-      {showButton && (
+      {showButton && !isAuth && (
         <div
           onClick={() => setIsModalFormOpened(true)}
           className={styles.order_fix}
         >
-          {/* <PhoneIcon className={styles.order_fix_icon} /> */}
           <ApplicationIcon className={styles.order_fix_icon}/>
         </div>
       )}
