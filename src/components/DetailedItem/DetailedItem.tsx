@@ -125,7 +125,7 @@ const DetailedItem: React.FC<DetailedProps> = ({
             onImageFormSubmit && onImageFormSubmit(file)
             setIsAddFacadeItemWindowOpened(false)
           }}
-          fileTitle=""
+          // fileTitle=""
         />
       </ModalWindow>
 
