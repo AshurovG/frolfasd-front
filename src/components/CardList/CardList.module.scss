@@ -2,7 +2,20 @@
 
 .list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  // grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   row-gap: 30px;
   column-gap: 30px;
+}
+
+@include tablet {
+  .list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@include smallTablet {
+  .list {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
