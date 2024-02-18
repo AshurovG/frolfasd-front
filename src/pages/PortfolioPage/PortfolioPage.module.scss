@@ -21,6 +21,32 @@
     margin: 15px 0;
   }
 
+  &__input {
+    border-radius: 5px;
+    border: 1px solid $brand;
+    height: 10vw;
+    max-height: 50px;
+    text-align: left;
+    padding-left: 10px;
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: -10px;
+
+    &_message {
+      font-size: 13px;
+      color: red;
+      // background-color: red;
+      position: absolute;
+      // top: 0;
+      left: 0;
+    }
+
+    &:focus {
+      border: 2px solid $brand;
+    }
+  }
+
   &__text {
     font-size: 26px;
     margin-bottom: 30px;
@@ -78,6 +104,9 @@
       font-size: 24px;
       margin-bottom: 30px;
     }
+    &__input {
+      font-size: 18px;
+    }
   }
   .order_fix {
     &_icon {
@@ -101,6 +130,9 @@
     &__text {
       font-size: 20px;
       margin-bottom: 30px;
+    }
+    &__input {
+      font-size: 16px;
     }
   }
   .order_fix {

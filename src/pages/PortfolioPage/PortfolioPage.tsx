@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useState, ChangeEvent } from "react"
 import styles from "./PortfolioPage.module.scss"
 import { ReceivedFacadeData } from "../../../types"
 import { Response } from "../../../types"
@@ -15,10 +15,11 @@ import { useIsAuth } from "slices/AuthSlice"
 const PortfolioPage = () => {
   const isAuth = useIsAuth()
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
+  const [filteredFacadesItems, setFilteredFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
-
   const [showButton, setShowButton] = useState(false)
+  const [filterValue, setFilterValue] = useState('')
 
   const handleScroll = () => {
     const header = document.getElementById("header")
@@ -49,6 +50,7 @@ const PortfolioPage = () => {
         }
       )
       setFacadesItems(response.data)
+      setFilteredFacadesItems(response.data)
       setIsCardsLoading(false)
     } catch (error) {
       console.log(error)
@@ -61,6 +63,12 @@ const PortfolioPage = () => {
   useLayoutEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+
+  useEffect(() => {
+    setFilteredFacadesItems(facadesItems.filter((facade) => {
+      return facade.exterior_design_title.toLowerCase().includes(filterValue.toLowerCase())
+    }))
+  }, [filterValue])
 
   return (
     <div className={styles.page}>
@@ -77,11 +85,21 @@ const PortfolioPage = () => {
       <p className={styles.page__text}>Здесь кратко описано, что это за услуга / где и как используется. Также
         было бы полезно указать, какие материалы используются.</p>
 
+      <h2 className={styles.page__text}>Также вы можете найти объект по названию</h2>
+      <input 
+        placeholder="Название объекта*"
+        className={styles.page__input} 
+        type="text"
+        value={filterValue}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setFilterValue(event.target.value);
+        }} 
+        />
       <div className={styles.page__content}>
         <CardList
           isCardsLoading={isCardsLoading}
           onCardClick={() => setIsModalFormOpened(true)}
-          items={facadesItems}
+          items={filteredFacadesItems}
         />
       </div>
 
