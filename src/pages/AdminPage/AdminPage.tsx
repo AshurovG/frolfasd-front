@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, ChangeEvent } from "react"
 import styles from "./AdminPage.module.scss"
 import Navigation from "components/Navigation"
 import CardList from "components/CardList"
@@ -16,6 +16,7 @@ import { toast } from "react-toastify"
 const AdminPage = () => {
   const token = localStorage.getItem("token")
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
+  const [filteredFacadesItems, setFilteredFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
   const [active, setActive] = useState<"facades" | "questions">("facades")
   const [isCreateWindowOpened, setIsCreateWindowOpened] = useState(false)
@@ -26,19 +27,16 @@ const AdminPage = () => {
   const [currentQuestion, setCurrentQuestion] =
     useState<ReceivedQuestionsData>()
   const [isDeletedQuestionId, setDeletedQuestionId] = useState<number>()
-
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
   const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
-
-  React.useEffect(() => {
-    console.log("render")
-  }, [])
+  const [filterValue, setFilterValue] = useState('')
 
   const getFacades = async () => {
     setActive("facades")
     try {
       const response = await axios("https://frolfasd.ru/api/exterior_design/")
       setFacadesItems(response.data)
+      setFilteredFacadesItems(response.data)
       setTimeout(() => {
         setIsCardsLoading(false)
       }, 1000)
@@ -73,11 +71,6 @@ const AdminPage = () => {
         }
       )
       setIsCardsLoading(true)
-      // if (item.is_important === false) {
-      //   toast.success("Объект добавлен на главную страницу!")
-      // } else {
-      //   toast.success("Объект скрыт из главной страницы!")
-      // }
       toast.success('Информация успешно обновлена!')
 
       getFacades()
@@ -86,6 +79,12 @@ const AdminPage = () => {
       throw error
     }
   }
+
+  React. useEffect(() => {
+    setFilteredFacadesItems(facadesItems.filter((facade) => {
+      return facade.exterior_design_title.toLowerCase().includes(filterValue.toLowerCase())
+    }))
+  }, [filterValue])
 
   const postFacade = async (
     title: string,
@@ -106,9 +105,6 @@ const AdminPage = () => {
       else if (file) {
         formData.append("file", file)
       }
-      // for (var pair of formData.entries()) {
-      //   console.log(pair[0] + ", " + pair[1])
-      // }
       await axios("https://frolfasd.ru/api/exterior_design/", {
         method: "POST",
         data: formData,
@@ -192,7 +188,6 @@ const AdminPage = () => {
   const onEditButtonClick = (id: number, question: string, answer: string) => {
     console.log("edit clicked", question)
     console.log(id, question, answer)
-    // putQuestion(id, question, answer)
     setCurrentQuestion({
       questions_id: id,
       questions_title: question,
@@ -238,13 +233,25 @@ const AdminPage = () => {
         </div>
       )}
       {active === "facades" ? (
-        <div className={styles.admin__actions}>
-          <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
-          <AddButton
-            className={styles.admin__actions_add}
-            onClick={() => setIsCreateWindowOpened(true)}
+        <>
+          <div className={styles.admin__actions}>
+            <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
+            <AddButton
+              className={styles.admin__actions_add}
+              onClick={() => setIsCreateWindowOpened(true)}
+            />
+          </div>
+          <h4 className={styles.admin__text}>Также вы можете найти объект по названию</h4>
+          <input 
+            placeholder="Название объекта*"
+            className={styles.admin__input} 
+            type="text"
+            value={filterValue}
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setFilterValue(event.target.value);
+            }} 
           />
-        </div>
+        </>
       ) : (
         <div className={styles.admin__actions}>
           <h4 className={styles.admin__text}>Хотите добавить новый вопрос?</h4>
@@ -260,7 +267,7 @@ const AdminPage = () => {
           <CardList
             isCardsLoading={isCardsLoading}
             isAdminPage
-            items={facadesItems}
+            items={filteredFacadesItems}
             onButtonClick={changeImportantItem}
           />
         </div>
