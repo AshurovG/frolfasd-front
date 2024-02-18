@@ -3,8 +3,7 @@ import styles from "./OrderFrom.module.scss"
 
 import Button from "components/Button"
 import ReCAPTCHA from "react-google-recaptcha"
-// FieldValues
-import { useForm } from "react-hook-form"
+import { useForm, FieldValues } from "react-hook-form"
 import { toast } from "react-toastify"
 import axios from "axios"
 
@@ -23,28 +22,16 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
   const { isValid, touchedFields, errors } = formState
   const [isCompactMode, _] = useState(window.innerWidth <= 460)
 
-  // const postFacade = async (
-  //   fio: string,
-  //   email: string,
-  //   description: string
-  // ) => {
-  //   try {
-  //     await axios("https://frolfasd.ru/api/email/", {
-  //       method: "POST",
-  //       data: { fio: fio, email: email, description: description },
-  //     })
-      // toast.success("Заказ принят! Мы скоро с Вами свяжемся.")
-      // onSuccessfulSubmit()
-  //     reset()
-  //   } catch (error) {
-  //     toast.error("Что-то пошло не так. Попробуйте позднее!")
-  //     throw error
-  //   }
-  // }
-
-  const sendEmail = async () => {
+  const postFacade = async (
+    fio: string,
+    email: string,
+    description: string
+  ) => {
     try {
-      await axios(`https://api.unisender.com/ru/api/sendEmail?format=json&api_key=6gqzu9rys3eqw7ap4f69g453xgut91h5ue89qaao&email=ashurov.g13@gmail.com&sender_name=Client&sender_email=ashurov1308@gmail.com&subject=new&body=HTMLBODY&list_id=1`)
+      await axios("https://frolfasd.ru/api/email/", {
+        method: "POST",
+        data: { fio: fio, email: email, description: description },
+      })
       toast.success("Заказ принят! Мы скоро с Вами свяжемся.")
       onSuccessfulSubmit()
       reset()
@@ -54,9 +41,8 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
     }
   }
 
-  const onSubmit = () => {
-    // postFacade(data.fio, data.email, data.description)
-    sendEmail()
+  const onSubmit = (data: FieldValues) => {
+    postFacade(data.fio, data.email, data.description)
   }
 
   return (
@@ -78,8 +64,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
               },
             })}
             className={styles.form__input}
-            // value={name}
-            // onChange={(v) => setName(v.target.value)}
             placeholder="Введите ФИО*"
           />
           {errors?.fio && touchedFields.fio && (
@@ -99,8 +83,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
             })}
             className={styles.form__input}
             type="email"
-            // value={email}
-            // onChange={(v) => setEmail(v.target.value)}
             placeholder="Введите e-mail*"
           />
           {errors?.email && touchedFields.email && (
@@ -116,8 +98,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
             })}
             className={styles.form__input_big}
             placeholder="Введите описание*"
-            // value={description}
-            // onChange={(e) => setDescription(e.target.value)}
+
           ></textarea>
           {errors?.description && touchedFields.description && (
             <div className={styles.form__input_message}>
@@ -128,13 +109,10 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
         <div style={{ position: "relative", width: `100%` }}>
           <ReCAPTCHA
             size={isCompactMode ? "compact" : "normal"}
-            // theme="dark"
-            // data-theme="dark"
             sitekey="6LcKZG8pAAAAAOJoD4-euRFa1KEN_uJHw_Pw_Uor"
             onChange={(value) => setCaptchaValue(value)}
           />
         </div>
-        {/* <div > */}
         <Button
           className={styles.form__submit}
           disabled={!isValid || !captchaValue}
@@ -142,8 +120,6 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
         >
           Сделать заказ
         </Button>
-
-        {/* </div> */}
       </form>
     </div>
   )
