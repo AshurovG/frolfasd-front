@@ -102,6 +102,7 @@ const PortfolioPage = () => {
           items={filteredFacadesItems}
         />
       </div>
+      {filteredFacadesItems.length === 0 && <h2 className={styles.page__error}>Такого объекта не найдено...</h2>}
 
       <div className={styles.page__action}>
         <Link to="/frolfasd">

@@ -48,6 +48,15 @@
     }
   }
 
+  &__error {
+    font-size: 26px;
+    color: rgb(125, 125, 125);
+    text-align: center;
+    padding-bottom: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
   &__input {
     border-radius: 5px;
     border: 1px solid $brand;
@@ -141,6 +150,9 @@
     &__input {
       font-size: 18px;
     }
+    &__error {
+      font-size: 24px;
+    }
   }
 }
 
@@ -174,6 +186,9 @@
     &__text {
       font-size: 18px;
     }
+    &__error {
+      font-size: 20px;
+    }
   }
 }
 
@@ -188,11 +203,8 @@
     &__text {
       font-size: 16px;
     }
-    &__actions {
-      // &_add {
-      //   width: 20px;
-      //   height: 20px;
-      // }
+    &__error {
+      font-size: 18px;
     }
   }
   .modal {
