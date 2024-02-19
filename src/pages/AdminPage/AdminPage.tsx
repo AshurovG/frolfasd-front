@@ -313,6 +313,7 @@ const AdminPage = () => {
             items={filteredFacadesItems}
             onButtonClick={changeImportantItem}
           />
+          {filteredFacadesItems.length === 0 && <h2 className={styles.admin__error}>Такого объекта не найдено...</h2>}
         </div>
       ) : (
         <div>

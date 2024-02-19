@@ -58,6 +58,24 @@
     }
   }
 
+  &__error {
+    font-size: 26px;
+    color: rgb(125, 125, 125);
+    text-align: center;
+    padding-bottom: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  &__error {
+    font-size: 26px;
+    color: rgb(125, 125, 125);
+    text-align: center;
+    padding-bottom: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
   &__input {
     border-radius: 5px;
     border: 1px solid $brand;
@@ -217,12 +235,6 @@
     }
     &__text {
       font-size: 18px;
-    }
-  }
-  .totop_fix {
-    &_icon {
-      width: 70px;
-      height: 70px;
     }
   }
 }
