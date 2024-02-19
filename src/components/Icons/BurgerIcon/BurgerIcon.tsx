@@ -20,20 +20,20 @@ const BurgerIcon: React.FC<IconProps> = ({
       <path
         d="M3 19L25 19"
         stroke="#610a0a"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M3 12L25 12"
         stroke="#610a0a"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
       <path
         d="M3 5L25 5"
         stroke="#610a0a"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </Icon>
   )

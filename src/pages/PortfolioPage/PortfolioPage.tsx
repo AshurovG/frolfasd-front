@@ -25,16 +25,18 @@ const PortfolioPage = () => {
   >([])
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
-  const [showButton, setShowButton] = useState(false)
+  const [showOrderButton, setShowOrderButton] = useState(false)
+  const [showTopButton, setShowTopButton] = useState(false)
   const [filterValue, setFilterValue] = useState("")
 
   const handleScroll = () => {
     const header = document.getElementById("header")
     if (!header) return
     const rect = header.getBoundingClientRect()
-    setShowButton(rect.top < -147)
+    setShowOrderButton(rect.top < -147)
+    setShowTopButton(rect.top < -147)
     if (window.innerWidth < 1050) {
-      setShowButton(true)
+      setShowOrderButton(true)
     }
   }
 
@@ -45,7 +47,7 @@ const PortfolioPage = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     if (window.innerWidth < 1050) {
-      setShowButton(true)
+      setShowOrderButton(true)
     }
     return () => {
       window.removeEventListener("scroll", handleScroll)
@@ -87,7 +89,7 @@ const PortfolioPage = () => {
 
   return (
     <div className={styles.page}>
-      {showButton && !isAuth && (
+      {showOrderButton && !isAuth && (
         <div
           onClick={() => setIsModalFormOpened(true)}
           className={styles.order_fix}
@@ -95,7 +97,7 @@ const PortfolioPage = () => {
           <ApplicationIcon className={styles.order_fix_icon} />
         </div>
       )}
-      {showButton && !isAuth && (
+      {showTopButton && (
         <div
           onClick={() => {
             scroller.scrollTo("header", { smooth: true, duration: 300 })

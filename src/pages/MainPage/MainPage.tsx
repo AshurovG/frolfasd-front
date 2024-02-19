@@ -37,7 +37,6 @@ const MainPage = () => {
   }
 
   useEffect(() => {
-    console.log("TTTTTT")
     window.addEventListener("scroll", handleScroll)
     if (window.innerWidth < 1050) {
       setShowButton(true)

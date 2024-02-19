@@ -149,31 +149,44 @@ const Header = () => {
                 >
                   Портфолио
                 </Link>
-                <Link
-                  onClick={() => {
-                    setIsBurgerMenuOpened(false)
-                    setTimeout(() => {
-                      scroller.scrollTo("faq", { smooth: true, duration: 500 })
-                    }, 100)
-                  }}
-                  to="/frolfasd"
-                >
-                  Помощь
-                </Link>
-                <Link
-                  onClick={() => {
-                    setIsBurgerMenuOpened(false)
-                    setTimeout(() => {
-                      scroller.scrollTo("contacts", {
-                        smooth: true,
-                        duration: 500,
-                      })
-                    }, 100)
-                  }}
-                  to="/frolfasd"
-                >
-                  Контакты
-                </Link>
+                {isMainPage ? (
+                  <ScrollLink to="faq" smooth={true} duration={500}>
+                    Помощь
+                  </ScrollLink>
+                ) : (
+                  <Link
+                    onClick={() => {
+                      setTimeout(() => {
+                        scroller.scrollTo("faq", {
+                          smooth: true,
+                          duration: 500,
+                        })
+                      }, 100)
+                    }}
+                    to="/frolfasd"
+                  >
+                    Помощь
+                  </Link>
+                )}
+                {isMainPage ? (
+                  <ScrollLink to="contacts" smooth={true} duration={500}>
+                    Помощь
+                  </ScrollLink>
+                ) : (
+                  <Link
+                    onClick={() => {
+                      setTimeout(() => {
+                        scroller.scrollTo("contacts", {
+                          smooth: true,
+                          duration: 500,
+                        })
+                      }, 100)
+                    }}
+                    to="/frolfasd"
+                  >
+                    Контакты
+                  </Link>
+                )}
                 {isAuth && (
                   <Link
                     onClick={() => {

@@ -104,7 +104,21 @@
     }
   }
   .totop_fix {
-    display: none;
+    position: sticky;
+    left: 100%;
+    // margin-right: -65px;
+    background-color: $brand;
+    float: right;
+    border-radius: 50%;
+    top: 74%;
+    margin-bottom: 85px;
+    &_icon {
+      & path {
+        stroke: #fff;
+      }
+      width: 80px;
+      height: 80px;
+    }
   }
 }
 
@@ -130,6 +144,12 @@
     &_icon {
       width: 40px;
       height: 40px;
+    }
+  }
+  .totop_fix {
+    &_icon {
+      width: 80px;
+      height: 80px;
     }
   }
 }
@@ -159,12 +179,30 @@
       height: 30px;
     }
   }
+  .totop_fix {
+    &_icon {
+      width: 70px;
+      height: 70px;
+    }
+  }
 }
 
 @include ultraSmallMobile {
   .page__text {
     font-size: 18px;
     margin-bottom: 30px;
+  }
+  .order_fix {
+    &_icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+  .totop_fix {
+    &_icon {
+      width: 70px;
+      height: 70px;
+    }
   }
 }
 @include tinyMobile {

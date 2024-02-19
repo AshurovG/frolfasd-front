@@ -14,6 +14,8 @@ import Button from "components/Button"
 import { toast } from "react-toastify"
 import { useDispatch } from "react-redux"
 import { setIsMainPageAction } from "slices/PageSlice"
+import { scroller } from "react-scroll"
+import TopIcon from "components/Icons/TopIcon"
 
 const AdminPage = () => {
   const token = localStorage.getItem("token")
@@ -34,7 +36,24 @@ const AdminPage = () => {
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
   const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
   const [filterValue, setFilterValue] = useState("")
+  const [showTopButton, setShowTopButton] = useState(false)
   const dispatch = useDispatch()
+
+  const handleScroll = () => {
+    const header = document.getElementById("header")
+    if (!header) return
+    const rect = header.getBoundingClientRect()
+    setShowTopButton(rect.top < -147)
+    // if (window.innerWidth < 1050) {
+    //   setShowOrderButton(true)
+    // }
+  }
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   useEffect(() => {
     dispatch(setIsMainPageAction(false))
@@ -199,14 +218,11 @@ const AdminPage = () => {
   }, [])
 
   const onEditButtonClick = (id: number, question: string, answer: string) => {
-    console.log("edit clicked", question)
-    console.log(id, question, answer)
     setCurrentQuestion({
       questions_id: id,
       questions_title: question,
       questions_text: answer,
     })
-    console.log(currentQuestion)
     setIsEditQuestionModalOpen(true)
   }
 
@@ -217,6 +233,16 @@ const AdminPage = () => {
 
   return (
     <div className={styles.admin}>
+      {showTopButton && (
+        <div
+          onClick={() => {
+            scroller.scrollTo("header", { smooth: true, duration: 300 })
+          }}
+          className={styles.totop_fix}
+        >
+          <TopIcon className={styles.totop_fix_icon} />
+        </div>
+      )}
       <h1 className={styles.admin__title}>Управление сайтом</h1>
       <h4 className={styles.admin__subtitle}>
         Здесь вы можете редактировать данные сайта

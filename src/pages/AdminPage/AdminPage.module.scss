@@ -113,6 +113,20 @@
   }
 }
 
+.totop_fix {
+  cursor: pointer;
+  position: fixed;
+  right: 10px;
+  bottom: 0px;
+  z-index: 2;
+
+  &_icon {
+    display: block;
+    width: 100px;
+    height: 100px;
+  }
+}
+
 @include mediumTablet {
   .admin {
     &__title {
@@ -130,14 +144,21 @@
       font-size: 20px;
     }
   }
-}
-
-@include smallTablet {
-  // .modal {
-  //   &__title {
-  //     font-size: 28px;
-  //   }
-  // }
+  .totop_fix {
+    position: sticky;
+    left: 100%;
+    background-color: $brand;
+    float: right;
+    border-radius: 50%;
+    top: 85%;
+    &_icon {
+      & path {
+        stroke: #fff;
+      }
+      width: 80px;
+      height: 80px;
+    }
+  }
 }
 
 @include mobileLandscape {
@@ -157,6 +178,12 @@
           width: 25px;
         }
       }
+    }
+  }
+  .totop_fix {
+    &_icon {
+      width: 80px;
+      height: 80px;
     }
   }
 }
@@ -192,6 +219,12 @@
       font-size: 18px;
     }
   }
+  .totop_fix {
+    &_icon {
+      width: 70px;
+      height: 70px;
+    }
+  }
 }
 
 @include ultraSmallMobile {
@@ -225,6 +258,12 @@
     }
     &__title {
       font-size: 16px;
+    }
+  }
+  .totop_fix {
+    &_icon {
+      width: 70px;
+      height: 70px;
     }
   }
 }

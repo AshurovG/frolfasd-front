@@ -18,9 +18,9 @@ const TopIcon: React.FC<ButtonProps> = ({ className }) => {
       <path
         d="M17 15L12 10L7 15"
         stroke="#610a0a"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )
