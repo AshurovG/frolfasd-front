@@ -170,7 +170,7 @@ const Header = () => {
                 )}
                 {isMainPage ? (
                   <ScrollLink to="contacts" smooth={true} duration={500}>
-                    Помощь
+                    Контакты
                   </ScrollLink>
                 ) : (
                   <Link

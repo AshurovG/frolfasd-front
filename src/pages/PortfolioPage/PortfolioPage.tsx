@@ -102,7 +102,7 @@ const PortfolioPage = () => {
           onClick={() => {
             scroller.scrollTo("header", { smooth: true, duration: 300 })
           }}
-          className={styles.totop_fix}
+          className={!isAuth ? styles.totop_fix : styles.totop_fix_only}
         >
           <TopIcon className={styles.totop_fix_icon} />
         </div>
@@ -133,7 +133,9 @@ const PortfolioPage = () => {
           items={filteredFacadesItems}
         />
       </div>
-      {filteredFacadesItems.length === 0 && <h2 className={styles.page__error}>Такого объекта не найдено...</h2>}
+      {filteredFacadesItems.length === 0 && (
+        <h2 className={styles.page__error}>Такого объекта не найдено...</h2>
+      )}
 
       <div className={styles.page__action}>
         <Link to="/frolfasd">
