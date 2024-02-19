@@ -111,9 +111,9 @@
     }
   }
   // .modal {
-    // &__title {
-    //   font-size: 26px;
-    // }
+  // &__title {
+  //   font-size: 26px;
+  // }
   // }
 }
 
@@ -150,11 +150,44 @@
   }
 }
 
+@include extraSmallMobile {
+  .selected {
+    &__back {
+      &-button {
+        margin-left: 5px;
+
+        &-content {
+          font-size: 18px;
+          padding: 8px 25px;
+        }
+      }
+    }
+  }
+}
+
 @include ultraSmallMobile {
   .selected {
-    &__back-button {
-      display: none;
+    &__title {
+      &-block {
+        flex-direction: column-reverse;
+      }
     }
+    &__back {
+      &-button {
+        display: flex;
+        justify-content: end;
+        width: 100%;
+        margin-left: 0;
+        margin-top: -30px;
+        &-content {
+          font-size: 16px;
+          padding: 7px 20px;
+        }
+      }
+    }
+    // &__back-button {
+    //   display: none;
+    // }
   }
   .modal {
     &__delete {

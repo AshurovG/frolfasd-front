@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent } from "react"
+import React, { useState, ChangeEvent, useEffect } from "react"
 import styles from "./AdminPage.module.scss"
 import Navigation from "components/Navigation"
 import CardList from "components/CardList"
@@ -12,11 +12,15 @@ import FaqBlock from "components/FaqBlock"
 import QuestionForm from "components/QuestionForm/QuestionForm"
 import Button from "components/Button"
 import { toast } from "react-toastify"
+import { useDispatch } from "react-redux"
+import { setIsMainPageAction } from "slices/PageSlice"
 
 const AdminPage = () => {
   const token = localStorage.getItem("token")
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
-  const [filteredFacadesItems, setFilteredFacadesItems] = useState<ReceivedFacadeData[]>([])
+  const [filteredFacadesItems, setFilteredFacadesItems] = useState<
+    ReceivedFacadeData[]
+  >([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
   const [active, setActive] = useState<"facades" | "questions">("facades")
   const [isCreateWindowOpened, setIsCreateWindowOpened] = useState(false)
@@ -29,7 +33,12 @@ const AdminPage = () => {
   const [isDeletedQuestionId, setDeletedQuestionId] = useState<number>()
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
   const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
-  const [filterValue, setFilterValue] = useState('')
+  const [filterValue, setFilterValue] = useState("")
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setIsMainPageAction(false))
+  }, [])
 
   const getFacades = async () => {
     setActive("facades")
@@ -71,7 +80,7 @@ const AdminPage = () => {
         }
       )
       setIsCardsLoading(true)
-      toast.success('Информация успешно обновлена!')
+      toast.success("Информация успешно обновлена!")
 
       getFacades()
     } catch (error) {
@@ -80,10 +89,14 @@ const AdminPage = () => {
     }
   }
 
-  React. useEffect(() => {
-    setFilteredFacadesItems(facadesItems.filter((facade) => {
-      return facade.exterior_design_title.toLowerCase().includes(filterValue.toLowerCase())
-    }))
+  React.useEffect(() => {
+    setFilteredFacadesItems(
+      facadesItems.filter((facade) => {
+        return facade.exterior_design_title
+          .toLowerCase()
+          .includes(filterValue.toLowerCase())
+      })
+    )
   }, [filterValue])
 
   const postFacade = async (
@@ -98,11 +111,11 @@ const AdminPage = () => {
       }
       formData.append("title", title)
       formData.append("desc", description)
-      if (file && file.size >  5 *  1024 *  1024) { // Проверяем размер файла
-        toast.error("Размер фотографии должен не превышать  5 МБ");
-        return; // Прерываем выполнение функции
-      }
-      else if (file) {
+      if (file && file.size > 5 * 1024 * 1024) {
+        // Проверяем размер файла
+        toast.error("Размер фотографии должен не превышать  5 МБ")
+        return // Прерываем выполнение функции
+      } else if (file) {
         formData.append("file", file)
       }
       await axios("https://frolfasd.ru/api/exterior_design/", {
@@ -216,11 +229,11 @@ const AdminPage = () => {
       {active === "facades" && (
         <div className={styles["admin__actions-description"]}>
           <div className={styles["admin__actions-icon"]}>
-            <FavoritesIcon />
-            <p>
+            <FavoritesIcon className={styles["admin__actions-icon-liked"]} />
+            <span className={styles["admin__actions-icon-text"]}>
               - значит, что данный объект будет отображаться на главной
               странице.
-            </p>
+            </span>
           </div>
           <p>
             - Вы можете выбирать любые объекты, которые хотите видеть на
@@ -235,21 +248,25 @@ const AdminPage = () => {
       {active === "facades" ? (
         <>
           <div className={styles.admin__actions}>
-            <h4 className={styles.admin__text}>Хотите добавить новый объект?</h4>
+            <h4 className={styles.admin__text}>
+              Хотите добавить новый объект?
+            </h4>
             <AddButton
               className={styles.admin__actions_add}
               onClick={() => setIsCreateWindowOpened(true)}
             />
           </div>
-          <h4 className={styles.admin__text}>Также вы можете найти объект по названию</h4>
-          <input 
+          <h4 className={styles.admin__text}>
+            Также вы можете найти объект по названию
+          </h4>
+          <input
             placeholder="Название объекта*"
-            className={styles.admin__input} 
+            className={styles.admin__input}
             type="text"
             value={filterValue}
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setFilterValue(event.target.value);
-            }} 
+              setFilterValue(event.target.value)
+            }}
           />
         </>
       ) : (

@@ -68,7 +68,7 @@
   right: 10px;
   top: 50px;
   z-index: 2;
-  box-shadow:  0  5px  10px rgba(0,  0,  0,  0.15);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
   &_icon {
     display: block;
@@ -76,6 +76,21 @@
     height: 50px;
   }
 }
+
+.totop_fix {
+  cursor: pointer;
+  position: fixed;
+  right: 10px;
+  bottom: 0px;
+  z-index: 2;
+
+  &_icon {
+    display: block;
+    width: 100px;
+    height: 100px;
+  }
+}
+
 @include mediumTablet {
   .order_fix {
     position: sticky;
@@ -87,6 +102,9 @@
       width: 40px;
       height: 40px;
     }
+  }
+  .totop_fix {
+    display: none;
   }
 }
 

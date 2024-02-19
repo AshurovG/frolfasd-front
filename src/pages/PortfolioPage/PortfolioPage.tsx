@@ -11,15 +11,22 @@ import { Link } from "react-router-dom"
 import OrderForm from "components/OrderForm"
 import ApplicationIcon from "components/Icons/ApplicationIcon"
 import { useIsAuth } from "slices/AuthSlice"
+import { scroller } from "react-scroll"
+import TopIcon from "components/Icons/TopIcon"
+import { useDispatch } from "react-redux"
+import { setIsMainPageAction } from "slices/PageSlice"
 
 const PortfolioPage = () => {
   const isAuth = useIsAuth()
+  const dispatch = useDispatch()
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
-  const [filteredFacadesItems, setFilteredFacadesItems] = useState<ReceivedFacadeData[]>([])
+  const [filteredFacadesItems, setFilteredFacadesItems] = useState<
+    ReceivedFacadeData[]
+  >([])
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
   const [showButton, setShowButton] = useState(false)
-  const [filterValue, setFilterValue] = useState('')
+  const [filterValue, setFilterValue] = useState("")
 
   const handleScroll = () => {
     const header = document.getElementById("header")
@@ -30,6 +37,10 @@ const PortfolioPage = () => {
       setShowButton(true)
     }
   }
+
+  useEffect(() => {
+    dispatch(setIsMainPageAction(false))
+  }, [])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
@@ -65,9 +76,13 @@ const PortfolioPage = () => {
   }, [])
 
   useEffect(() => {
-    setFilteredFacadesItems(facadesItems.filter((facade) => {
-      return facade.exterior_design_title.toLowerCase().includes(filterValue.toLowerCase())
-    }))
+    setFilteredFacadesItems(
+      facadesItems.filter((facade) => {
+        return facade.exterior_design_title
+          .toLowerCase()
+          .includes(filterValue.toLowerCase())
+      })
+    )
   }, [filterValue])
 
   return (
@@ -77,24 +92,38 @@ const PortfolioPage = () => {
           onClick={() => setIsModalFormOpened(true)}
           className={styles.order_fix}
         >
-          <ApplicationIcon className={styles.order_fix_icon}/>
+          <ApplicationIcon className={styles.order_fix_icon} />
+        </div>
+      )}
+      {showButton && !isAuth && (
+        <div
+          onClick={() => {
+            scroller.scrollTo("header", { smooth: true, duration: 300 })
+          }}
+          className={styles.totop_fix}
+        >
+          <TopIcon className={styles.totop_fix_icon} />
         </div>
       )}
       <h1 className={styles.page__title}>Портфолио</h1>
       <h2 className={styles.page__subtitle}>Вентилируемые фасады</h2>
-      <p className={styles.page__text}>Здесь кратко описано, что это за услуга / где и как используется. Также
-        было бы полезно указать, какие материалы используются.</p>
+      <p className={styles.page__text}>
+        Здесь кратко описано, что это за услуга / где и как используется. Также
+        было бы полезно указать, какие материалы используются.
+      </p>
 
-      <h2 className={styles.page__text}>Также вы можете найти объект по названию</h2>
-      <input 
+      <h2 className={styles.page__text}>
+        Также вы можете найти объект по названию
+      </h2>
+      <input
         placeholder="Название объекта*"
-        className={styles.page__input} 
+        className={styles.page__input}
         type="text"
         value={filterValue}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
-          setFilterValue(event.target.value);
-        }} 
-        />
+          setFilterValue(event.target.value)
+        }}
+      />
       <div className={styles.page__content}>
         <CardList
           isCardsLoading={isCardsLoading}

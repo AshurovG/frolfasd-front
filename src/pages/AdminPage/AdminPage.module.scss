@@ -41,10 +41,20 @@
     }
 
     &-icon {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-bottom: 5px
+      // display: flex;
+      // align-items: start;
+      // gap: 5px;
+      // margin-bottom: 5px;
+      &-liked {
+        width: 30px;
+        vertical-align: middle;
+        margin-right: 7px;
+      }
+
+      &-text {
+        vertical-align: middle;
+        white-space: normal;
+      }
     }
   }
 
@@ -141,6 +151,13 @@
     &__input {
       font-size: 18px;
     }
+    &__actions {
+      &-icon {
+        &-liked {
+          width: 25px;
+        }
+      }
+    }
   }
 }
 
@@ -189,10 +206,11 @@
       font-size: 16px;
     }
     &__actions {
-      // &_add {
-      //   width: 20px;
-      //   height: 20px;
-      // }
+      &-icon {
+        &-liked {
+          width: 20px;
+        }
+      }
     }
   }
   .modal {

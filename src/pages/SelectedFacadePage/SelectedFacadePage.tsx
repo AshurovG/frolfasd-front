@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react"
+import React, { useEffect, useLayoutEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import axios from "axios"
@@ -12,6 +12,8 @@ import FacadeForm from "components/FacadeForm"
 import ModalWindow from "components/ModalWindow"
 import DetailedItemSkeleton from "components/DetailedItem/DetailedItemSkeleton"
 import QuestionSkeleton from "components/Question/QuestionSkeleton"
+import { useDispatch } from "react-redux"
+import { setIsMainPageAction } from "slices/PageSlice"
 
 const SelectedFacadePage = () => {
   const token = localStorage.getItem("token")
@@ -23,6 +25,12 @@ const SelectedFacadePage = () => {
     useState(false)
   const [isDeleteFacadeWindowOpened, setIsDeleteFacadeWindowOpened] =
     useState(false)
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setIsMainPageAction(false))
+  }, [])
 
   const getFacade = async () => {
     try {
@@ -106,10 +114,10 @@ const SelectedFacadePage = () => {
         data: formData,
       })
       getFacade()
-      toast.success('Фото успешно добавлено!')
+      toast.success("Фото успешно добавлено!")
       setIsLoading(true)
     } catch (error) {
-      toast.error('Размер фото не должен превышать 5 МБ!')
+      toast.error("Размер фото не должен превышать 5 МБ!")
       throw error
     }
   }
@@ -127,10 +135,10 @@ const SelectedFacadePage = () => {
         }
       )
       getFacade()
-      toast.success('Фото успешно удалено!')
+      toast.success("Фото успешно удалено!")
       setIsLoading(true)
     } catch (error) {
-      toast.error('Что-то пошло не так...')
+      toast.error("Что-то пошло не так...")
       throw error
     }
   }
@@ -153,15 +161,16 @@ const SelectedFacadePage = () => {
               {facade?.exterior_design_title}
             </h1>
           )}
-
-          <Button
-            className={styles["selected__back-button"]}
-            onClick={() => {
-              navigate("/administration")
-            }}
-          >
-            Назад
-          </Button>
+          <div className={styles["selected__back-button"]}>
+            <Button
+              className={styles["selected__back-button-content"]}
+              onClick={() => {
+                navigate("/administration")
+              }}
+            >
+              Назад
+            </Button>
+          </div>
         </div>
         <div className={styles.selected__info}>
           {isLoading ? (

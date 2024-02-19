@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import axios from "axios"
 import { toast } from "react-toastify"
 import { useNavigate } from "react-router-dom"
@@ -7,11 +7,16 @@ import styles from "./LoginPage.module.scss"
 import Button from "components/Button"
 import { useDispatch } from "react-redux"
 import { setIsAuthAction } from "slices/AuthSlice"
+import { setIsMainPageAction } from "slices/PageSlice"
 
 const LoginPage = () => {
   const form = useRef<HTMLFormElement>(null)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
+  useEffect(() => {
+    dispatch(setIsMainPageAction(false))
+  }, [])
 
   const forma = useForm({
     mode: "onChange", // I want to change it to onBlur

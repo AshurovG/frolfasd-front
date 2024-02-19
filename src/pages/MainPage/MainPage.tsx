@@ -12,13 +12,15 @@ import ApplicationIcon from "components/Icons/ApplicationIcon"
 import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { useIsAuth } from "slices/AuthSlice"
+import { setIsMainPageAction } from "slices/PageSlice"
+import { useDispatch } from "react-redux"
 
 const MainPage = () => {
   const isAuth = useIsAuth()
   const [isCardsLoading, setIsCardsLoading] = useState<boolean>(true)
   const [isQuestionsLoading, setIsQuestionsLoading] = useState<boolean>(true)
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
-
+  const dispatch = useDispatch()
   const [facadesItems, setFacadesItems] = useState<ReceivedFacadeData[]>([])
   const [questions, setQuestions] = useState<ReceivedQuestionsData[]>([])
 
@@ -35,7 +37,7 @@ const MainPage = () => {
   }
 
   useEffect(() => {
-    console.log('TTTTTT')
+    console.log("TTTTTT")
     window.addEventListener("scroll", handleScroll)
     if (window.innerWidth < 1050) {
       setShowButton(true)
@@ -83,6 +85,10 @@ const MainPage = () => {
     getQuestions()
   }, [])
 
+  useEffect(() => {
+    dispatch(setIsMainPageAction(true))
+  }, [])
+
   return (
     <>
       <AboutCompanyBlock />
@@ -93,7 +99,7 @@ const MainPage = () => {
             onClick={() => setIsModalFormOpened(true)}
             className={styles.order_fix}
           >
-          <ApplicationIcon className={styles.order_fix_icon}/>
+            <ApplicationIcon className={styles.order_fix_icon} />
           </div>
         )}
         <FacadesBlock isCardsLoading={isCardsLoading} items={facadesItems} />

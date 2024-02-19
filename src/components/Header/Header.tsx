@@ -5,15 +5,17 @@ import ModalWindow from "components/ModalWindow"
 import OrderForm from "components/OrderForm"
 import { Link } from "react-router-dom"
 // import { Link as ScrollLink, scroller } from "react-scroll"
-import { motion, AnimatePresence } from "framer-motion";
-import {scroller} from "react-scroll"
+import { motion, AnimatePresence } from "framer-motion"
+import { scroller, Link as ScrollLink } from "react-scroll"
 import BurgerIcon from "components/Icons/BurgerIcon"
 import { useIsAuth, setIsAuthAction } from "slices/AuthSlice"
 import { useDispatch } from "react-redux"
 import { toast } from "react-toastify"
+import { useIsMainPage } from "slices/PageSlice"
 const Header = () => {
   const dispatch = useDispatch()
   const isAuth = useIsAuth()
+  const isMainPage = useIsMainPage()
   const [isModalFormOpened, setIsModalFormOpened] = useState(false)
   const [isBurgerMenuOpened, setIsBurgerMenuOpened] = useState(false)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -33,8 +35,8 @@ const Header = () => {
 
   const onExitButtonClick = () => {
     dispatch(setIsAuthAction(false))
-    localStorage.removeItem('token')
-    toast.success('Вы успешно вышли из режима администратора!')
+    localStorage.removeItem("token")
+    toast.success("Вы успешно вышли из режима администратора!")
   }
 
   return (
@@ -49,28 +51,43 @@ const Header = () => {
             <li className={styles.header__inner_navmenu_item}>Портфолио</li>
           </Link>
           <li className={styles.header__inner_navmenu_item}>
-            <Link
-              onClick={() => {
-                setTimeout(() => {
-                  scroller.scrollTo("faq", { smooth: true, duration: 500 })
-                }, 100)
-              }}
-              to="/frolfasd"
-            >
-              Помощь
-            </Link>
+            {isMainPage ? (
+              <ScrollLink to="faq" smooth={true} duration={500}>
+                Помощь
+              </ScrollLink>
+            ) : (
+              <Link
+                onClick={() => {
+                  setTimeout(() => {
+                    scroller.scrollTo("faq", { smooth: true, duration: 500 })
+                  }, 100)
+                }}
+                to="/frolfasd"
+              >
+                Помощь
+              </Link>
+            )}
           </li>
           <li className={styles.header__inner_navmenu_item}>
-            <Link
-              onClick={() => {
-                setTimeout(() => {
-                  scroller.scrollTo("contacts", { smooth: true, duration: 500 })
-                }, 100)
-              }}
-              to="/frolfasd"
-            >
-              Контакты
-            </Link>
+            {isMainPage ? (
+              <ScrollLink to="contacts" smooth={true} duration={500}>
+                Помощь
+              </ScrollLink>
+            ) : (
+              <Link
+                onClick={() => {
+                  setTimeout(() => {
+                    scroller.scrollTo("contacts", {
+                      smooth: true,
+                      duration: 500,
+                    })
+                  }, 100)
+                }}
+                to="/frolfasd"
+              >
+                Контакты
+              </Link>
+            )}
           </li>
 
           {isAuth && (
@@ -81,19 +98,23 @@ const Header = () => {
 
           {/* <li className={styles.header__inner_navmenu_item}>Сделать заказ</li> */}
         </ul>
-        {!isAuth && <Button
-          onClick={() => setIsModalFormOpened(true)}
-          className={styles.header__inner_action}
-        >
-          Сделать заказ
-        </Button>}
+        {!isAuth && (
+          <Button
+            onClick={() => setIsModalFormOpened(true)}
+            className={styles.header__inner_action}
+          >
+            Сделать заказ
+          </Button>
+        )}
 
-        {isAuth && <Button
-          onClick={onExitButtonClick}
-          className={styles.header__inner_action}
-        >
-          Выйти
-        </Button>}
+        {isAuth && (
+          <Button
+            onClick={onExitButtonClick}
+            className={styles.header__inner_action}
+          >
+            Выйти
+          </Button>
+        )}
 
         {isBurgerMenuOpened === false ? (
           <BurgerIcon
@@ -107,20 +128,19 @@ const Header = () => {
           ></div>
         )}
 
-        
         <AnimatePresence>
           {isBurgerMenuOpened && (
-              <motion.div
+            <motion.div
               initial={{ opacity: 0, y: -80 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -80 }}
               transition={{ duration: 0.3 }}
               style={{
-                  marginTop: -20,
-                  position: "absolute",
-                  right: 0,
+                marginTop: -20,
+                position: "absolute",
+                right: 0,
               }}
-              >
+            >
               <div ref={menuRef} className={styles.burger__menu}>
                 <Link
                   onClick={() => setIsBurgerMenuOpened(false)}
@@ -144,28 +164,49 @@ const Header = () => {
                   onClick={() => {
                     setIsBurgerMenuOpened(false)
                     setTimeout(() => {
-                      scroller.scrollTo("contacts", { smooth: true, duration: 500 })
+                      scroller.scrollTo("contacts", {
+                        smooth: true,
+                        duration: 500,
+                      })
                     }, 100)
                   }}
                   to="/frolfasd"
                 >
                   Контакты
                 </Link>
-                {isAuth && <Link onClick={() => {
-                    setIsBurgerMenuOpened(false)}} to="/administration">Управление</Link>}
-                {isAuth && <Link to='/' onClick={() => {onExitButtonClick(); setIsBurgerMenuOpened(false)}}>
-                  Выйти
-                </Link>}
-                {!isAuth && <div
-                  onClick={() => {
-                    setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
-                  }}
-                >
-                  {" "}
-                  Сделать заказ
-                </div>}
+                {isAuth && (
+                  <Link
+                    onClick={() => {
+                      setIsBurgerMenuOpened(false)
+                    }}
+                    to="/administration"
+                  >
+                    Управление
+                  </Link>
+                )}
+                {isAuth && (
+                  <Link
+                    to="/"
+                    onClick={() => {
+                      onExitButtonClick()
+                      setIsBurgerMenuOpened(false)
+                    }}
+                  >
+                    Выйти
+                  </Link>
+                )}
+                {!isAuth && (
+                  <div
+                    onClick={() => {
+                      setIsModalFormOpened(true), setIsBurgerMenuOpened(false)
+                    }}
+                  >
+                    {" "}
+                    Сделать заказ
+                  </div>
+                )}
               </div>
-              </motion.div>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
