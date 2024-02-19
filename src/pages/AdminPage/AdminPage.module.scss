@@ -67,15 +67,6 @@
     margin: 0 auto;
   }
 
-  &__error {
-    font-size: 26px;
-    color: rgb(125, 125, 125);
-    text-align: center;
-    padding-bottom: 30px;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
   &__input {
     border-radius: 5px;
     border: 1px solid $brand;
@@ -197,6 +188,9 @@
         }
       }
     }
+    &__error {
+      font-size: 24px;
+    }
   }
   .totop_fix {
     &_icon {
@@ -204,6 +198,7 @@
       height: 80px;
     }
   }
+  
 }
 
 @include mobile {
@@ -236,6 +231,9 @@
     &__text {
       font-size: 18px;
     }
+    &__error {
+      font-size: 20px;
+    }
   }
 }
 
@@ -256,6 +254,9 @@
           width: 20px;
         }
       }
+    }
+    &__error {
+      font-size: 18px;
     }
   }
   .modal {
