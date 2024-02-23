@@ -131,8 +131,10 @@
 
   &_icon {
     display: block;
-    width: 80px;
-    height: 80px;
+    // width: 80px;
+    // height: 80px;
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -158,14 +160,14 @@
     left: 100%;
     // background-color: $brand;
     float: right;
-    border-radius: 50%;
+    // border-radius: 50%;
     top: 85%;
     &_icon {
       & path {
         stroke: #fff;
       }
-      width: 80px;
-      height: 80px;
+      // width: 80px;
+      // height: 80px;
     }
   }
 }
@@ -193,10 +195,10 @@
     }
   }
   .totop_fix {
-    &_icon {
-      width: 80px;
-      height: 80px;
-    }
+    // &_icon {
+    //   width: 80px;
+    //   height: 80px;
+    // }
   }
   
 }
@@ -275,8 +277,8 @@
   }
   .totop_fix {
     &_icon {
-      width: 70px;
-      height: 70px;
+      // width: 70px;
+      // height: 70px;
     }
   }
 }

@@ -233,7 +233,7 @@ const AdminPage = () => {
 
   return (
     <div className={styles.admin}>
-      {showTopButton && (
+      {showTopButton && active === 'facades' && (
         <div
           onClick={() => {
             scroller.scrollTo("header", { smooth: true, duration: 300 })

@@ -31,10 +31,10 @@ const FacadesBlock: React.FC<FacadesBlockProps> = ({
           <Button>Посмотреть все работы</Button>
         </Link>
       </div>
-      <p className={styles.block__description}>
+      {/* <p className={styles.block__description}>
         Здесь кратко описано, что это за услуга / где и как используется. Также
         было бы полезно указать, какие материалы используются.
-      </p>
+      </p> */}
     </div>
   )
 }
