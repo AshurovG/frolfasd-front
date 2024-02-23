@@ -6,12 +6,14 @@ export type FacadeFormProps = {
   onSubmit: (question: string, answer: string) => void
   question?: string
   answer?: string
+  active?: boolean
 }
 
 const QuestionForm: React.FC<FacadeFormProps> = ({
   onSubmit,
   question,
   answer,
+  active
 }) => {
   const [questionValue, setQuestionValue] = useState(question)
   const [answerValue, setAnswerValue] = useState(answer)
@@ -25,7 +27,6 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
 
   const handleFormSubmit = () => {
     questionValue && answerValue && onSubmit(questionValue, answerValue)
-    clearData()
   }
 
   const clearData = () => {
@@ -33,16 +34,17 @@ const QuestionForm: React.FC<FacadeFormProps> = ({
     setAnswerValue("")
   }
 
+  React.useEffect(() => {
+    if (active) {
+      clearData()
+    }
+  }, [active])
+
   return (
     <form
       ref={form}
       className={styles.form}
       onSubmit={handleSubmit(handleFormSubmit)}
-      //   onSubmit={(event) => {
-      //     event.preventDefault()
-      //     questionValue && answerValue && onSubmit(questionValue, answerValue),
-      //       clearData()
-      //   }}
     >
       <h1 className={styles.form__header}>Заполните данные</h1>
       <div style={{ position: "relative", width: `100%` }}>

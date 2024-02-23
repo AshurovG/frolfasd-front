@@ -338,6 +338,7 @@ const AdminPage = () => {
               title=""
               description=""
               fileTitle=""
+              active={isCreateWindowOpened}
             />
           }
         </div>
@@ -347,7 +348,7 @@ const AdminPage = () => {
         active={isCreateQuestionModalOpen}
         handleBackdropClick={() => setIsCreateQuestionModalOpen(false)}
       >
-        <QuestionForm onSubmit={postQuestion} />
+        <QuestionForm onSubmit={postQuestion} active={isCreateQuestionModalOpen}/>
       </ModalWindow>
 
       <ModalWindow

@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react"
 import styles from "./FacadeForm.module.scss"
 import { Controller, useForm } from "react-hook-form"
 import Button from "components/Button"
+// import { act } from "react-dom/test-utils"
 
 export type FacadeFormProps = {
   onSubmit: (title: string, description: string, file: File | null) => void
@@ -9,6 +10,7 @@ export type FacadeFormProps = {
   description?: string
   fileTitle?: string
   isEditing?: boolean
+  active?: boolean
 }
 
 const MAX_FILE_SIZE =  5 *  1024 *  1024;
@@ -19,32 +21,13 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
   description,
   fileTitle,
   isEditing,
+  active,
 }) => {
   const form = useRef<HTMLFormElement>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState(fileTitle)
   const [titleValue, setTitleValue] = useState(title)
   const [descriptionValue, setDescriptionValue] = useState(description)
-
-  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (event.target.files) {
-  //     const file = event.target.files[0]
-  //     // if (file.size > MAX_FILE_SIZE) {
-  //       // Set error message if file size is larger than  5 MB
-  //       // errors.file = {
-  //       //   type: 'manual',
-  //       //   message: 'Файл должен быть до  5 МБ',
-  //       // };
-  //     // } else {
-  //       setSelectedFile(file)
-  //       setFileName(file.name)
-  //     // }
-  //   } else {
-  //     setSelectedFile(null)
-  //     setFileName("")
-  //   }
-  // }
-
 
   const forma = useForm({
     mode: "onChange",
@@ -75,7 +58,6 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
     }
   }
 
-
   const clearData = () => {
     setFileName("")
     setSelectedFile(null)
@@ -91,8 +73,13 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
       title: "",
       description: "",
     })
-    clearData()
   }
+
+  React.useEffect(() => {
+    if (active) {
+      clearData()
+    }
+  }, [active])
 
   return (
     <form
