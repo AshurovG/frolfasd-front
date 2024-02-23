@@ -9,8 +9,7 @@
   // border-bottom: 1px solid #fff;
   padding: 30px 0px;
   z-index: 2;
-  box-shadow:  0  5px  10px rgba(0,  0,  0,  0.15);
-
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
   &__inner {
     font-size: 20px;
@@ -55,7 +54,7 @@
       color: $brand !important;
       font-size: 30px;
       font-weight: 600;
-      transition: background .2s linear, color .2s linear !important;
+      transition: background 0.2s linear, color 0.2s linear !important;
 
       &:hover {
         background: $brand !important;
@@ -134,7 +133,7 @@
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    box-shadow:  0  5px  10px rgba(0,  0,  0,  0.15);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
     &-item {
       padding: 5px;
@@ -151,10 +150,10 @@
 }
 
 // @include mobileLandscape {
-  // .burger__menu {
-  //   width: 200px;
-  //   font-size: 22px;
-  // }
+// .burger__menu {
+//   width: 200px;
+//   font-size: 22px;
+// }
 // }
 
 @include mobile {
