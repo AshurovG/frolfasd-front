@@ -121,8 +121,8 @@ const DetailedItem: React.FC<DetailedProps> = ({
         handleBackdropClick={() => setIsAddFacadeItemWindowOpened(false)}
       >
         <ImageForm
-          onSubmit={(file: File) => {
-            onImageFormSubmit && onImageFormSubmit(file)
+          onSubmit={(image: File) => {
+            onImageFormSubmit && onImageFormSubmit(image)
             setIsAddFacadeItemWindowOpened(false)
           }}
           // fileTitle=""

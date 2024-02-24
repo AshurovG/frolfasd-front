@@ -13,7 +13,7 @@ export type FacadeFormProps = {
   active?: boolean
 }
 
-const MAX_FILE_SIZE =  5 *  1024 *  1024;
+const MAX_FILE_SIZE = 5 * 1024 * 1024
 
 const FacadeForm: React.FC<FacadeFormProps> = ({
   onSubmit,
@@ -32,37 +32,46 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
   const forma = useForm({
     mode: "onChange",
   })
-  const { register, handleSubmit, formState, reset, control, clearErrors, setError, setValue } = forma
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    control,
+    clearErrors,
+    setError,
+    setValue,
+  } = forma
   const { isValid, touchedFields, errors } = formState
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const file = event.target.files[0];
+      const file = event.target.files[0]
       if (file.size > MAX_FILE_SIZE) {
-        setValue("file", null);
+        setValue("file", null)
         setError("file", {
           type: "manual",
           message: "Размер файла не должен превышать   5 МБ",
-        });
-        setSelectedFile(null);
-        setFileName("");
+        })
+        setSelectedFile(null)
+        setFileName("")
       } else {
-        setSelectedFile(file);
-        setFileName(file.name);
-        clearErrors("file");
+        setSelectedFile(file)
+        setFileName(file.name)
+        clearErrors("file")
       }
     } else {
-      setSelectedFile(null);
-      setFileName("");
-      clearErrors("file");
+      setSelectedFile(null)
+      setFileName("")
+      clearErrors("file")
     }
   }
 
   const clearData = () => {
     setFileName("")
     setSelectedFile(null)
-    setTitleValue('')
-    setDescriptionValue('')
+    setTitleValue("")
+    setDescriptionValue("")
   }
 
   const submitForm = () => {
@@ -123,7 +132,14 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
             <textarea
               {...register("description", {
                 required: "Обязательное поле",
+                pattern: {
+                  value: /^[\S\s]{1,200}$/,
+                  message: "Введите максимум 200 слов",
+                },
               })}
+              // {...register("description", {
+              //   required: "Обязательное поле",
+              // })}
               className={styles.form__input_big}
               placeholder="Введите описание*"
               value={descriptionValue}
@@ -142,46 +158,46 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
 
       <div style={{ position: "relative", width: `100%` }}>
         <div className={styles["form__file"]}>
-        <Controller
-        control={control}
-        name="file"
-        rules={{
-          required: isEditing ? false : "Обязательное поле",
-        }}
-        render={({ field, fieldState: { error } }) => (
-          <div>
-            <input
-              {...field}
-              type="file"
-              id="inp"
-              accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
-              style={{ display: "none" }}
-              onChange={(e) => {
-                field.onChange(e);
-                handleFileChange(e);
-              }}
-            />
-            <label htmlFor="inp" className={styles["form__file-label"]}>
-              {isEditing ? (
-                !selectedFile ? (
-                  <>Измените файл</>
-                ) : (
-                  <>{fileName}</>
-                )
-              ) : !selectedFile ? (
-                <>Выберите файл</>
-              ) : (
-                <>{fileName}</>
-              )}
-            </label>
-            {error && (
-              <div className={styles.form__input_message}>
-                {error.message}
+          <Controller
+            control={control}
+            name="file"
+            rules={{
+              required: isEditing ? false : "Обязательное поле",
+            }}
+            render={({ field, fieldState: { error } }) => (
+              <div>
+                <input
+                  {...field}
+                  type="file"
+                  id="inp"
+                  accept="image/jpeg, image/png, image/gif, image/bmp, image/webp"
+                  style={{ display: "none" }}
+                  onChange={(e) => {
+                    field.onChange(e)
+                    handleFileChange(e)
+                  }}
+                />
+                <label htmlFor="inp" className={styles["form__file-label"]}>
+                  {isEditing ? (
+                    !selectedFile ? (
+                      <>Измените файл</>
+                    ) : (
+                      <>{fileName}</>
+                    )
+                  ) : !selectedFile ? (
+                    <>Выберите файл</>
+                  ) : (
+                    <>{fileName}</>
+                  )}
+                </label>
+                {error && (
+                  <div className={styles.form__input_message}>
+                    {error.message}
+                  </div>
+                )}
               </div>
             )}
-          </div>
-        )}
-      />
+          />
         </div>
       </div>
       <Button disabled={!isValid} className={styles.form__submit} type="submit">

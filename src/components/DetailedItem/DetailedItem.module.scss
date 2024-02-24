@@ -48,7 +48,7 @@
     }
 
     &_description {
-      font-size: 23px;
+      font-size: 20px;
     }
 
     &_actions {
@@ -163,6 +163,7 @@
 @include mobileLandscape {
   .slider {
     width: 80vw;
+
     // height: 90vh;
     flex-direction: column;
     &__images {
@@ -177,10 +178,11 @@
       }
     }
     &__info {
-      overflow: hidden;
+      // overflow: hidden;
       box-sizing: border-box;
       flex-direction: row;
       width: 100%;
+      height: fit-content;
       padding: 0 10px 10px 10px;
       &_title {
         margin: 0;
@@ -189,8 +191,8 @@
       }
       &_description {
         display: block;
-        font-size: 18px;
-        width: 80%;
+        font-size: 16px;
+        width: 95%;
       }
     }
   }
@@ -207,7 +209,7 @@
 @include mobile {
   .slider {
     width: 85vw;
-    height: 500px;
+    height: 600px;
     flex-direction: column;
     &__images {
       width: 100%;
@@ -245,7 +247,7 @@
 @include smallMobile {
   .slider {
     width: 90vw;
-    height: 400px;
+    height: 500px;
     flex-direction: column;
     &__images {
       width: 100%;
@@ -273,6 +275,10 @@
 }
 
 @include ultraSmallMobile {
+  .slider {
+    width: 90vw;
+    height: 500px;
+  }
   .left {
     width: 20px;
     height: 20px;
