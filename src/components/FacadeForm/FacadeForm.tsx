@@ -134,7 +134,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
                 required: "Обязательное поле",
                 pattern: {
                   value: /^[\S\s]{1,200}$/,
-                  message: "Введите максимум 200 слов",
+                  message: "Введите максимум 200 символов",
                 },
               })}
               // {...register("description", {
