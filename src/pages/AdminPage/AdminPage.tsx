@@ -233,7 +233,7 @@ const AdminPage = () => {
 
   return (
     <div className={styles.admin}>
-      {showTopButton && (
+      {showTopButton && active === 'facades' && (
         <div
           onClick={() => {
             scroller.scrollTo("header", { smooth: true, duration: 300 })
@@ -338,6 +338,7 @@ const AdminPage = () => {
               title=""
               description=""
               fileTitle=""
+              active={isCreateWindowOpened}
             />
           }
         </div>
@@ -347,7 +348,7 @@ const AdminPage = () => {
         active={isCreateQuestionModalOpen}
         handleBackdropClick={() => setIsCreateQuestionModalOpen(false)}
       >
-        <QuestionForm onSubmit={postQuestion} />
+        <QuestionForm onSubmit={postQuestion} active={isCreateQuestionModalOpen}/>
       </ModalWindow>
 
       <ModalWindow

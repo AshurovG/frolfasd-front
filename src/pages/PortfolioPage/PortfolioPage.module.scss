@@ -96,8 +96,10 @@
 
   &_icon {
     display: block;
-    width: 80px;
-    height: 80px;
+    // width: 80px;
+    // height: 80px;
+    width: 60px;
+    height: 60px;
   }
 }
 .totop_fix_only {
@@ -109,15 +111,19 @@
 
   &_icon {
     display: block;
-    width: 80px;
-    height: 80px;
+    // width: 80px;
+    // height: 80px;
+    width: 60px;
+    height: 60px;
   }
 }
 
 .totop_fix_icon {
   display: block;
-  width: 80px;
-  height: 80px;
+  // width: 80px;
+  // height: 80px;
+  width: 60px;
+  height: 60px;
 }
 
 @include mediumTablet {
@@ -139,10 +145,10 @@
     border-radius: 50%;
     top: 74%;
     margin-bottom: 85px;
-    &_icon {
-      width: 80px;
-      height: 80px;
-    }
+    // &_icon {
+    //   width: 80px;
+    //   height: 80px;
+    // }
     &_only {
       position: sticky;
       left: 100%;
@@ -151,10 +157,10 @@
       top: 85%;
 
       z-index: 2;
-      &_icon {
-        width: 80px;
-        height: 80px;
-      }
+      // &_icon {
+      //   width: 80px;
+      //   height: 80px;
+      // }
     }
   }
 }
@@ -187,10 +193,10 @@
     }
   }
   .totop_fix {
-    &_icon {
-      width: 80px;
-      height: 80px;
-    }
+    // &_icon {
+    //   width: 80px;
+    //   height: 80px;
+    // }
   }
 }
 
@@ -223,10 +229,10 @@
     }
   }
   .totop_fix {
-    &_icon {
-      width: 70px;
-      height: 70px;
-    }
+    // &_icon {
+    //   width: 70px;
+    //   height: 70px;
+    // }
   }
 }
 
@@ -247,10 +253,10 @@
     }
   }
   .totop_fix {
-    &_icon {
-      width: 70px;
-      height: 70px;
-    }
+    // &_icon {
+    //   width: 70px;
+    //   height: 70px;
+    // }
   }
 }
 @include tinyMobile {

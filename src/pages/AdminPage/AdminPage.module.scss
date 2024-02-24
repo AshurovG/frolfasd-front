@@ -67,15 +67,6 @@
     margin: 0 auto;
   }
 
-  &__error {
-    font-size: 26px;
-    color: rgb(125, 125, 125);
-    text-align: center;
-    padding-bottom: 30px;
-    max-width: 700px;
-    margin: 0 auto;
-  }
-
   &__input {
     border-radius: 5px;
     border: 1px solid $brand;
@@ -140,8 +131,10 @@
 
   &_icon {
     display: block;
-    width: 80px;
-    height: 80px;
+    // width: 80px;
+    // height: 80px;
+    width: 60px;
+    height: 60px;
   }
 }
 
@@ -167,14 +160,14 @@
     left: 100%;
     // background-color: $brand;
     float: right;
-    border-radius: 50%;
+    // border-radius: 50%;
     top: 85%;
     &_icon {
       & path {
         stroke: #fff;
       }
-      width: 80px;
-      height: 80px;
+      // width: 80px;
+      // height: 80px;
     }
   }
 }
@@ -197,13 +190,17 @@
         }
       }
     }
-  }
-  .totop_fix {
-    &_icon {
-      width: 80px;
-      height: 80px;
+    &__error {
+      font-size: 24px;
     }
   }
+  .totop_fix {
+    // &_icon {
+    //   width: 80px;
+    //   height: 80px;
+    // }
+  }
+  
 }
 
 @include mobile {
@@ -236,6 +233,9 @@
     &__text {
       font-size: 18px;
     }
+    &__error {
+      font-size: 20px;
+    }
   }
 }
 
@@ -257,6 +257,9 @@
         }
       }
     }
+    &__error {
+      font-size: 18px;
+    }
   }
   .modal {
     &__delete {
@@ -274,8 +277,8 @@
   }
   .totop_fix {
     &_icon {
-      width: 70px;
-      height: 70px;
+      // width: 70px;
+      // height: 70px;
     }
   }
 }

@@ -71,7 +71,7 @@ const Header = () => {
           <li className={styles.header__inner_navmenu_item}>
             {isMainPage ? (
               <ScrollLink to="contacts" smooth={true} duration={500}>
-                Помощь
+                Контакты
               </ScrollLink>
             ) : (
               <Link
