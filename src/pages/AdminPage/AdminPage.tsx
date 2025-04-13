@@ -130,9 +130,9 @@ const AdminPage = () => {
       }
       formData.append("title", title)
       formData.append("desc", description)
-      if (file && file.size > 5 * 1024 * 1024) {
+      if (file && file.size > 1 * 1024 * 1024) {
         // Проверяем размер файла
-        toast.error("Размер фотографии должен не превышать  5 МБ")
+        toast.error("Размер фотографии должен не превышать  1 МБ")
         return // Прерываем выполнение функции
       } else if (file) {
         formData.append("file", file)
@@ -150,7 +150,7 @@ const AdminPage = () => {
       getFacades()
       setIsCreateWindowOpened(false)
     } catch (error) {
-      toast.error("Размер фотографии должен не превышать 5 МБ")
+      toast.error("Размер фотографии должен не превышать 1 МБ")
       throw error
     }
   }

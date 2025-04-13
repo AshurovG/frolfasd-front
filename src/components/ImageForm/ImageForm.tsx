@@ -8,7 +8,7 @@ export type FacadeItemFormProps = {
   isEditing?: boolean
 }
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024
+const MAX_FILE_SIZE = 1 * 1024 * 1024
 
 const ImageForm: React.FC<FacadeItemFormProps> = ({ onSubmit, isEditing }) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
@@ -27,7 +27,7 @@ const ImageForm: React.FC<FacadeItemFormProps> = ({ onSubmit, isEditing }) => {
         setValue("image", null)
         setError("image", {
           type: "manual",
-          message: "Размер файла не должен превышать   5 МБ",
+          message: "Размер файла не должен превышать   1 МБ",
         })
         setSelectedFile(null)
         setFileName("")

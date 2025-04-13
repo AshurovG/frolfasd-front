@@ -13,7 +13,7 @@ export type FacadeFormProps = {
   active?: boolean
 }
 
-const MAX_FILE_SIZE = 5 * 1024 * 1024
+const MAX_FILE_SIZE = 1 * 1024 * 1024
 
 const FacadeForm: React.FC<FacadeFormProps> = ({
   onSubmit,
@@ -51,7 +51,7 @@ const FacadeForm: React.FC<FacadeFormProps> = ({
         setValue("file", null)
         setError("file", {
           type: "manual",
-          message: "Размер файла не должен превышать   5 МБ",
+          message: "Размер файла не должен превышать 1 МБ",
         })
         setSelectedFile(null)
         setFileName("")

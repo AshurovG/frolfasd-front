@@ -117,7 +117,7 @@ const SelectedFacadePage = () => {
       toast.success("Фото успешно добавлено!")
       setIsLoading(true)
     } catch (error) {
-      toast.error("Размер фото не должен превышать 5 МБ!")
+      toast.error("Размер фото не должен превышать 1 МБ!")
       throw error
     }
   }
