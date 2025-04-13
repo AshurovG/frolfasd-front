@@ -43,7 +43,7 @@ const Header = () => {
     <div className={styles.header} id="header">
       <div className={styles.header__inner}>
         <Link to="/">
-          <div className={styles.header__inner_logo}>ФРОЛФАСД</div>
+          <div className={styles.header__inner_logo}>ФРОЛФАСАД</div>
         </Link>
 
         <ul className={styles.header__inner_navmenu}>

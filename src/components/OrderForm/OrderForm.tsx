@@ -52,7 +52,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
         className={styles.form}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h1 className={styles.form__header}>ФРОЛФАСД</h1>
+        <h1 className={styles.form__header}>ФРОЛФАСАД</h1>
 
         <div style={{ position: "relative", width: `100%` }}>
           <input
