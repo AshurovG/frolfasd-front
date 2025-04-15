@@ -28,7 +28,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
     description: string
   ) => {
     try {
-      await axios("https://frolfasd.ru/api/email/", {
+      await axios("https://frolfasad.ru/api/email/", {
         method: "POST",
         data: { fio: fio, email: email, description: description },
       })

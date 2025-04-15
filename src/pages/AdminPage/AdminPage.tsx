@@ -62,7 +62,7 @@ const AdminPage = () => {
   const getFacades = async () => {
     setActive("facades")
     try {
-      const response = await axios("https://frolfasd.ru/api/exterior_design/")
+      const response = await axios("https://frolfasad.ru/api/exterior_design/")
       setFacadesItems(response.data)
       setFilteredFacadesItems(response.data)
       setTimeout(() => {
@@ -76,7 +76,7 @@ const AdminPage = () => {
   const getQuestions = async () => {
     setActive("questions")
     try {
-      const response = await axios("https://frolfasd.ru/api/questions/")
+      const response = await axios("https://frolfasad.ru/api/questions/")
       setQuestions(response.data)
       setTimeout(() => {
         setIsQuestionsLoading(false)
@@ -89,7 +89,7 @@ const AdminPage = () => {
   const changeImportantItem = async (item: ReceivedFacadeData) => {
     try {
       await axios(
-        `https://frolfasd.ru/api/exterior_design_important/${item.exterior_design_id}`,
+        `https://frolfasad.ru/api/exterior_design_important/${item.exterior_design_id}`,
         {
           method: "PUT",
           data: {
@@ -137,7 +137,7 @@ const AdminPage = () => {
       } else if (file) {
         formData.append("file", file)
       }
-      await axios("https://frolfasd.ru/api/exterior_design/", {
+      await axios("https://frolfasad.ru/api/exterior_design/", {
         method: "POST",
         data: formData,
         headers: {
@@ -157,7 +157,7 @@ const AdminPage = () => {
 
   const postQuestion = async (question: string, answer: string) => {
     try {
-      await axios("https://frolfasd.ru/api/questions/", {
+      await axios("https://frolfasad.ru/api/questions/", {
         method: "POST",
         data: {
           title: question,
@@ -176,7 +176,7 @@ const AdminPage = () => {
 
   const putQuestion = async (question: string, answer: string) => {
     try {
-      await axios(`https://frolfasd.ru/api/questions/`, {
+      await axios(`https://frolfasad.ru/api/questions/`, {
         method: "PUT",
         data: {
           title: question,
@@ -197,7 +197,7 @@ const AdminPage = () => {
 
   const deleteQuestion = async () => {
     try {
-      await axios(`https://frolfasd.ru/api/questions/${isDeletedQuestionId}`, {
+      await axios(`https://frolfasad.ru/api/questions/${isDeletedQuestionId}`, {
         method: "DELETE",
         data: {
           jwt: token,

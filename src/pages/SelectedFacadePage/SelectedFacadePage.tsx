@@ -35,7 +35,7 @@ const SelectedFacadePage = () => {
   const getFacade = async () => {
     try {
       const response = await axios(
-        `https://frolfasd.ru/api/exterior_design/${id}`
+        `https://frolfasad.ru/api/exterior_design/${id}`
       )
       setFacade(response.data)
       setTimeout(() => {
@@ -66,7 +66,7 @@ const SelectedFacadePage = () => {
         }
       }
 
-      await axios(`https://frolfasd.ru/api/exterior_design/${id}`, {
+      await axios(`https://frolfasad.ru/api/exterior_design/${id}`, {
         method: "PUT",
         data: formData,
         headers: {
@@ -85,7 +85,7 @@ const SelectedFacadePage = () => {
 
   const deleteFacade = async () => {
     try {
-      await axios(`https://frolfasd.ru/api/exterior_design/${id}`, {
+      await axios(`https://frolfasad.ru/api/exterior_design/${id}`, {
         method: "DELETE",
         data: {
           jwt: token,
@@ -109,7 +109,7 @@ const SelectedFacadePage = () => {
       formData.append("exteriorDesignId", String(facade.exterior_design_id))
     }
     try {
-      await axios("https://frolfasd.ru/api/exterior_design_items/", {
+      await axios("https://frolfasad.ru/api/exterior_design_items/", {
         method: "POST",
         data: formData,
       })
@@ -125,7 +125,7 @@ const SelectedFacadePage = () => {
   const deleteImage = async (imageId: number) => {
     try {
       await axios(
-        `https://frolfasd.ru/api/exterior_design_items/${imageId}?id=${id}`,
+        `https://frolfasad.ru/api/exterior_design_items/${imageId}?id=${id}`,
         {
           method: "DELETE",
           data: {

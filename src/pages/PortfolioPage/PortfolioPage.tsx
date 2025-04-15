@@ -57,7 +57,7 @@ const PortfolioPage = () => {
   const getFacadesItems = async () => {
     try {
       const response: Response = await axios(
-        `https://frolfasd.ru/api/exterior_design`, //1111111111111
+        `https://frolfasad.ru/api/exterior_design`, //1111111111111
         {
           method: "GET",
         }

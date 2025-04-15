@@ -9,19 +9,21 @@ const Footer = () => {
           <br />
           <div>
             Адрес: <br />
-            Москва, ул Парковая 6
+            Краснодарский край, г. Белореченск,<br />
+            Толстого 60а
           </div>
         </div>
-        <div className={styles.footer__inner_duty}>
+        {/* <div className={styles.footer__inner_duty}>
           Режим работы:
           <br /> пн-пт 9:00-20:00
           <br /> сб 10:00-18:00
           <br /> вс выходной
-        </div>
+        </div> */}
         <div className={styles.footer__inner_contacts}>
           Контакты:
-          <br /> <a href="tel:+7-999-999-99-99">+7-999-999-99-99</a>
-          <br /> <a href="mailto:firma@mail.ru">firma@mail.ru</a>
+          <br /> <a href="tel:+7-918-180-87-08">+7-918-180-87-08</a>
+          <br /> <a href="tel:+7-918-361-86-97">+7-918-361-86-97</a>
+          <br /> <a href="mailto:frolfasad@mail.ru">frolfasad@mail.ru</a>
         </div>
       </div>
     </footer>

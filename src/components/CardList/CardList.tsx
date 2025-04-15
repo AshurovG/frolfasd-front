@@ -40,7 +40,7 @@ const CardList: React.FC<CardListProps> = ({
     try {
       setIsItemLoading(true)
       const response: Response = await axios(
-        `https://frolfasd.ru/api/exterior_design/${id}`,
+        `https://frolfasad.ru/api/exterior_design/${id}`,
         {
           method: "GET",
         }

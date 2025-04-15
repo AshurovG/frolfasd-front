@@ -26,7 +26,7 @@ const LoginPage = () => {
 
   const login = async (password: any) => {
     try {
-      const response = await axios("https://frolfasd.ru/api/login", {
+      const response = await axios("https://frolfasad.ru/api/login", {
         method: "POST",
         data: {
           password: password,

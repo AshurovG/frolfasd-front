@@ -49,7 +49,7 @@ const MainPage = () => {
   const getFacadesMainItems = async () => {
     try {
       const response: Response = await axios(
-        `https://frolfasd.ru/api/exterior_design_important`,
+        `https://frolfasad.ru/api/exterior_design_important`,
         {
           method: "GET",
         }
@@ -64,7 +64,7 @@ const MainPage = () => {
   const getQuestions = async () => {
     try {
       const response: Response = await axios(
-        `https://frolfasd.ru/api/questions/`,
+        `https://frolfasad.ru/api/questions/`,
         {
           method: "GET",
         }

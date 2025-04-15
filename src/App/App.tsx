@@ -24,7 +24,7 @@ const App = () => {
   const getIsAuth = async () => {
     setIsCheckLoading(true);
     try {
-      await axios("https://frolfasd.ru/api/check", {
+      await axios("https://frolfasad.ru/api/check", {
         method: "POST",
         data: {
           token,
