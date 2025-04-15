@@ -109,7 +109,7 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
         <div style={{ position: "relative", width: `100%` }}>
           <ReCAPTCHA
             size={isCompactMode ? "compact" : "normal"}
-            sitekey="6LcOm6QpAAAAACiSyHhAWnNHd9pl_aQJjd5NHZYx"
+            sitekey="6LdpCBorAAAAAEh0WuHqwPtahdme30e4ChNYSXDE"
             onChange={(value) => setCaptchaValue(value)}
           />
         </div>
