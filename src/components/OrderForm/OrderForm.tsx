@@ -5,14 +5,14 @@ import Button from "components/Button"
 import ReCAPTCHA from "react-google-recaptcha"
 import { useForm, FieldValues } from "react-hook-form"
 import { toast } from "react-toastify"
-import axios from "axios"
+// import axios from "axios"
 import emailjs from "@emailjs/browser";
 
 type OrderFormProps = {
   onSuccessfulSubmit: () => void
 }
 
-const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
+const OrderForm: React.FC<OrderFormProps> = () => {
   const form = useRef<HTMLFormElement>(null)
   const [captchaValue, setCaptchaValue] = useState<string | null>(null)
 
@@ -23,24 +23,24 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
   const { isValid, touchedFields, errors } = formState
   const [isCompactMode, _] = useState(window.innerWidth <= 460)
 
-  const postFacade = async (
-    fio: string,
-    email: string,
-    description: string
-  ) => {
-    try {
-      await axios("https://frolfasad.ru/api/email/", {
-        method: "POST",
-        data: { fio: fio, email: email, description: description },
-      })
-      toast.success("Заказ принят! Мы скоро с Вами свяжемся.")
-      onSuccessfulSubmit()
-      reset()
-    } catch (error) {
-      toast.error("Что-то пошло не так. Попробуйте позднее!")
-      throw error
-    }
-  }
+  // const postFacade = async (
+  //   fio: string,
+  //   email: string,
+  //   description: string
+  // ) => {
+  //   try {
+  //     await axios("https://frolfasad.ru/api/email/", {
+  //       method: "POST",
+  //       data: { fio: fio, email: email, description: description },
+  //     })
+  //     toast.success("Заказ принят! Мы скоро с Вами свяжемся.")
+  //     onSuccessfulSubmit()
+  //     reset()
+  //   } catch (error) {
+  //     toast.error("Что-то пошло не так. Попробуйте позднее!")
+  //     throw error
+  //   }
+  // }
 
   const onSubmit = (data: FieldValues) => {
     console.log(form.current)
@@ -56,11 +56,14 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
       .then(
         (result) => {
           console.log(result.text);
+          toast.success("Заказ принят! Мы скоро с Вами свяжемся.")
         },
         (error) => {
-          console.log(error.text);
+          console.log(error.text, data);
+          toast.error("Что-то пошло не так. Попробуйте позднее!")
         }
       );
+      reset()
     }
   }
 
