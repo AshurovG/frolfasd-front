@@ -6,6 +6,7 @@ import ReCAPTCHA from "react-google-recaptcha"
 import { useForm, FieldValues } from "react-hook-form"
 import { toast } from "react-toastify"
 import axios from "axios"
+import emailjs from "@emailjs/browser";
 
 type OrderFormProps = {
   onSuccessfulSubmit: () => void
@@ -42,7 +43,25 @@ const OrderForm: React.FC<OrderFormProps> = ({ onSuccessfulSubmit }) => {
   }
 
   const onSubmit = (data: FieldValues) => {
-    postFacade(data.fio, data.email, data.description)
+    console.log(form.current)
+
+    if (form.current) {
+      emailjs
+      .sendForm(
+        "service_lsjuc1d",
+        "template_rems7jm",
+        form.current,
+        "DY7f6VxucpGKfewwtujN"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    }
   }
 
   return (
