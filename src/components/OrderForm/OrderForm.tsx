@@ -12,7 +12,7 @@ type OrderFormProps = {
   onSuccessfulSubmit: () => void
 }
 
-const OrderForm: React.FC<OrderFormProps> = () => {
+const OrderForm: React.FC<OrderFormProps> = ({onSuccessfulSubmit}) => {
   const form = useRef<HTMLFormElement>(null)
   const [captchaValue, setCaptchaValue] = useState<string | null>(null)
 
@@ -57,6 +57,7 @@ const OrderForm: React.FC<OrderFormProps> = () => {
         (result) => {
           console.log(result.text);
           toast.success("Заказ принят! Мы скоро с Вами свяжемся.")
+          onSuccessfulSubmit()
         },
         (error) => {
           console.log(error.text, data);
