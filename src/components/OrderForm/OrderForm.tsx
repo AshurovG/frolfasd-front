@@ -48,10 +48,10 @@ const OrderForm: React.FC<OrderFormProps> = () => {
     if (form.current) {
       emailjs
       .sendForm(
-        "service_lsjuc1d",
+        "service_s0vmxp7",
         "template_rems7jm",
         form.current,
-        "DY7f6VxucpGKfewwtujN"
+        "VLZgVrmxu5H3kA3j-"
       )
       .then(
         (result) => {
