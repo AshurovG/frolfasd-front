@@ -48,7 +48,7 @@ const OrderForm: React.FC<OrderFormProps> = ({onSuccessfulSubmit}) => {
     if (form.current) {
       emailjs
       .sendForm(
-        "service_tqr0dxk",
+        "service_u0yjyd3",
         "template_9v0h7qn",
         form.current,
         "Yr8QuQUIlXompjRBo"
